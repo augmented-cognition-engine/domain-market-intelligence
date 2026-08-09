@@ -7,10 +7,10 @@ runtime.
 It supplies marketing meaning and policy. It does not implement a second reasoning engine, graph,
 state store, authority system, detector runtime, or feedback loop.
 
-- **Distribution:** `ace-domain-market-intelligence` 0.6.0 release candidate
+- **Distribution:** `ace-domain-market-intelligence` 0.6.0
 - **Requires:** Python 3.12 and `ace-core>=0.4.1,<0.5`
 - **Artifact boundary:** JSON-only, data-only, inert
-- **Status:** initial public repository; tag, GitHub Release, and PyPI publication are pending
+- **Status:** public on GitHub and PyPI; GI2 cross-domain falsification passed
 
 ## Architecture
 
@@ -52,7 +52,7 @@ conformance packet without pretending that every planned Market facet is impleme
 
 ## Install
 
-The package will install with either command after the 0.6.0 public release:
+Install the public package with either command:
 
 ```bash
 uv add "ace-domain-market-intelligence==0.6.0"
@@ -81,8 +81,7 @@ for publication in the 0.6.0 root release.
 
 ## GI2: cross-domain falsification
 
-The release candidate must prove a clean installation of ACE plus both independently packaged
-domains:
+The public release proves a clean installation of ACE plus both independently packaged domains:
 
 ```text
 ace-core 0.4.1
@@ -90,13 +89,24 @@ ace-core 0.4.1
   + ace-domain-world-intelligence 0.8.0
 ```
 
-Both packs must compile and activate through unchanged ACE, retain distinct pack, entity, persona,
-policy, and authority identities, and survive independent deactivation. A co-install alone is not
-enough. Passing this gate supplies the second public-domain evidence needed to close Core roadmap
-outcome GI2.
+Both packs compile and activate through unchanged ACE, retain distinct pack, entity, persona,
+policy, and authority identities, and survive independent deactivation. A co-install alone was not
+enough. This supplied the second public-domain evidence that closed Core roadmap outcome GI2.
 
-Current verification and remaining publication steps are recorded in the
-[0.6.0 release-candidate record](docs/releases/market-intelligence-v0.6.0.md).
+Publication identities and verification are recorded in the
+[0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md).
+
+## GC1: external governed-cognition consumer
+
+The next cross-repository packet uses Market Intelligence as an external consumer of ACE's public
+governed-cognition builder interface. Its two-phase verifier teaches a reusable market reasoning
+pattern from an accepted task, inspects and approves the proposal, proves exact material use,
+crosses a real ACE restart, proves exact later use, retires the revision, and requires subsequent
+selection to fail closed.
+
+The verifier imports no Core internals and remains outside the inert wheel. See the
+[external GC1 journey](docs/gc1-external-consumer.md). It is candidate evidence until the Core CLI
+ships in a public post-0.4.1 artifact and the journey is rerun from public installations.
 
 ## Guardrails
 

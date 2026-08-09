@@ -1,0 +1,11 @@
+{
+  "contract_version": "ace.market.gc1-scenario/v1",
+  "stable_key": "market_signal_review",
+  "name": "Market Signal Review",
+  "description": "Review a market signal with explicit counterevidence and bounded uncertainty.",
+  "intent": "Reuse an accepted market-intelligence reasoning pattern without granting model write authority.",
+  "base_recipe": "coding_intelligence",
+  "fresh_use_prompt": "Re-evaluate this new market signal, identify counterevidence, and state bounded uncertainty.",
+  "restart_use_prompt": "After restart, re-evaluate the market signal using the exact approved reasoning revision.",
+  "retire_rationale": "This market reasoning revision is no longer eligible for selection."
+}
