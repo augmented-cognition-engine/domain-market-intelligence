@@ -1,0 +1,133 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_PYTHON: "3.12"
+  ROOT_WHEEL: "ace_domain_market_intelligence-0.6.0-py3-none-any.whl"
+  ROOT_SDIST: "ace_domain_market_intelligence-0.6.0.tar.gz"
+  PYTHONPATH: "${{ github.workspace }}:${{ github.workspace }}/adapters/public_product_source/src"
+
+jobs:
+  release-readiness:
+    name: release readiness and GI2 (python 3.12)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Sync locked environment
+        run: uv sync --frozen --no-install-project
+
+      - name: Lint focused release tests
+        run: uv run --no-sync ruff check --no-cache tests
+
+      - name: Check focused release-test formatting
+        run: uv run --no-sync ruff format --check --no-cache tests
+
+      - name: Run all pack, connector, release, and GI2 tests
+        run: uv run --no-sync pytest
+
+      - name: Build root distribution
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          uv build --out-dir dist
+          rm -f dist/.gitignore
+
+      - name: Confirm exact root artifacts
+        run: |
+          set -euo pipefail
+          uv run --no-sync python - <<'PY'
+          import os
+          from pathlib import Path
+
+          entries = sorted(path.name for path in Path("dist").iterdir())
+          assert entries == sorted([os.environ["ROOT_SDIST"], os.environ["ROOT_WHEEL"]]), entries
+          PY
+
+      - name: Validate distribution metadata
+        run: uv run --no-sync twine check --strict "dist/${ROOT_SDIST}" "dist/${ROOT_WHEEL}"
+
+      - name: Inspect exact wheel boundary
+        run: |
+          set -euo pipefail
+          uv run --no-sync python - <<'PY'
+          import os
+          import zipfile
+          from email import message_from_string
+          from pathlib import Path
+
+          from packaging.requirements import Requirement
+          from packaging.specifiers import SpecifierSet
+          from packaging.utils import canonicalize_name
+
+          wheel_path = Path("dist") / os.environ["ROOT_WHEEL"]
+          dist_info = "ace_domain_market_intelligence-0.6.0.dist-info/"
+          with zipfile.ZipFile(wheel_path) as wheel:
+              names = sorted(wheel.namelist())
+              metadata = message_from_string(
+                  wheel.read(dist_info + "METADATA").decode("utf-8")
+              )
+
+          payload = [name for name in names if not name.startswith(dist_info)]
+          assert len(payload) == 39, payload
+          assert all(name.startswith("domain_packs/market_intelligence/") for name in payload)
+          assert all(name.endswith(".json") for name in payload)
+          assert not [name for name in names if name.endswith((".py", ".pyc", ".so", ".pyd"))]
+          assert not [name for name in names if name.startswith(("scripts/", "adapters/"))]
+          assert metadata["Name"] == "ace-domain-market-intelligence"
+          assert metadata["Version"] == "0.6.0"
+          assert SpecifierSet(metadata["Requires-Python"]) == SpecifierSet(">=3.12,<3.13")
+          requirements = metadata.get_all("Requires-Dist") or []
+          assert len(requirements) == 1, requirements
+          requirement = Requirement(requirements[0])
+          assert canonicalize_name(requirement.name) == "ace-core"
+          assert requirement.specifier == SpecifierSet(">=0.4.1,<0.5")
+          print("inspected", wheel_path.name, "with", len(payload), "JSON resources")
+          PY
+
+      - name: Prove clean public two-domain installation
+        run: |
+          set -euo pipefail
+          ISOLATED="$(mktemp -d)"
+          cp "dist/${ROOT_WHEEL}" "${ISOLATED}/${ROOT_WHEEL}"
+          cd "${ISOLATED}"
+          uv venv --no-config --python 3.12 isolated-venv
+          uv pip install --no-config --python isolated-venv/bin/python \
+            "./${ROOT_WHEEL}" \
+            "ace-core==0.4.1" \
+            "ace-domain-world-intelligence==0.8.0"
+          isolated-venv/bin/python -I - <<'PY'
+          import importlib.metadata as metadata
+          import importlib.util
+          import json
+          from importlib.resources import files
+
+          assert metadata.version("ace-core") == "0.4.1"
+          assert metadata.version("ace-domain-market-intelligence") == "0.6.0"
+          assert metadata.version("ace-domain-world-intelligence") == "0.8.0"
+          assert json.loads(
+              files("domain_packs.market_intelligence").joinpath("manifest.json").read_text()
+          )["metadata"]["pack_id"] == "market_intelligence"
+          assert json.loads(
+              files("domain_packs.world_intelligence").joinpath("manifest.json").read_text()
+          )["metadata"]["pack_id"] == "world_intelligence"
+          assert importlib.util.find_spec("ace_market_public_product_source") is None
+          print("clean public two-domain installation passed")
+          PY

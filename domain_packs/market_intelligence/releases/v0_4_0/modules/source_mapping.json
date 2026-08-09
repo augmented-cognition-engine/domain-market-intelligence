@@ -1,0 +1,41 @@
+{
+  "contract": "ace.intelligence.source-mapping/v1alpha1",
+  "module_id": "market_source_mapping",
+  "mappings": [
+    {
+      "mapping_id": "product_price_snapshot",
+      "source_definition_ref": "source_definition:public-northstar-edge-x1",
+      "source_type_ref": "public_product_page",
+      "capability_requirement_id": "public_product_snapshot",
+      "authority_request_id": "read_public_product_source",
+      "allowed_uri_schemes": [
+        "https"
+      ],
+      "subject_binding_id": "listed_product",
+      "entity_type_id": "product",
+      "attribute_mappings": [
+        {
+          "attribute_id": "name",
+          "source_pointer": "/product_name",
+          "transform": "copy",
+          "min_length": 1,
+          "max_length": 256
+        },
+        {
+          "attribute_id": "price",
+          "source_pointer": "/listed_price",
+          "transform": "decimal_text_to_number"
+        },
+        {
+          "attribute_id": "currency",
+          "source_pointer": "/currency",
+          "transform": "copy",
+          "min_length": 3,
+          "max_length": 3,
+          "character_set": "ascii_upper"
+        }
+      ],
+      "static_confidence": 1.0
+    }
+  ]
+}

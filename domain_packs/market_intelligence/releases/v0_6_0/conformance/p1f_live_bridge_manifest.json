@@ -1,0 +1,37 @@
+{
+  "contract": "ace.market-intelligence.p1f-live-bridge-manifest/v1alpha1",
+  "packet": "P1F",
+  "packet_version": "0.6.0",
+  "domain_pack_dependency": {
+    "pack_id": "market_intelligence",
+    "pack_version": "0.3.0",
+    "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+    "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd"
+  },
+  "platform_capabilities": [
+    "governed_live_derivation",
+    "live_numeric_shift",
+    "live_signal_routing",
+    "governed_live_brief_synthesis",
+    "exact_restart_replay"
+  ],
+  "artifacts": [
+    {
+      "path": "p1f_live_bridge_expected.json",
+      "sha256": "f23cfbeee5ac86b2200702057bd4fc93e2e6efbcbea42be678eccc18fb4e5f0d"
+    },
+    {
+      "path": "p1f_live_bridge_negative_cases.json",
+      "sha256": "0f73f16899f5c0c9f85935c940e6cf21d888c43c80436f25ea06710022a8a351"
+    }
+  ],
+  "negative_case_count": 4,
+  "scope": {
+    "mode": "live",
+    "delivery": false,
+    "external_actions": false,
+    "decision_feedback": false,
+    "provider_or_connector_in_pack": false,
+    "pack_schema_change": false
+  }
+}

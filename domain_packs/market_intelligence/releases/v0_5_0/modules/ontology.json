@@ -1,0 +1,49 @@
+{
+  "contract": "ace.intelligence.ontology/v1alpha1",
+  "module_id": "market_ontology",
+  "entity_types": [
+    {
+      "entity_type_id": "competitor",
+      "display_name": "Competitor",
+      "attributes": [
+        {
+          "attribute_id": "name",
+          "value_type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "entity_type_id": "product",
+      "display_name": "Product",
+      "attributes": [
+        {
+          "attribute_id": "name",
+          "value_type": "string",
+          "required": true
+        },
+        {
+          "attribute_id": "price",
+          "value_type": "number",
+          "required": true
+        },
+        {
+          "attribute_id": "currency",
+          "value_type": "string",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "relation_types": [
+    {
+      "relation_type_id": "makes",
+      "source_entity_types": [
+        "competitor"
+      ],
+      "target_entity_types": [
+        "product"
+      ]
+    }
+  ]
+}

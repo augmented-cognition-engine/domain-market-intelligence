@@ -1,0 +1,235 @@
+{
+  "contract": "ace.market-intelligence.prepared-brief-input/v1alpha1",
+  "fixture_id": "p1d1_prepared_brief_input",
+  "fixture_version": "0.4.0",
+  "fixture_scope": "governed_route_triggered_prepared_brief",
+  "platform_dependency": {
+    "ace_core_wheel": "ace_core-0.3.0-py3-none-any.whl",
+    "ace_core_wheel_sha256": "267cfed8ec3057439abf2a55e4f595e34c92f3b10f4e37c21a2e253a80b9dc4d",
+    "public_seams": [
+      "ace.application",
+      "ace.core",
+      "ace.intelligence",
+      "ace.testing"
+    ]
+  },
+  "historical_archive": {
+    "pack_version": "0.3.0",
+    "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+    "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+    "manual_brief_id": "brief:1bf59d3e6c5a47634c345a9366b555be",
+    "manual_brief_digest": "sha256:1bf59d3e6c5a47634c345a9366b555be04e45f3ab2f8099d54b998cef4c6d5b8"
+  },
+  "pack": {
+    "pack_id": "market_intelligence",
+    "pack_version": "0.4.0",
+    "synthesis_contract": "ace.intelligence.synthesis/v1alpha2",
+    "source_mapping_id": "product_price_snapshot",
+    "detector_id": "product_price_move",
+    "brief_template_id": "competitive_price_move_brief",
+    "routed_persona_id": "competitive_intelligence_analyst",
+    "required_sections": [
+      "what_changed",
+      "why_it_matters",
+      "recommendation",
+      "limitations"
+    ]
+  },
+  "activation": {
+    "product_id": "product:market-intelligence-conformance",
+    "activation_key": "market_intelligence",
+    "revision_1_occurred_at": "2026-01-01T00:00:00Z",
+    "revision_2_occurred_at": "2026-08-06T15:00:00Z",
+    "revision_2_committed_at": "2026-08-06T15:00:01Z",
+    "revision_3_rollback_occurred_at": "2026-08-06T15:24:00Z",
+    "revision_3_rollback_committed_at": "2026-08-06T15:24:01Z",
+    "actor_ref": "principal:market-pack-test-author",
+    "revision_2_compilation_receipt_ref": "receipt:p1d1-market-pack-compilation",
+    "revision_2_conformance_receipt_ref": "receipt:p1d1-prepared-brief-conformance",
+    "revision_2_approval_receipt_ref": "receipt:p1d1-market-pack-approval",
+    "revision_3_approval_receipt_ref": "receipt:p1d1-market-pack-rollback-approval"
+  },
+  "derivation": {
+    "derivation_key": "derivation:market-intelligence:p1d1:prepared-price-move:v1",
+    "resource_mode": "prepared",
+    "brief_in_initial_batch": false,
+    "shift_detected_at": "2026-08-06T15:21:00Z",
+    "signal_detected_at": "2026-08-06T15:21:30Z",
+    "attention_evaluated_at": "2026-08-06T15:22:00Z"
+  },
+  "snapshots": [
+    {
+      "snapshot_id": "edge_x1_p1d1_baseline",
+      "source": {
+        "source_definition_ref": "source_definition:public-northstar-edge-x1",
+        "source_uri": "https://example.com/public/northstar/edge-x1",
+        "source_type_ref": "public_product_page",
+        "captured_payload": {
+          "product_name": "Edge X1",
+          "listed_price": "1200.00",
+          "currency": "USD"
+        },
+        "captured_payload_digest": "sha256:e74784170d9f36931bdf4b64488aa456fc7ea15f600b30554a5dd6cb33961a0a",
+        "acquisition_mode": "prepared_fixture",
+        "acquisition_receipt_ref": "receipt:p1d1-prepared-acquisition:edge_x1_baseline",
+        "acquisition_receipt_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "source_published_at": null,
+        "event_effective_at": null,
+        "observed_at": "2026-08-06T15:10:00Z",
+        "ingested_at": "2026-08-06T15:10:30Z",
+        "locator": "json-pointer:/listed_price"
+      },
+      "resolved_subject": {
+        "subject_binding_id": "listed_product",
+        "entity_type_id": "product",
+        "entity_ref": "product:northstar_edge_x1"
+      },
+      "expected_mapped_product_attributes": {
+        "name": "Edge X1",
+        "price": 1200.0,
+        "currency": "USD"
+      }
+    },
+    {
+      "snapshot_id": "edge_x1_p1d1_current",
+      "source": {
+        "source_definition_ref": "source_definition:public-northstar-edge-x1",
+        "source_uri": "https://example.com/public/northstar/edge-x1",
+        "source_type_ref": "public_product_page",
+        "captured_payload": {
+          "product_name": "Edge X1",
+          "listed_price": "1080.00",
+          "currency": "USD"
+        },
+        "captured_payload_digest": "sha256:b6cec89416e2f0112843583c9bb1cb66104d3b96ee38c35e8383e9552822670b",
+        "acquisition_mode": "prepared_fixture",
+        "acquisition_receipt_ref": "receipt:p1d1-prepared-acquisition:edge_x1_current",
+        "acquisition_receipt_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "source_published_at": null,
+        "event_effective_at": null,
+        "observed_at": "2026-08-06T15:20:00Z",
+        "ingested_at": "2026-08-06T15:20:30Z",
+        "locator": "json-pointer:/listed_price"
+      },
+      "resolved_subject": {
+        "subject_binding_id": "listed_product",
+        "entity_type_id": "product",
+        "entity_ref": "product:northstar_edge_x1"
+      },
+      "expected_mapped_product_attributes": {
+        "name": "Edge X1",
+        "price": 1080.0,
+        "currency": "USD"
+      }
+    }
+  ],
+  "reasoning": {
+    "synthesis_key": "synthesis:market-intelligence:p1d1:prepared-price-move:v1",
+    "reasoning_attempt_key": "reasoning:market-intelligence:p1d1:prepared-price-move:v1",
+    "requested_at": "2026-08-06T15:23:00Z",
+    "generated_at": "2026-08-06T15:23:15Z",
+    "authentication": {
+      "actor_ref": "principal:competitive-intelligence-analyst",
+      "receipt_ref": "authentication:p1d1-market-analyst",
+      "receipt_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "authenticated_at": "2026-08-06T15:09:00Z",
+      "expires_at": "2026-08-06T15:40:00Z"
+    },
+    "reasoning_artifact": {
+      "capability": "structured_reasoning",
+      "contract": "ace.core.reasoning-provider/v1alpha1",
+      "implementation_id": "market_p1d1_reasoning_fixture",
+      "implementation_version": "0.1.0",
+      "artifact_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "append_artifact": {
+      "capability": "append_immutable_records",
+      "contract": "ace.core.immutable-record-appender/v1alpha1",
+      "implementation_id": "market_p1d1_append_fixture",
+      "implementation_version": "0.1.0",
+      "artifact_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "provider_route": {
+      "provider_id": "market-p1d1-fixture",
+      "model_id": "deterministic-structured",
+      "model_version": "1",
+      "configuration_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "provider_usage": {
+      "input_units": 120,
+      "output_units": 40,
+      "total_units": 160,
+      "duration_ms": 3
+    }
+  },
+  "provider_draft": {
+    "brief_type": "competitive_intelligence",
+    "persona_ids": [
+      "competitive_intelligence_analyst"
+    ],
+    "sections": [
+      {
+        "section_id": "what_changed",
+        "claims": [
+          {
+            "statement": "The listed Edge X1 price changed from USD 1,200 to USD 1,080.",
+            "grounding_kind": "cited",
+            "support_group": "all_observations",
+            "confidence": 1.0,
+            "uncertainty": null
+          }
+        ]
+      },
+      {
+        "section_id": "why_it_matters",
+        "claims": [
+          {
+            "statement": "The prepared price move warrants review, but its market effect is not established.",
+            "grounding_kind": "inference",
+            "support_group": "shift_and_snapshots",
+            "confidence": 0.8,
+            "uncertainty": "The selected records contain no measured market response."
+          }
+        ]
+      },
+      {
+        "section_id": "recommendation",
+        "claims": [
+          {
+            "statement": "Review the listed price change and gather attributable relationship evidence before considering a competitive response.",
+            "grounding_kind": "inference",
+            "support_group": "signal",
+            "confidence": 0.8,
+            "uncertainty": "The selected records do not establish who owns the product or why the price changed."
+          }
+        ]
+      },
+      {
+        "section_id": "limitations",
+        "claims": [
+          {
+            "statement": "Ownership, motive, and market effect are not established.",
+            "grounding_kind": "inference",
+            "support_group": "shift",
+            "confidence": 1.0,
+            "uncertainty": "No competitor or makes relationship is persisted in the selected closure."
+          }
+        ]
+      }
+    ],
+    "recommendation_section_count": 1
+  },
+  "rollback_replay": {
+    "fresh_authentication_receipt_ref": "authentication:p1d1-market-analyst-fresh",
+    "fresh_authentication_receipt_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "fresh_authenticated_at": "2026-08-06T15:24:00Z",
+    "fresh_expires_at": "2026-08-06T15:40:00Z",
+    "delivery_evaluated_at": "2026-08-06T15:25:00Z"
+  },
+  "limitations": [
+    "This is deterministic PREPARED fixture data, not captured public evidence.",
+    "Platform validates exact attribution and structural policy, not semantic entailment of arbitrary prose.",
+    "No competitor or makes relationship is persisted in the selected closure.",
+    "No LIVE resource, source capture, delivery, Decision, Outcome, feedback, UI, HTTP, MCP, or Content AI is in scope."
+  ]
+}

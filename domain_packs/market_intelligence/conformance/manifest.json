@@ -1,0 +1,37 @@
+{
+  "contract": "ace.market-intelligence.conformance-manifest/v1alpha1",
+  "pack_id": "market_intelligence",
+  "pack_version": "0.3.0",
+  "artifact_scope": "prepared_only",
+  "artifacts": [
+    {
+      "artifact_id": "public_product_price_snapshot_boundary",
+      "artifact_role": "public_source_adapter_boundary",
+      "path": "public_product_price_boundary.json",
+      "digest": "sha256:dfc0a63eaaebca857c46da62080ae14f5d46793d808fe0296d66c951c55bdff5"
+    },
+    {
+      "artifact_id": "p1_price_move_golden",
+      "artifact_role": "positive_scenario",
+      "path": "p1_price_move_golden.json",
+      "digest": "sha256:5d04afed27b785f35cbd29083d566bb84770a2fbdf4a44837ea196e432dd1cdf"
+    },
+    {
+      "artifact_id": "p1_price_move_negative_cases",
+      "artifact_role": "negative_scenarios",
+      "path": "p1_price_move_negative_cases.json",
+      "digest": "sha256:39003bb393dc94bf2737b7568993577a0e9b55a4efc7981922270350a2e8095c"
+    },
+    {
+      "artifact_id": "p1c_durable_price_move_expected",
+      "artifact_role": "durable_prepared_expected_identities",
+      "path": "p1c_durable_price_move_expected.json",
+      "digest": "sha256:735fe7aa0dc1678daa3dec3d052317452314b075c45ef24b88d8d409d131b6b7"
+    }
+  ],
+  "limitations": [
+    "This manifest inventories Market-owned prepared conformance data; it is not a Domain Activation, authority grant, or runtime registry.",
+    "The shared ACE conformance runner and durable receipt contracts are consumed from Platform through public ace.* seams.",
+    "Production SurrealDB durability remains Platform evidence and is not reimplemented or independently claimed by Market."
+  ]
+}

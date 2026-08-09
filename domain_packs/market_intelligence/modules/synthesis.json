@@ -1,0 +1,20 @@
+{
+  "contract": "ace.intelligence.synthesis/v1alpha1",
+  "module_id": "market_synthesis",
+  "brief_templates": [
+    {
+      "template_id": "competitive_price_move_brief",
+      "brief_type": "competitive_intelligence",
+      "display_name": "Competitive Price Move Brief",
+      "objective": "Explain a material competitor price change, its evidence, uncertainty, and the decision it may affect.",
+      "required_sections": [
+        "what_changed",
+        "why_it_matters",
+        "recommendation",
+        "limitations"
+      ],
+      "recommendation_required": true,
+      "claim_policy": "citation_or_explicit_inference"
+    }
+  ]
+}
