@@ -3,7 +3,19 @@
 All notable changes to `ace-domain-market-intelligence` are recorded here. The project follows
 Semantic Versioning.
 
-## [0.6.0] — unreleased release candidate
+## Unreleased
+
+### Added
+
+- Two-phase external GC1 consumer verifier over the public `ace cognition` CLI, covering sourced
+  proposal, semantic diff, human approval, exact material use, restart, exact later use,
+  retirement, and fail-closed subsequent selection without importing Core internals.
+
+### Documentation
+
+- Reconcile the 0.6.0 GitHub/PyPI publication and GI2 closeout status.
+
+## [0.6.0] — 2026-08-09
 
 Initial public Domain Pack distribution extracted from the legacy executable B2B Marketing
 extension.

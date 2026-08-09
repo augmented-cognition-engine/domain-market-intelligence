@@ -1,11 +1,11 @@
-# ACE Market Intelligence 0.6.0 — release-candidate record
+# ACE Market Intelligence 0.6.0 — release record
 
-**Status:** initial public repository and release candidate; not tagged or published
+**Status:** public GitHub Release and PyPI package
 **Distribution:** `ace-domain-market-intelligence` 0.6.0
 **Runtime requirement:** Python 3.12 and `ace-core>=0.4.1,<0.5`
 **Artifact boundary:** 39 JSON resources; no Python, connector, entry point, or install hook
 
-## What this candidate proves
+## What this release proves
 
 1. The frozen Market P1A–P1F conformance history is preserved in a repository that contains no
    legacy application UI or private Intelligence runtime.
@@ -27,7 +27,7 @@
 | Actionlint | passed |
 | Twine strict metadata validation | passed |
 | Wheel boundary | **39 JSON resources, zero executable code files** |
-| Isolated install | `ace-core==0.4.1`, Market `0.6.0` candidate wheel, World `0.8.0` |
+| Isolated install | public `ace-core==0.4.1`, Market `0.6.0`, and World `0.8.0` packages |
 | Installed-artifact dual compile | passed; distinct Pack IR digests |
 | Installed-artifact dual activation and independent retirement | passed |
 | Connector bundled or installed by root | no |
@@ -35,21 +35,21 @@
 The historical negative-case harness uses its originally frozen Pydantic 2.12.5 development
 environment. That pin is not published metadata and does not constrain an installing consumer.
 
-## Remaining release steps
+## Publication
 
-- merge the initial repository pull request;
-- verify main-branch CI;
-- record final tagged artifact digests;
-- configure PyPI trusted publishing;
-- tag `v0.6.0`, publish the GitHub Release, and verify a clean public-index installation; and
-- reconcile the resulting two-domain evidence into ACE Core roadmap outcome GI2.
+- [GitHub Release v0.6.0](https://github.com/augmented-cognition-engine/domain-market-intelligence/releases/tag/v0.6.0)
+- [PyPI package](https://pypi.org/project/ace-domain-market-intelligence/0.6.0/)
+- [Trusted-publication workflow](https://github.com/augmented-cognition-engine/domain-market-intelligence/actions/runs/31333497948)
+- Wheel SHA-256: `73220bbd16d295734e7dc322147e6e3137752306ef9758f48fa6aecabdfeb080`
+- Source-distribution SHA-256: `8082a5589f9608fa9d7f9827a8986d5413514d57e5878bcba7e829fb47388575`
 
-GI2 is not closed by this candidate. It closes only after the Market artifact is independently
-published and the public two-domain journey is reproducible without a source checkout.
+The public two-domain install, activation, and independent-retirement journey passed and is bound
+into Core's
+[GI2 public cross-domain evidence](https://github.com/augmented-cognition-engine/core/blob/main/docs/evidence/gi2-public-cross-domain-falsification-v1.md).
 
 ## Explicit limits
 
-This candidate does not claim broad Market Intelligence coverage, production source connectors,
+This release does not claim broad Market Intelligence coverage, production source connectors,
 continuous monitoring, delivery, publishing, external action, autonomous promotion, or general
 domain neutrality. The current compiled proof is the narrow competitor/product public-price path;
 broader Market facets remain roadmap scope.

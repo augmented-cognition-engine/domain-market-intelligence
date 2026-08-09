@@ -35,10 +35,10 @@ jobs:
         run: uv sync --frozen --no-install-project
 
       - name: Lint focused release tests
-        run: uv run --no-sync ruff check --no-cache tests
+        run: uv run --no-sync ruff check --no-cache tests scripts/gc1_external_consumer.py
 
       - name: Check focused release-test formatting
-        run: uv run --no-sync ruff format --check --no-cache tests
+        run: uv run --no-sync ruff format --check --no-cache tests scripts/gc1_external_consumer.py
 
       - name: Run all pack, connector, release, and GI2 tests
         run: uv run --no-sync pytest
