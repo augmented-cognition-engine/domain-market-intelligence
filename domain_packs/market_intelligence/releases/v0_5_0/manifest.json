@@ -1,0 +1,112 @@
+{
+  "contract": "ace.intelligence.domain-pack-manifest/v1alpha1",
+  "metadata": {
+    "pack_id": "market_intelligence",
+    "version": "0.5.0",
+    "display_name": "ACE Market Intelligence",
+    "description": "Inert Market Intelligence domain program adding the bounded P1E Decision, Outcome, and prepared feedback policy."
+  },
+  "compatibility": {
+    "compiler_contract": "ace.intelligence.pack-compiler/v1alpha1",
+    "intelligence_contract": "ace.intelligence.runtime/v1alpha1"
+  },
+  "resources": [
+    {
+      "resource_id": "market_ontology",
+      "path": "modules/ontology.json",
+      "media_type": "application/json",
+      "digest": "sha256:c99ad5b44b5ddb2077fc292e44adc51eea90425ae4de37ada81bf8c363a721f6"
+    },
+    {
+      "resource_id": "market_source_mapping",
+      "path": "modules/source_mapping.json",
+      "media_type": "application/json",
+      "digest": "sha256:acebb1a048ca284c9d7d902e4c1a3af9ea02567f13836685382a02047e7ee293"
+    },
+    {
+      "resource_id": "market_detection",
+      "path": "modules/detection.json",
+      "media_type": "application/json",
+      "digest": "sha256:a2a3a25b39d8bce53d6b5d22439d319912d445c7a51921e0c2c83417bc39cb47"
+    },
+    {
+      "resource_id": "market_synthesis",
+      "path": "modules/synthesis.json",
+      "media_type": "application/json",
+      "digest": "sha256:2a18ca17378d509a73fe748fd4c9441f3e668ffb85d7daa710c033bd7dbbfa4a"
+    },
+    {
+      "resource_id": "market_personas",
+      "path": "modules/personas.json",
+      "media_type": "application/json",
+      "digest": "sha256:ed1c0da8c45867504c5894085d10944389f954890d62cfb33d10ca7caff8a83d"
+    },
+    {
+      "resource_id": "market_decision_outcomes",
+      "path": "modules/decision_outcomes.json",
+      "media_type": "application/json",
+      "digest": "sha256:0b953e30af3ec818bb7959903085da95bf93385d01c9aa1fa7b61abae54e34ce"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "market_ontology",
+      "contract": "ace.intelligence.ontology/v1alpha1",
+      "resource_id": "market_ontology",
+      "depends_on": []
+    },
+    {
+      "module_id": "market_source_mapping",
+      "contract": "ace.intelligence.source-mapping/v1alpha1",
+      "resource_id": "market_source_mapping",
+      "depends_on": [
+        "market_ontology"
+      ]
+    },
+    {
+      "module_id": "market_detection",
+      "contract": "ace.intelligence.detection/v1alpha1",
+      "resource_id": "market_detection",
+      "depends_on": [
+        "market_ontology"
+      ]
+    },
+    {
+      "module_id": "market_synthesis",
+      "contract": "ace.intelligence.synthesis/v1alpha2",
+      "resource_id": "market_synthesis",
+      "depends_on": []
+    },
+    {
+      "module_id": "market_personas",
+      "contract": "ace.intelligence.personas/v1alpha1",
+      "resource_id": "market_personas",
+      "depends_on": [
+        "market_detection",
+        "market_synthesis"
+      ]
+    },
+    {
+      "module_id": "market_decision_outcomes",
+      "contract": "ace.intelligence.decision-outcomes/v1alpha1",
+      "resource_id": "market_decision_outcomes",
+      "depends_on": [
+        "market_personas"
+      ]
+    }
+  ],
+  "capability_requirements": [
+    {
+      "requirement_id": "public_product_snapshot",
+      "capability": "source_snapshot",
+      "contract": "ace.source.snapshot/v1alpha1"
+    }
+  ],
+  "authority_requests": [
+    {
+      "request_id": "read_public_product_source",
+      "authority": "source_read"
+    }
+  ],
+  "overlay_slots": []
+}

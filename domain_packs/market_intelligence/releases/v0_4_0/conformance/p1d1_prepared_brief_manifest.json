@@ -1,0 +1,68 @@
+{
+  "contract": "ace.market-intelligence.p1d1-prepared-brief-conformance-manifest/v1",
+  "conformance_id": "market_intelligence_p1d1_governed_routed_prepared_brief",
+  "pack_id": "market_intelligence",
+  "pack_version": "0.4.0",
+  "platform_dependency": {
+    "wheel": "ace_core-0.3.0-py3-none-any.whl",
+    "sha256": "267cfed8ec3057439abf2a55e4f595e34c92f3b10f4e37c21a2e253a80b9dc4d"
+  },
+  "historical_archive": {
+    "pack_version": "0.3.0",
+    "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+    "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+    "synthesis_module_digest": "sha256:99ccea5e5fe93cd2ad22c20e9a36d30ce61506f8f998bc30da1a0432947495c0",
+    "manual_brief_id": "brief:1bf59d3e6c5a47634c345a9366b555be",
+    "manual_brief_digest": "sha256:1bf59d3e6c5a47634c345a9366b555be04e45f3ab2f8099d54b998cef4c6d5b8"
+  },
+  "release": {
+    "manifest_sha256": "6f24562e0e9a3fe1959c7c1db7f736bd130d8a1da5694d0c7cd8e9a62047cdea",
+    "compiled_pack_id": "pack_ir:c87b61600105da2a72d6d7a9fa7cb7dd",
+    "pack_digest": "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c",
+    "synthesis_module_digest": "sha256:fa6346a4173b7bbae1cd62a06a51b1a184f8408160deebfd95b71b0dfe3f0512",
+    "template_id": "competitive_price_move_brief",
+    "template_digest": "sha256:f960449b8ca85a1be41d2d800198e1f6b5c4d5f14a87c00dc55099f8eedcdc91",
+    "persona_ids": [
+      "competitive_intelligence_analyst"
+    ],
+    "required_section_ids": [
+      "what_changed",
+      "why_it_matters",
+      "recommendation",
+      "limitations"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "p1d1_prepared_brief_input.json",
+      "sha256": "0763bab7ff71b7dcb5eca91788ff8377ff109d64c1f730b9e793624a62d7b53a"
+    },
+    {
+      "path": "p1d1_prepared_brief_expected.json",
+      "sha256": "744323b07dceee2cc50d7c7e88884af56381516793e1d48b7b8a4499b4553e13"
+    },
+    {
+      "path": "p1d1_prepared_brief_negative_cases.json",
+      "sha256": "cf6f3e851620a557be2835dadd286f26f21d3de4c7a1951a12323c210acaae42"
+    }
+  ],
+  "expected": {
+    "derivation_key": "derivation:market-intelligence:p1d1:prepared-price-move:v1",
+    "brief_id": "brief:c65102850e3d543713a0ff71d02dcc78",
+    "brief_digest": "sha256:c65102850e3d543713a0ff71d02dcc7803d0255bcc116abb6caafdbab307dff5",
+    "synthesis_receipt_id": "brief_synthesis_receipt:e60876278f68e31e7941381f29741b8f",
+    "synthesis_receipt_digest": "sha256:e60876278f68e31e7941381f29741b8fde840c53d50689d0b43a01b6fdc59d71",
+    "atomic_append_receipt_id": "append_only_receipt:9519bd315fbe1d4b8593970a972f0f69",
+    "provider_calls": 1,
+    "final_citation_locators": null,
+    "forbidden_rendered_term": "Northstar"
+  },
+  "negative_case_count": 18,
+  "scope": {
+    "mode": "prepared",
+    "delivery": false,
+    "live_promotion": false,
+    "provider_or_connector_in_pack": false,
+    "semantic_entailment_validation_claimed": false
+  }
+}

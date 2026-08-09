@@ -1,0 +1,129 @@
+name: publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Exact release tag to publish"
+        required: true
+        type: string
+        default: v0.6.0
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.workflow }}
+  cancel-in-progress: false
+
+env:
+  UV_PYTHON: "3.12"
+  ROOT_DISTRIBUTION: "ace-domain-market-intelligence"
+
+jobs:
+  verify:
+    name: verify tag and build root distribution
+    runs-on: ubuntu-latest
+    outputs:
+      wheel: ${{ steps.version.outputs.wheel }}
+      sdist: ${{ steps.version.outputs.sdist }}
+    steps:
+      - name: Resolve requested tag
+        id: request
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          if [ "${EVENT_NAME}" = release ]; then TAG="${RELEASE_TAG}"; else TAG="${DISPATCH_TAG}"; fi
+          test -n "${TAG}"
+          echo "tag=${TAG}" >> "${GITHUB_OUTPUT}"
+
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ steps.request.outputs.tag }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Verify tag matches project version
+        id: version
+        env:
+          TAG: ${{ steps.request.outputs.tag }}
+        run: |
+          python - <<'PY' >> "${GITHUB_OUTPUT}"
+          import os
+          import tomllib
+          from pathlib import Path
+
+          project = tomllib.loads(Path("pyproject.toml").read_text())["project"]
+          assert project["name"] == os.environ["ROOT_DISTRIBUTION"]
+          version = project["version"]
+          assert os.environ["TAG"] == f"v{version}"
+          print(f"wheel=ace_domain_market_intelligence-{version}-py3-none-any.whl")
+          print(f"sdist=ace_domain_market_intelligence-{version}.tar.gz")
+          PY
+
+      - name: Build root distribution only
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          uv build --out-dir dist
+          rm -f dist/.gitignore
+
+      - name: Confirm exact artifacts and metadata
+        env:
+          WHEEL: ${{ steps.version.outputs.wheel }}
+          SDIST: ${{ steps.version.outputs.sdist }}
+        run: |
+          set -euo pipefail
+          test "$(find dist -maxdepth 1 -type f | wc -l | tr -d ' ')" = 2
+          uvx --from twine twine check --strict "dist/${WHEEL}" "dist/${SDIST}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: root-distribution
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: publish to PyPI via trusted publishing
+    needs: verify
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ace-domain-market-intelligence
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: root-distribution
+          path: dist
+      - name: Confirm root artifacts only
+        env:
+          WHEEL: ${{ needs.verify.outputs.wheel }}
+          SDIST: ${{ needs.verify.outputs.sdist }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          expected = {os.environ["WHEEL"], os.environ["SDIST"]}
+          assert {path.name for path in Path("dist").iterdir()} == expected
+          PY
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
+          print-hash: true

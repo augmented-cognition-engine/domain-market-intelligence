@@ -1,0 +1,23 @@
+{
+  "contract": "ace.market-intelligence.live-source-conformance-manifest/v1alpha1",
+  "fixture_id": "p1c2_live_public_product_source",
+  "fixture_version": "0.1.1",
+  "pack_version": "0.3.0",
+  "negative_case_count": 41,
+  "artifacts": [
+    {
+      "path": "p1c2_live_source_input.json",
+      "digest": "sha256:555b7a2e41c5864038a357edcafebeb73187339dbb1fdeff5c8c03da93a659e2"
+    },
+    {
+      "path": "p1c2_live_source_negative_cases.json",
+      "digest": "sha256:bbd89f833094605821a164b56da0cf1a97663d9ea26e4b09a9c73d91bd5e820f"
+    },
+    {
+      "path": "p1c2_live_expected.json",
+      "digest": "sha256:3d44cf54294b3fb53b1d14503730894050d38e124fdf5422412d9010254ca254"
+    }
+  ],
+  "network_claim": "Deterministic injected-transport runtime conformance only; no public endpoint was contacted and no captured public evidence is claimed.",
+  "next_dependency": "Platform P1D1 governed PREPARED, route-triggered Core reasoning and template-enforced Brief assembly using the existing P1B route receipt; LIVE Shift/Signal/routing is a separate future bridge required before any LIVE Brief."
+}

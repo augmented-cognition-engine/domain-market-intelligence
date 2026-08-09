@@ -1,0 +1,1 @@
+recursive-include domain_packs/market_intelligence *.json

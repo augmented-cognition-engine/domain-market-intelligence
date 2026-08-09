@@ -1,0 +1,58 @@
+{
+  "contract": "ace.market-intelligence.p1e-governed-feedback-input/v1",
+  "fixture_version": "0.5.0",
+  "source_brief": {
+    "brief_id": "brief:c65102850e3d543713a0ff71d02dcc78",
+    "brief_digest": "sha256:c65102850e3d543713a0ff71d02dcc7803d0255bcc116abb6caafdbab307dff5"
+  },
+  "activation": {
+    "actor_ref": "principal:market-pack-test-author",
+    "revision_4_approval_receipt_ref": "receipt:p1e-market-pack-approval",
+    "revision_4_compilation_receipt_ref": "receipt:p1e-market-pack-compilation",
+    "revision_4_conformance_receipt_ref": "receipt:p1e-governed-feedback-conformance",
+    "revision_4_occurred_at": "2026-08-06T15:25:00Z",
+    "revision_4_committed_at": "2026-08-06T15:25:01Z"
+  },
+  "authentication": {
+    "actor_ref": "principal:competitive-intelligence-analyst",
+    "receipt_ref": "authentication:p1e-market-analyst",
+    "receipt_digest": "sha256:abababababababababababababababababababababababababababababababab",
+    "authenticated_at": "2026-08-06T15:29:00Z",
+    "expires_at": "2026-08-06T15:45:00Z"
+  },
+  "policy": {
+    "policy_id": "competitive_price_move_usefulness",
+    "persona_id": "competitive_intelligence_analyst",
+    "routing_rule_id": "route_competitive_price_move",
+    "initial_value": 0.5,
+    "expected_value": 0.55
+  },
+  "decision": {
+    "decision_type": "competitive_response",
+    "disposition": "accept",
+    "action_disposition": "no_action",
+    "action_type": null,
+    "rationale": "The price move is useful context, but the evidence does not justify an immediate market action.",
+    "decided_at": "2026-08-06T15:30:00Z"
+  },
+  "outcome": {
+    "outcome_type": "decision_usefulness",
+    "measure_id": "analyst_usefulness",
+    "value_json": "\"useful\"",
+    "observed_at": "2026-08-06T15:34:00Z",
+    "recorded_at": "2026-08-06T15:35:00Z"
+  },
+  "feedback": {
+    "proposed_at": "2026-08-06T15:36:00Z",
+    "approval_receipt_ref": "receipt:p1e-feedback-policy-approval",
+    "approved_by": "principal:market-pack-test-author",
+    "committed_at": "2026-08-06T15:37:00Z"
+  },
+  "scope": {
+    "mode": "prepared",
+    "live_effect": false,
+    "external_action_executed": false,
+    "delivery_authority": false,
+    "claim": "P1E proves governed prepared feedback mechanics only; it does not promote fixture-derived material into LIVE scoring or learning."
+  }
+}

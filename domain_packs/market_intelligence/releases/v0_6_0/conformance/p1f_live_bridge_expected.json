@@ -1,0 +1,37 @@
+{
+  "contract": "ace.market-intelligence.p1f-live-bridge-expected/v1alpha1",
+  "expected": {
+    "attention_disposition": "route",
+    "brief_id": "brief:f394e4711d8134fffde7bf0ee9bf9912",
+    "brief_record_kinds": [
+      "brief",
+      "brief_synthesis_receipt"
+    ],
+    "brief_replayed": true,
+    "brief_template_id": "competitive_price_move_brief",
+    "brief_title": "Competitive Price Move Brief",
+    "citation_count": 2,
+    "claim_count": 4,
+    "contract": "ace.market-intelligence.p1f-live-bridge-evidence/v1alpha1",
+    "delivery_authority": false,
+    "derivation_record_kinds": [
+      "shift",
+      "signal",
+      "attention_disposition",
+      "live_derivation_receipt"
+    ],
+    "derivation_replayed": true,
+    "external_actions": [],
+    "mode": "live",
+    "observed_price_change": {
+      "baseline": 1200.0,
+      "current": 1080.0
+    },
+    "provider_calls": 1,
+    "replay_provider_calls": 0,
+    "routing_rule_id": "route_competitive_price_move",
+    "shift_id": "shift:24095ad9e5f627c19e790b8aee71dd8c",
+    "signal_id": "signal:5cefff328ba9131f33aec66e57953fe2",
+    "source_record_count": 10
+  }
+}

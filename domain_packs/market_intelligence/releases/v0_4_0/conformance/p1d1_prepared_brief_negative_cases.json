@@ -1,0 +1,191 @@
+{
+  "contract": "ace.market-intelligence.p1d1-prepared-brief-negative-cases/v1",
+  "fixture_version": "0.4.0",
+  "platform_dependency": {
+    "ace_core_wheel_sha256": "267cfed8ec3057439abf2a55e4f595e34c92f3b10f4e37c21a2e253a80b9dc4d"
+  },
+  "cases": [
+    {
+      "brief_residue_delta": 0,
+      "case_id": "old_attention_receipt",
+      "cause": null,
+      "error": "request requires one exact routed attention receipt with template and personas",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "wrong_attention_digest",
+      "cause": null,
+      "error": "request requires one exact routed attention receipt with template and personas",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "prebuilt_brief_derivation",
+      "cause": null,
+      "error": "route-triggered synthesis requires a derivation with no prebuilt Brief",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "wrong_pack_version",
+      "cause": null,
+      "error": "request does not bind the current committed activation and Pack IR",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "wrong_activation_revision",
+      "cause": null,
+      "error": "request does not bind the current committed activation and Pack IR",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "wrong_derivation_key",
+      "cause": null,
+      "error": "routed PREPARED derivation is missing",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "as_of_mismatch",
+      "cause": null,
+      "error": "Brief cutoff must equal the routed Signal as_of time",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "cutoff_before_signal_availability",
+      "cause": null,
+      "error": "request requires one exact routed attention receipt with template and personas",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 0,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "wrong_provider_brief_type",
+      "cause": "draft brief type does not match the exact routed template",
+      "error": "Core draft failed provisional append-recipe assembly",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "wrong_provider_persona",
+      "cause": "draft personas do not match the exact routed personas",
+      "error": "Core draft failed provisional append-recipe assembly",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "missing_required_section",
+      "cause": "draft section IDs and order must exactly match the routed template",
+      "error": "Core draft failed provisional append-recipe assembly",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "reordered_required_sections",
+      "cause": "draft section IDs and order must exactly match the routed template",
+      "error": "Core draft failed provisional append-recipe assembly",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "cited_claim_non_observation_support",
+      "cause": "cited draft claims may reference only exact persisted Observations",
+      "error": "Core draft failed provisional append-recipe assembly",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "unknown_support",
+      "cause": "draft claim names unknown exact supports: ['observation:unknown-support']",
+      "error": "Core draft failed provisional append-recipe assembly",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "unused_selected_support",
+      "cause": "structured output left exact selected supports unused: ['observation:e041e86159bb12d9283ba960650cb2ae']",
+      "error": "Core draft failed provisional append-recipe assembly",
+      "error_type": "BriefSynthesisError",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "divergent_same_synthesis_key",
+      "cause": null,
+      "error": "synthesis key already binds different Brief request material",
+      "error_type": "BriefSynthesisReplayConflict",
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "wrong_historical_pack",
+      "cause": null,
+      "error": "resolved Pack IR crossed exact content coordinates",
+      "error_type": "BriefSynthesisError",
+      "forbidden_provider_calls": 0,
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    },
+    {
+      "brief_residue_delta": 0,
+      "case_id": "missing_historical_pack",
+      "cause": null,
+      "error": "exact historical Pack IR artifact is unavailable",
+      "error_type": "BriefSynthesisError",
+      "forbidden_provider_calls": 0,
+      "prepared_synthesis_transaction_residue_delta": 0,
+      "provider_calls": 1,
+      "synthesis_receipt_residue_delta": 0
+    }
+  ]
+}

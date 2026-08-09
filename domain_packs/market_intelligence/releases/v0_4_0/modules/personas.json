@@ -1,0 +1,22 @@
+{
+  "contract": "ace.intelligence.personas/v1alpha1",
+  "module_id": "market_personas",
+  "personas": [
+    {
+      "persona_id": "competitive_intelligence_analyst",
+      "display_name": "Competitive Intelligence Analyst",
+      "description": "Validates competitive changes, evidence, implications, and recommended responses."
+    }
+  ],
+  "signal_routing_rules": [
+    {
+      "routing_rule_id": "route_competitive_price_move",
+      "signal_type": "competitive_price_move",
+      "persona_ids": [
+        "competitive_intelligence_analyst"
+      ],
+      "minimum_confidence": 0.7,
+      "brief_template_id": "competitive_price_move_brief"
+    }
+  ]
+}

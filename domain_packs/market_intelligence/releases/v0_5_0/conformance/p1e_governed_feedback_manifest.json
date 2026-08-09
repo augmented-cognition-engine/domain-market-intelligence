@@ -1,0 +1,50 @@
+{
+  "contract": "ace.market-intelligence.p1e-governed-feedback-manifest/v1",
+  "fixture_version": "0.5.0",
+  "platform_dependency": {
+    "distribution": "ace-core",
+    "version": "0.3.0",
+    "wheel": "ace_core-0.3.0-py3-none-any.whl",
+    "sha256": "44287fe0f7cff79186c732d00d6b9eba5f44c508522aa2911f1a63a88a7fa68f"
+  },
+  "platform_surface": [
+    {
+      "path": "ace/core/decisions.py",
+      "sha256": "96f7406230d9d41d0f9176aedffdff2830b0e110371ccc2bb765982c4f4e6583"
+    },
+    {
+      "path": "ace/intelligence/contracts/feedback.py",
+      "sha256": "f1f310fa61d8f17e3ef24a93415886f64ce8a461b08d6efea8f7aa8c017f987e"
+    },
+    {
+      "path": "ace/application/decision_feedback.py",
+      "sha256": "4ec9953db57fbe3a3fee0071fceb53a130490d30d4f550232693968fed766038"
+    }
+  ],
+  "acceptance_script": {
+    "path": "scripts/p1e_governed_feedback_acceptance.py",
+    "sha256": "ba816424bb3705464a94cd8f58e0f4fb05efce83b3d8761a0a8d81cfcfcc045b"
+  },
+  "artifacts": [
+    {
+      "path": "p1e_governed_feedback_input.json",
+      "sha256": "37d172c19c5ed72d20734f1a7b56ce0a186053f68bd3c6ea7edb019fbf8acc9b"
+    },
+    {
+      "path": "p1e_governed_feedback_expected.json",
+      "sha256": "6ec9b34baa2251ac672ac68dffa254deed0f02568f9d124f3624c8093721c01a"
+    },
+    {
+      "path": "p1e_governed_feedback_negative_cases.json",
+      "sha256": "a6b6082cbe37305a9578600e132f6f60931cf1a4a5483fac9a3a30931e5d2f99"
+    }
+  ],
+  "negative_case_count": 9,
+  "scope": {
+    "mode": "prepared",
+    "delivery": false,
+    "external_action": false,
+    "live_effect": false,
+    "provider_or_connector_in_pack": false
+  }
+}

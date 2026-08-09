@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ace-domain-market-intelligence"
+version = "0.6.0"
+description = "Inert ACE Market Intelligence Domain Pack and conformance fixtures"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+dependencies = ["ace-core>=0.4.1,<0.5"]
+
+[project.urls]
+Repository = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
+Issues = "https://github.com/augmented-cognition-engine/domain-market-intelligence/issues"
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["domain_packs.market_intelligence*"]
+exclude = ["domain_packs.tests*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"domain_packs.market_intelligence" = [
+    "*.json",
+    "modules/*.json",
+    "conformance/*.json",
+    "releases/*/*.json",
+    "releases/*/modules/*.json",
+    "releases/*/conformance/*.json",
+]
+
+[dependency-groups]
+dev = [
+    "ace-domain-world-intelligence==0.8.0",
+    "ace-market-public-product-source",
+    "build>=1.2",
+    "packaging>=24",
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+    "pydantic==2.12.5",
+    "ruff>=0.9",
+    "twine>=6",
+]
+
+[tool.uv.sources]
+ace-market-public-product-source = { path = "adapters/public_product_source", editable = true }
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["domain_packs/tests", "tests", "adapters/public_product_source/tests"]
+pythonpath = [".", "domain_packs/tests"]
+norecursedirs = [".*", "build", "dist", "*.egg-info"]
+markers = ["unit: hermetic unit test"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100

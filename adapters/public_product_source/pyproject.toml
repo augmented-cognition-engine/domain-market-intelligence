@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ace-market-public-product-source"
+version = "0.1.1"
+description = "Deterministic transport-injected public product source adapter for ACE Market P1C2"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["ace-core>=0.4.1,<0.5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ace_market_public_product_source*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

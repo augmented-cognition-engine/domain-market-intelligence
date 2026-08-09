@@ -1,0 +1,115 @@
+{
+  "contract": "ace.market-intelligence.live-source-input/v1alpha1",
+  "fixture_id": "p1c2_live_public_product_source",
+  "fixture_version": "0.1.1",
+  "platform_dependency": {
+    "ace_core_version": "0.3.0",
+    "ace_core_wheel_sha256": "902e52ffd3c5850aadd9b1b1cb69f190a8c6d0f93c288bb229d2b1c1e7077f10"
+  },
+  "adapter_artifact": {
+    "package": "ace-market-public-product-source",
+    "implementation_id": "market_public_product_source",
+    "implementation_version": "0.1.1",
+    "capability": "source_snapshot",
+    "contract": "ace.source.snapshot/v1alpha1",
+    "artifact_digest": "sha256:6e1cc3c710e7a1e9d8d464a356cadb1c41ea5663dacf57041943456594671c99"
+  },
+  "scenario": {
+    "product_id": "product:market-northstar",
+    "actor_ref": "actor:market-analyst",
+    "activation_key": "market_intelligence_live_public_source",
+    "mapping_id": "product_price_snapshot",
+    "source_definition_ref": "source_definition:public-northstar-edge-x1",
+    "source_type_ref": "public_product_page",
+    "entity_ref": "product:northstar_edge_x1",
+    "subject_binding_id": "listed_product",
+    "entity_type_id": "product",
+    "idempotency_key": "live-source:market-northstar:edge-x1:2026-08-06",
+    "configuration_ref": "config:public-northstar-edge-x1",
+    "configuration_digest": "sha256:f5a6cb04b70c87709b51ea18b1654d665a74324a645d0833cc3cbd89ffc395aa",
+    "authority": "source_read",
+    "grant_ref": "authority_grant:market-public-source-read",
+    "grant_hash": "826147d65d5e6e628acca16c5f4f89e1b1424f9d9c0c6ff262dec369c424cfa4",
+    "grant_expires_at": "2026-08-06T12:10:00Z",
+    "authentication_receipt_ref": "authentication_receipt:market-p1c2-live",
+    "authentication_receipt_digest": "sha256:0ce61ba0b03daab3fefbad8d6db949628655a7a9d7ca80fd6d1cbe0ff4eb28a0",
+    "authenticated_at": "2026-08-06T12:00:00Z",
+    "authentication_expires_at": "2026-08-06T12:15:00Z",
+    "requested_at": "2026-08-06T12:01:00Z",
+    "activation_occurred_at": "2026-08-06T11:50:00Z",
+    "activation_committed_at": "2026-08-06T11:50:01Z",
+    "capture_started_at": "2026-08-06T12:01:01Z",
+    "observed_at": "2026-08-06T12:01:02Z",
+    "captured_at": "2026-08-06T12:01:02Z",
+    "rechecked_at": "2026-08-06T12:01:03Z",
+    "admitted_at": "2026-08-06T12:01:04Z",
+    "approval_receipt_ref": "approval_receipt:market-p1c2-live",
+    "compilation_receipt_ref": "compilation_receipt:market-p1c2-live",
+    "conformance_receipt_ref": "conformance_receipt:market-p1c2-live"
+  },
+  "activation_binding": {
+    "overlay_id": "market_intelligence_live_conformance",
+    "overlay_version": "0.1.0",
+    "capability_requirement_id": "public_product_snapshot",
+    "authority_request_id": "read_public_product_source"
+  },
+  "governed_heads": {
+    "capability": {
+      "sequence": 1,
+      "revision_id": "capability_state_revision:market-public-product-source-v1",
+      "commit_receipt_id": "governed_state_commit:market-public-product-source-v1",
+      "updated_at": "2026-08-06T11:55:00Z"
+    },
+    "grant": {
+      "sequence": 4,
+      "revision_id": "authority_grant_revision:market-public-source-read-v4",
+      "commit_receipt_id": "governed_state_commit:market-public-source-read-v4",
+      "updated_at": "2026-08-06T11:56:00Z"
+    },
+    "source_definition": {
+      "sequence": 3,
+      "revision_id": "source_definition_revision:public-northstar-edge-x1-v3",
+      "commit_receipt_id": "governed_state_commit:public-northstar-edge-x1-v3",
+      "updated_at": "2026-08-06T11:57:00Z"
+    }
+  },
+  "transport_fixture": {
+    "fixture_only": true,
+    "network_access": false,
+    "requested_uri": "https://public.example.test/products/edge-x1",
+    "effective_uri": "https://public.example.test/products/edge-x1",
+    "status_code": 200,
+    "media_type": "application/json",
+    "redirect_chain": [],
+    "resolved_ip_addresses": [
+      "1.1.1.1"
+    ],
+    "connected_ip_addresses": [
+      "1.1.1.1"
+    ],
+    "dns_rebinding_protection_applied": true,
+    "credentials_used": false,
+    "locator": "json-pointer:/listed_price",
+    "response_body": "{\"product_name\":\"Edge X1\",\"listed_price\":\"1080.00\",\"currency\":\"USD\"}",
+    "source_published_at": null,
+    "event_effective_at": null
+  },
+  "expected_attributes": {
+    "name": "Edge X1",
+    "price": 1080.0,
+    "currency": "USD"
+  },
+  "prohibited_record_kinds": [
+    "signal",
+    "shift",
+    "brief",
+    "route",
+    "delivery",
+    "decision",
+    "outcome",
+    "feedback",
+    "learning_event",
+    "schedule",
+    "monitor"
+  ]
+}

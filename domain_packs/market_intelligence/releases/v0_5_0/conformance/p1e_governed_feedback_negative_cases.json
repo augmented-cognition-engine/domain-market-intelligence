@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "case_id": "unknown_feedback_policy",
+      "error": "feedback policy 'unknown_policy' must resolve exactly once in the bound compiled pack",
+      "error_type": "PreparedDecisionFeedbackError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "wrong_persona",
+      "error": "Decision is outside exact pack-declared PREPARED feedback eligibility",
+      "error_type": "PreparedDecisionFeedbackError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "decision_authority_denied",
+      "error": "Core authorization for record_decision failed closed",
+      "error_type": "PreparedDecisionFeedbackError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "wrong_outcome_measure",
+      "error": "Outcome is outside exact pack-declared PREPARED feedback eligibility",
+      "error_type": "PreparedDecisionFeedbackError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "outcome_before_decision",
+      "error": "1 validation error for OutcomeIntentV1Alpha1\n  Value error, outcome cannot predate Decision availability [type=value_error, input_value={'product_id': 'product:m...=datetime.timezone.utc)}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/value_error",
+      "error_type": "ValidationError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "unmapped_outcome_value",
+      "error": "Outcome value has no exact declarative adjustment",
+      "error_type": "PreparedDecisionFeedbackError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "wrong_outcome_record_digest",
+      "error": "outcome exact immutable record is unavailable",
+      "error_type": "PreparedDecisionFeedbackError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "wrong_feedback_approval_subject",
+      "error": "1 validation error for GovernedStateCommitRequestV1\n  Value error, approval receipt must resolve to the exact governed-state subject [type=value_error, input_value={'revision': GovernedStat...=datetime.timezone.utc)}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/value_error",
+      "error_type": "ValidationError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    },
+    {
+      "case_id": "stale_feedback_proposal",
+      "error": "feedback proposal no longer targets the exact current policy revision",
+      "error_type": "PreparedDecisionFeedbackError",
+      "residue_delta": {"action_authorization": 0, "decision": 0, "feedback_proposal": 0, "feedback_state": 0, "outcome": 0}
+    }
+  ],
+  "contract": "ace.market-intelligence.p1e-governed-feedback-negative-cases/v1",
+  "fixture_version": "0.5.0"
+}
