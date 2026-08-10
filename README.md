@@ -10,7 +10,7 @@ state store, authority system, detector runtime, or feedback loop.
 - **Distribution:** `ace-domain-market-intelligence` 0.6.0
 - **Requires:** Python 3.12 and `ace-core>=0.4.1,<0.5`
 - **Artifact boundary:** JSON-only, data-only, inert
-- **Status:** public on GitHub and PyPI; GI2 cross-domain falsification passed
+- **Status:** public on GitHub and PyPI; GI2 and the external GC1 consumer journey passed
 
 ## Architecture
 
@@ -98,15 +98,17 @@ Publication identities and verification are recorded in the
 
 ## GC1: external governed-cognition consumer
 
-The next cross-repository packet uses Market Intelligence as an external consumer of ACE's public
+Market Intelligence is the first external consumer of ACE's public
 governed-cognition builder interface. Its two-phase verifier teaches a reusable market reasoning
 pattern from an accepted task, inspects and approves the proposal, proves exact material use,
 crosses a real ACE restart, proves exact later use, retires the revision, and requires subsequent
 selection to fail closed.
 
 The verifier imports no Core internals and remains outside the inert wheel. See the
-[external GC1 journey](docs/gc1-external-consumer.md). It is candidate evidence until the Core CLI
-ships in a public post-0.4.1 artifact and the journey is rerun from public installations.
+[external GC1 journey](docs/gc1-external-consumer.md) and the
+[public 0.4.4 execution record](docs/evidence/gc1-market-external-consumer-v1.md). The journey passed
+from a clean public-index installation, crossed a real API restart over durable state, and rejected
+a distinct required use after retirement. ACE Core owns the final GC1 roadmap reconciliation.
 
 ## Guardrails
 

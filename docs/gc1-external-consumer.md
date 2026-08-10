@@ -28,9 +28,8 @@ accepted source task
 - a human operator token carrying `cognition-review` authority for approval and retirement; and
 - one completed product-scoped task that contains the accepted reasoning worth teaching.
 
-The command family is merged into ACE Core but is not yet available from a published post-0.4.1
-artifact. Until that Core patch is tagged, published, and clean-installed, this verifier is
-candidate evidence rather than a public GC1 pass.
+The command family is public in `ace-core==0.4.4`. The completed Market execution is recorded in
+the [GC1 public evidence](evidence/gc1-market-external-consumer-v1.md).
 
 ## Prepare
 
@@ -62,13 +61,14 @@ uv run python scripts/gc1_external_consumer.py resume \
 
 Resume refuses a changed scenario, revision, or active head. It requires matching non-empty
 selection/use revision sets, `used` state, and a material-use hash. After retirement it accepts only
-a cognition-use failure code; connection errors and unrelated command failures cannot satisfy the
-fail-closed gate.
+a cognition-use failure code from an explicitly distinct request; connection errors, unrelated
+command failures, and idempotent replay of the pre-retirement request cannot satisfy the fail-closed
+gate.
 
 ## Evidence boundary
 
-The completed state file is a local execution receipt. It does not establish publication,
-cross-deployment behavior, beneficial reasoning quality, hostile-code isolation, distributed
-approval, or autonomous learning. GC1 can advance only after the same journey is rerun from exact
-public Core and Market artifacts and its public hashes and limitations are reconciled into Core's
-roadmap evidence.
+The completed state file is an execution receipt. The accepted public run used exact public Core
+and Market artifacts and is archived with hashes and limitations in this repository. It does not
+establish cross-deployment behavior, beneficial reasoning quality, hostile-code isolation,
+distributed approval, or autonomous learning. ACE Core owns the separate outcome-state
+reconciliation in its public roadmap.
