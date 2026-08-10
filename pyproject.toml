@@ -12,8 +12,11 @@ license = "Apache-2.0"
 dependencies = ["ace-core>=0.4.1,<0.5"]
 
 [project.urls]
+Homepage = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
 Repository = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
 Issues = "https://github.com/augmented-cognition-engine/domain-market-intelligence/issues"
+Changelog = "https://github.com/augmented-cognition-engine/domain-market-intelligence/blob/main/CHANGELOG.md"
+Roadmap = "https://github.com/augmented-cognition-engine/domain-market-intelligence/blob/main/ROADMAP.md"
 
 [tool.setuptools]
 include-package-data = false

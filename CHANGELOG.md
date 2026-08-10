@@ -14,6 +14,10 @@ Semantic Versioning.
 ### Documentation
 
 - Reconcile the 0.6.0 GitHub/PyPI publication and GI2 closeout status.
+- Align the README, NOTICE, security policy, contribution guide, Code of Conduct, project links,
+  roadmap boundary, and conformance assertions with the World Intelligence sibling repository.
+- Make the released Core 0.4 compatibility boundary explicit instead of implying that Market 0.6
+  can co-install with World 0.9/Core 0.5 before a separately tested Market release.
 
 ## [0.6.0] — 2026-08-09
 
