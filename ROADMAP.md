@@ -10,14 +10,21 @@
 
 GI2 is now passed through public Core 0.4.1, Market 0.6.0, and World 0.8.0 artifacts.
 
-## Next — GC1 external consumer and analyst orientation
+## Completed — GC1 external consumer
 
-- Reproduce the two-phase Market governed-cognition journey through the public `ace cognition`
+- Reproduced the two-phase Market governed-cognition journey through public `ace-core==0.4.4` and
+  the supported `ace cognition`
   interface: sourced proposal, semantic diff, human approval, exact use, restart, exact later use,
   retirement, and fail-closed subsequent selection.
-- Keep the verifier outside the data-only Domain Pack wheel and import no Core internals.
-- Bind the final receipt to a published Core patch containing the builder CLI; candidate source
-  evidence does not move Core outcome GC1.
+- Kept the verifier outside the data-only Domain Pack wheel with no Core Python imports.
+- Bound the final receipt to the exact public Core release, verifier/scenario hashes, durable
+  receipt identities, and a clean schema-v176 database.
+
+The [public execution record](docs/evidence/gc1-market-external-consumer-v1.md) passed. Core roadmap
+reconciliation is owned by the ACE Core repository and does not change this pack's inert 0.6.0
+artifact.
+
+## Next — analyst orientation
 
 - Cases and standing investigations;
 - Monitors and Subscriptions after their shared contracts stabilize;

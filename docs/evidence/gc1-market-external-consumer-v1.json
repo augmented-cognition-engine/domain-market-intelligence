@@ -1,0 +1,50 @@
+{
+  "contract_version": "ace.market.gc1-external-consumer/v1",
+  "first_use": {
+    "material_use_hash": "919ac46758ee244fbf9e029b79155313d568aa08295e0c0e8097a7ca516872f5",
+    "selected_revision_ids": [
+      "cognition_revision:02db82ccd8f2f5776bc49ef88f71ec62",
+      "cognition_revision:9dfb655a542e5cf8cca5f5554b0db597",
+      "cognition_revision:e7370ab4b73fb8689c3004dc26f45fd0",
+      "cognition_revision:284fb5fe55b7be3d1777976dec28e1a6"
+    ],
+    "selection_hash": "901c41524ae54ade9a904aa17a7631c039764b8d0d22db42b25eb5c2c7261989",
+    "selection_receipt_id": "cognition_selection:c9f62b4ec81ec8c881b8d81757781070",
+    "task_id": "task:3ohtjhggviqo25arnoax",
+    "use_hash": "f97c8699c20d44f5139e0db9733ae19c5ed95524e3f447a0197eb1796a251fd4",
+    "use_receipt_id": "cognition_use:97c54661a56ec657989041b63fcc56fa"
+  },
+  "head_generation": 1,
+  "head_hash": "7bb755abaabf53da8933de9981b4c377c79aab34f01087e7ad94a81cabf11f05",
+  "head_id": "cognition_head:dcc2299f646ad9a0a811f8bd4898a1c9",
+  "inspection_hash": "43dfd2bc15c26df9350508bc254db6775e30a2c31837bcac9166bdadf8a5a4f4",
+  "lifecycle_receipt_hash": "ad5dd71aec17be5910388d359613b6bd0609c8f07ef705b9be1abb76fb6aaf34",
+  "lifecycle_receipt_id": "cognition_lifecycle:5d673126b4c5e84b46014c038b29fd74",
+  "phase": "complete",
+  "post_retirement_failure": "Error: cognition_use_attribution_incomplete",
+  "proposal_hash": "a1306d345dfd5bc0e9fb7182905ab383df0e026605406073f64b0f985edefa98",
+  "proposal_id": "cognition_proposal:a1306d345dfd5bc0e9fb7182905ab383",
+  "restart_use": {
+    "material_use_hash": "919ac46758ee244fbf9e029b79155313d568aa08295e0c0e8097a7ca516872f5",
+    "selected_revision_ids": [
+      "cognition_revision:02db82ccd8f2f5776bc49ef88f71ec62",
+      "cognition_revision:9dfb655a542e5cf8cca5f5554b0db597",
+      "cognition_revision:e7370ab4b73fb8689c3004dc26f45fd0",
+      "cognition_revision:284fb5fe55b7be3d1777976dec28e1a6"
+    ],
+    "selection_hash": "192cefc610b845d6a1e17bf0caa676f7ac503809c8289a9a0a9fe2a5fd3854ab",
+    "selection_receipt_id": "cognition_selection:e9264aebf024cf592c160e7e16d9c29b",
+    "task_id": "task:ino203d0bq12znb1dlmz",
+    "use_hash": "6707396f1fd39d2c186a589ed3a955a7a563f94a388966bc64dc63790a5e0f1b",
+    "use_receipt_id": "cognition_use:b43f9da7c64c5718c4a44986f736563d"
+  },
+  "retired_head_hash": "c84ac6df2ed73cef0757be350b4e399af1cf108155eb40965a44cd4629794a7e",
+  "review_receipt_hash": "cc72d68d74a4655836c4763c5fe7cf8c62247d1c436dc2e779b8d8d8a0674729",
+  "review_receipt_id": "cognition_review:2dead1ebed5de7e6fea92a553b6c3e5c",
+  "revision_hash": "e04977c31966cef53b85f64bbefa20b871f3223245463eab18f6700642d29730",
+  "revision_id": "cognition_revision:02db82ccd8f2f5776bc49ef88f71ec62",
+  "scenario_hash": "dc5c6b3c617ecbbbfe8bed273b65e6be996734c7e3b7554e20f83403299f7297",
+  "semantic_diff_hash": "5211778bfd65a2177894180029898fa80a27374246fb8819959261d46db342b5",
+  "source_task_id": "task:9295nllkmh074tv3pr58",
+  "stable_key": "market_signal_review"
+}

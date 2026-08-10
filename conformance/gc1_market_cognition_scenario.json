@@ -7,5 +7,6 @@
   "base_recipe": "coding_intelligence",
   "fresh_use_prompt": "Re-evaluate this new market signal, identify counterevidence, and state bounded uncertainty.",
   "restart_use_prompt": "After restart, re-evaluate the market signal using the exact approved reasoning revision.",
+  "post_retirement_use_prompt": "After retirement, attempt a distinct market-signal review that requires the retired reasoning revision.",
   "retire_rationale": "This market reasoning revision is no longer eligible for selection."
 }

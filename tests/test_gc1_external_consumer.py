@@ -48,6 +48,22 @@ def _scenario() -> dict[str, Any]:
     return json.loads(SCENARIO_PATH.read_text(encoding="utf-8"))
 
 
+def test_parse_json_output_accepts_public_task_progress_prefix() -> None:
+    payload = {"id": "task:fresh", "status": "completed"}
+    output = (
+        "Accepted as task:fresh; waiting on the durable receipt…\n"
+        + json.dumps(payload, indent=2)
+        + "\n"
+    )
+
+    assert module._parse_json_output(output) == payload
+
+
+def test_parse_json_output_rejects_non_receipt_output() -> None:
+    with pytest.raises(module.JourneyError, match="did not return one JSON object"):
+        module._parse_json_output("Accepted as task:fresh; still waiting\n")
+
+
 def _use(task_id: str, selection_id: str, use_id: str) -> dict[str, Any]:
     return {
         "id": task_id,
@@ -196,6 +212,8 @@ def test_resume_proves_restart_exact_use_retirement_and_fail_closed_selection(
     assert completed["restart_use"]["selected_revision_ids"] == ["cognition_revision:exact"]
     assert completed["post_retirement_failure"] == "cognition_use_attribution_incomplete"
     assert runner.calls[-1][:3] == ("cognition", "use", "market_signal_review")
+    assert runner.calls[-1][3] == _scenario()["post_retirement_use_prompt"]
+    assert runner.calls[-1][3] != _scenario()["restart_use_prompt"]
     assert json.loads(state_path.read_text(encoding="utf-8")) == completed
     assert not runner.payloads
 

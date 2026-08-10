@@ -21,6 +21,24 @@ class JourneyError(RuntimeError):
     """The external consumer could not prove a required public behavior."""
 
 
+def _parse_json_output(output: str) -> dict[str, Any]:
+    """Decode the one JSON receipt after any public CLI progress line."""
+
+    decoder = json.JSONDecoder()
+    for index, character in enumerate(output):
+        if character != "{":
+            continue
+        try:
+            payload, end = decoder.raw_decode(output, index)
+        except json.JSONDecodeError:
+            continue
+        if output[end:].strip():
+            continue
+        if isinstance(payload, dict):
+            return payload
+    raise JourneyError("ace command did not return one JSON object")
+
+
 class Runner(Protocol):
     def json(self, *args: str) -> dict[str, Any]: ...
 
@@ -45,13 +63,7 @@ class AceCliRunner:
         if completed.returncode != 0:
             message = " ".join(completed.stderr.split())[:500]
             raise JourneyError(f"ace command failed ({completed.returncode}): {message}")
-        try:
-            payload = json.loads(completed.stdout)
-        except json.JSONDecodeError as exc:
-            raise JourneyError("ace command did not return one JSON object") from exc
-        if not isinstance(payload, dict):
-            raise JourneyError("ace command did not return one JSON object")
-        return payload
+        return _parse_json_output(completed.stdout)
 
     def failure(self, *args: str) -> str:
         completed = self._run(args)
@@ -293,7 +305,12 @@ def resume(
         "cognition",
         "use",
         stable_key,
-        str(_require(scenario.get("restart_use_prompt"), "restart use prompt is missing")),
+        str(
+            _require(
+                scenario.get("post_retirement_use_prompt"),
+                "post-retirement use prompt is missing",
+            )
+        ),
     )
     allowed_failure_codes = (
         "cognition_use_not_completed",
