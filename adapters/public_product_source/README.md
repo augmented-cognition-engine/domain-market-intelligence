@@ -27,3 +27,7 @@ fixed at `json-pointer:/listed_price`; a transport-supplied different locator fa
 never become acquisition provenance. The adapter does not authorize access, resolve actors or
 governed state, mint receipts, map entities, persist records, convert currency, or infer motive or
 impact.
+
+## License
+
+Apache-2.0 under the repository [`LICENSE`](../../LICENSE) and [`NOTICE`](../../NOTICE).

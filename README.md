@@ -1,34 +1,84 @@
 # ACE Market Intelligence
 
-ACE Market Intelligence is an inert Domain Pack for turning attributable market observations into
-domain-governed Signals, Shifts, Cases, and Briefs through the shared ACE Core + Intelligence
+**Governed market sensemaking on the shared ACE foundation.**
+
+ACE Market Intelligence is an independently versioned ACE domain product. Its installable package
+is an inert, JSON-only Domain Pack for turning attributable market observations into
+domain-governed Shifts, Signals, Cases, and Briefs through the shared ACE Core + Intelligence
 runtime.
 
-It supplies marketing meaning and policy. It does not implement a second reasoning engine, graph,
-state store, authority system, detector runtime, or feedback loop.
+It supplies Market vocabulary, source mappings, material-change policy, personas, synthesis and
+feedback policy, connector fixtures, and product evidence. It does not implement a second reasoning
+engine, graph, state store, authority system, detector runtime, or feedback loop.
+
+[Install](#install) · [Architecture](#what-you-install-and-what-you-get) ·
+[Proof](#current-proof-surface) · [Roadmap](ROADMAP.md) · [Security](SECURITY.md) ·
+[Contributing](CONTRIBUTING.md)
 
 - **Distribution:** `ace-domain-market-intelligence` 0.6.0
 - **Requires:** Python 3.12 and `ace-core>=0.4.1,<0.5`
 - **Artifact boundary:** JSON-only, data-only, inert
-- **Status:** public on GitHub and PyPI; GI2 and the external GC1 consumer journey passed
+- **Release:** public. The
+  [`v0.6.0` GitHub Release](https://github.com/augmented-cognition-engine/domain-market-intelligence/releases/tag/v0.6.0)
+  and [`0.6.0` PyPI distribution](https://pypi.org/project/ace-domain-market-intelligence/0.6.0/)
+  are public. GI2 and the external GC1 consumer journey passed. See the
+  [0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md).
 
-## Architecture
+## What you install, and what you get
 
-| Layer | Owner |
-|---|---|
-| ACE Core | Identity, time, immutable state, graph mechanics, reasoning, authority, decisions, outcomes, receipts, and replay. |
-| ACE Intelligence | Domain-neutral Observation, Entity state, Signal, Shift, Case, Brief, pack compilation, activation, routing, synthesis, and feedback contracts. |
-| Market Intelligence Domain Pack | Competitor, product, claim, campaign, market, customer-segment, event, materiality, persona, mapping, detector, synthesis, and outcome declarations. |
-| Connectors | Separately reviewed source translation. They are executable, optional, and never bundled into this wheel. |
+The product is split into three layers, and this repository owns only the third.
 
-The user-facing grammar is a DAG, not a forced pipeline:
+| Layer | Distribution | What it is |
+|---|---|---|
+| **ACE Core** | `ace-core` (public on PyPI; this release targets 0.4.1) | The runtime: identity, graph, immutable records, temporal validation, lineage, reasoning, authority, decisions, outcomes, receipts, and replay. |
+| **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: pack compilation, activation, Observation, Entity Snapshot, detection, routing, Case, Brief synthesis, epistemic status, and feedback. |
+| **Market Intelligence Domain Pack** | `ace-domain-market-intelligence` (this repository) | JSON declarations only — ontology, source mappings, detection, personas, synthesis, feedback policy, and frozen conformance fixtures. |
+
+Installing the Domain Pack adds **data**, not behavior. The wheel contains no Python modules, entry
+points, install hooks, connector, or application UI. ACE Core compiles those JSON modules and does
+the reasoning. Live sensing requires a separately reviewed connector; see
+[Connector boundary](#connector-boundary).
+
+### Install
+
+Install the public package with either command:
+
+```bash
+uv add "ace-domain-market-intelligence==0.6.0"
+```
+
+```bash
+pip install "ace-domain-market-intelligence==0.6.0"
+```
+
+The published 0.6.0 proof intentionally pins `ace-core>=0.4.1,<0.5`. World Intelligence 0.9.0
+targets Core 0.5.0, so those two exact released domain versions are not co-installable in one
+environment. That is independent release cadence, not an architectural split; Market's Core 0.5
+compatibility must be proven and released rather than asserted by widening metadata.
+
+Resolve the pack data from the installed distribution:
+
+```python
+import json
+from importlib.resources import files
+
+manifest = json.loads(
+    files("domain_packs.market_intelligence").joinpath("manifest.json").read_text(encoding="utf-8")
+)
+print(manifest["metadata"]["pack_id"])  # market_intelligence
+```
+
+## Product loop
 
 ```text
-evidence → Observation → entity state
-              ├────────→ Signal ──┐
-              └────────→ Shift ───┼→ Case / Brief → Decision → Outcome
-                                  └→ governed feedback proposal
+authorized evidence → Observation → Entity Snapshot
+                           ├────────→ Signal ──┐
+                           └────────→ Shift ───┼→ Case / Brief → Decision → Outcome
+                                               └→ governed feedback proposal
 ```
+
+This is a typed DAG, not a forced pipeline. A Shift need not become a Signal, a Signal need not
+become a Brief, and no downstream resource grants itself authority.
 
 ## Domain scope
 
@@ -50,21 +100,6 @@ routing, and a governed competitive-price Brief. Additive 0.4.0 and 0.5.0 pack r
 synthesis and bounded decision/outcome policy; the 0.6.0 distribution adds the P1F LIVE-bridge
 conformance packet without pretending that every planned Market facet is implemented.
 
-## Install
-
-Install the public package with either command:
-
-```bash
-uv add "ace-domain-market-intelligence==0.6.0"
-```
-
-```bash
-pip install "ace-domain-market-intelligence==0.6.0"
-```
-
-Installing the Domain Pack adds data, not behavior. The wheel contains no Python modules, entry
-points, install hooks, connector, or application UI.
-
 ## Current proof surface
 
 The repository carries the frozen Market P1 packets:
@@ -75,13 +110,16 @@ The repository carries the frozen Market P1 packets:
 - P1E: Decision, Outcome, and bounded feedback proposal with no silent policy change; and
 - P1F: the paired LIVE Shift → Signal → route → Brief bridge through unchanged ACE.
 
+## Connector boundary
+
 The separately packaged public-product connector accepts only an injected reviewed transport. It is
-source-available here for conformance but is not a dependency of the Domain Pack and is not planned
-for publication in the 0.6.0 root release.
+executable host software, not Domain Pack content. It is source-available here for conformance but
+is not a dependency of the Domain Pack and was not published by the 0.6.0 root release. Installing
+`ace-domain-market-intelligence` never installs, discovers, registers, or authorizes it.
 
 ## GI2: cross-domain falsification
 
-The public release proves a clean installation of ACE plus both independently packaged domains:
+The public release proved a clean installation of ACE plus both independently packaged domains:
 
 ```text
 ace-core 0.4.1
@@ -89,26 +127,42 @@ ace-core 0.4.1
   + ace-domain-world-intelligence 0.8.0
 ```
 
-Both packs compile and activate through unchanged ACE, retain distinct pack, entity, persona,
-policy, and authority identities, and survive independent deactivation. A co-install alone was not
+Both packs compiled and activated through unchanged ACE, retained distinct pack, entity, persona,
+policy, and authority identities, and survived independent deactivation. A co-install alone was not
 enough. This supplied the second public-domain evidence that closed Core roadmap outcome GI2.
 
 Publication identities and verification are recorded in the
-[0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md).
+[0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md). This is an exact historical
+receipt; World has since released 0.9.0 against Core 0.5.0.
 
 ## GC1: external governed-cognition consumer
 
-Market Intelligence is the first external consumer of ACE's public
-governed-cognition builder interface. Its two-phase verifier teaches a reusable market reasoning
-pattern from an accepted task, inspects and approves the proposal, proves exact material use,
-crosses a real ACE restart, proves exact later use, retires the revision, and requires subsequent
-selection to fail closed.
+Market Intelligence is the first external consumer of ACE's public governed-cognition builder
+interface. Its two-phase verifier teaches a reusable market reasoning pattern from an accepted
+task, inspects and approves the proposal, proves exact material use, crosses a real ACE restart,
+proves exact later use, retires the revision, and requires subsequent selection to fail closed.
 
 The verifier imports no Core internals and remains outside the inert wheel. See the
 [external GC1 journey](docs/gc1-external-consumer.md) and the
 [public 0.4.4 execution record](docs/evidence/gc1-market-external-consumer-v1.md). The journey passed
 from a clean public-index installation, crossed a real API restart over durable state, and rejected
 a distinct required use after retirement. ACE Core owns the final GC1 roadmap reconciliation.
+
+## Verification
+
+Use Python 3.12 and the locked environment:
+
+```bash
+uv sync --frozen --no-install-project
+uv run --no-sync pytest
+uv run --no-sync pytest tests/test_release_contract.py
+uv run --no-sync ruff check --no-cache tests scripts/gc1_external_consumer.py
+uv run --no-sync ruff format --check --no-cache tests scripts/gc1_external_consumer.py
+```
+
+The authoritative artifact hashes, clean-install evidence, cross-domain GI2 proof, and limitations
+are recorded in the [0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md). The GC1
+consumer evidence is a later additive proof over the unchanged inert 0.6.0 artifact.
 
 ## Guardrails
 
@@ -121,6 +175,20 @@ a distinct required use after retirement. ACE Core owns the final GC1 roadmap re
 - Content creation, campaign activation, publishing, and project management are downstream
   consumers, not part of this package.
 
+## Roadmap and project status
+
+The [Market Intelligence roadmap](ROADMAP.md) owns current domain direction, and release history is
+in [`CHANGELOG.md`](CHANGELOG.md). Core, World, and Market version independently; each compatibility
+window advances only with its own conformance and public-artifact evidence.
+
+## Community and security
+
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Issues](https://github.com/augmented-cognition-engine/domain-market-intelligence/issues)
+
 ## License
 
-Apache-2.0.
+Apache-2.0. See [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE). Existing work is copyright Edwin
+Amirian; contributors retain copyright in their contributions and license them under Apache-2.0.

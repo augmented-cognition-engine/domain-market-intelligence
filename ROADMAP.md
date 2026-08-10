@@ -24,8 +24,11 @@ The [public execution record](docs/evidence/gc1-market-external-consumer-v1.md) 
 reconciliation is owned by the ACE Core repository and does not change this pack's inert 0.6.0
 artifact.
 
-## Next — analyst orientation
+## Next — Core 0.5 compatibility and analyst orientation
 
+- release a Market revision against public `ace-core==0.5.x` rather than widening the 0.6.0
+  compatibility metadata in place;
+- reproduce simultaneous Market + World 0.9 installation and isolation on the current Core line;
 - Cases and standing investigations;
 - Monitors and Subscriptions after their shared contracts stabilize;
 - competitive, event, weekly-summary, GTM, and narrative-drift Brief experiences;
@@ -34,6 +37,14 @@ artifact.
 
 ## Later — governed effects
 
-Approved delivery and downstream content consumers may bind through separate adapters only after ACE
-authority, idempotency, retry, revocation, and outcome receipts pass. The Domain Pack never executes
-an external effect.
+ACE 0.5.0 now supplies a bounded reviewed-action contract under its documented single-host,
+trusted-adapter topology. Market delivery and downstream content consumers may bind through
+separate adapters only after this repository proves its own Core 0.5 compatibility, action policy,
+idempotency, denial, replay, and outcome journey. The Domain Pack never executes an external
+effect.
+
+## Invariant boundary
+
+The Domain Pack never executes code, grants authority, fetches a source, publishes content, or
+silently changes policy. Core + Intelligence own the invariant machinery; this repository owns
+Market vocabulary, source mappings, policies, connectors, fixtures, and product evidence.

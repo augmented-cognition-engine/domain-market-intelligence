@@ -38,6 +38,48 @@ def test_root_distribution_identity_and_compatibility_are_exact() -> None:
     assert requirement.url is None
 
 
+def test_repository_identity_license_and_public_links_are_complete() -> None:
+    project = ROOT_PROJECT["project"]
+    expected_urls = {
+        "Homepage": "https://github.com/augmented-cognition-engine/domain-market-intelligence",
+        "Repository": "https://github.com/augmented-cognition-engine/domain-market-intelligence",
+        "Issues": "https://github.com/augmented-cognition-engine/domain-market-intelligence/issues",
+        "Changelog": "https://github.com/augmented-cognition-engine/domain-market-intelligence/blob/main/CHANGELOG.md",
+        "Roadmap": "https://github.com/augmented-cognition-engine/domain-market-intelligence/blob/main/ROADMAP.md",
+    }
+
+    assert project["license"] == "Apache-2.0"
+    assert project["urls"] == expected_urls
+    for name in (
+        "LICENSE",
+        "NOTICE",
+        "README.md",
+        "ROADMAP.md",
+        "CHANGELOG.md",
+        "SECURITY.md",
+        "CONTRIBUTING.md",
+        "CODE_OF_CONDUCT.md",
+    ):
+        assert (REPO_ROOT / name).is_file(), name
+
+    license_text = (REPO_ROOT / "LICENSE").read_text(encoding="utf-8")
+    assert "Apache License" in license_text
+    assert "Version 2.0, January 2004" in license_text
+
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    for phrase in (
+        "independently versioned ACE domain product",
+        "JSON-only Domain Pack",
+        "## What you install, and what you get",
+        "## Product loop",
+        "## Connector boundary",
+        "## Guardrails",
+        "## Roadmap and project status",
+        "## Community and security",
+    ):
+        assert phrase in readme
+
+
 def test_root_distribution_mapping_is_inert_and_data_only() -> None:
     setuptools = ROOT_PROJECT["tool"]["setuptools"]
 
@@ -73,7 +115,13 @@ def test_connector_is_separate_and_never_a_root_dependency() -> None:
 
     assert adapter["name"] == ADAPTER_DISTRIBUTION
     assert adapter["version"] == "0.1.1"
+    assert adapter["requires-python"] == ">=3.12,<3.13"
+    assert adapter["license"] == "Apache-2.0"
     assert adapter["dependencies"] == ["ace-core>=0.4.1,<0.5"]
+    assert adapter["urls"] == {
+        "Repository": "https://github.com/augmented-cognition-engine/domain-market-intelligence",
+        "Issues": "https://github.com/augmented-cognition-engine/domain-market-intelligence/issues",
+    }
 
     published_requirements = [Requirement(item) for item in ROOT_PROJECT["project"]["dependencies"]]
     assert canonicalize_name(ADAPTER_DISTRIBUTION) not in {
