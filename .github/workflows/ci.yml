@@ -86,7 +86,8 @@ jobs:
               )
 
           payload = [name for name in names if not name.startswith(dist_info)]
-          assert len(payload) == 39, payload
+          assert len(payload) == 40, payload
+          assert "domain_packs/market_intelligence/onboarding_profile.json" in payload
           assert all(name.startswith("domain_packs/market_intelligence/") for name in payload)
           assert all(name.endswith(".json") for name in payload)
           assert not [name for name in names if name.endswith((".py", ".pyc", ".so", ".pyd"))]

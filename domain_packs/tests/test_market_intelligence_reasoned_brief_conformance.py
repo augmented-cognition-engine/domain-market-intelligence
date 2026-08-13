@@ -12,9 +12,7 @@ import pytest
 try:
     from ace.intelligence.packs import compile_pack_document
 except ModuleNotFoundError as exc:
-    if exc.name is not None and (
-        exc.name == "ace" or exc.name.startswith(("ace.", "pydantic"))
-    ):
+    if exc.name is not None and (exc.name == "ace" or exc.name.startswith(("ace.", "pydantic"))):
         pytest.skip(
             "the exact ACE Core P1D1 wheel is required for Market conformance",
             allow_module_level=True,
@@ -48,6 +46,7 @@ FROZEN_0_3_0_SHA256 = {
     "conformance/p1c2_live_source_negative_cases.json": "bbd89f833094605821a164b56da0cf1a97663d9ea26e4b09a9c73d91bd5e820f",
     "conformance/p1c2_live_manifest.json": "b3ab83ab4d32df2c1211802a126d39e3165fc2545e0c4e7e7112adf95ce94722",
 }
+ADDITIVE_PRODUCT_METADATA = {"onboarding_profile.json"}
 
 
 def _load(path: Path) -> dict:
@@ -73,10 +72,7 @@ def _compile(root: Path):
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
-        {
-            item["path"]: (root / item["path"]).read_bytes()
-            for item in manifest["resources"]
-        },
+        {item["path"]: (root / item["path"]).read_bytes() for item in manifest["resources"]},
     )
 
 
@@ -88,7 +84,7 @@ def test_historical_0_3_0_archive_is_byte_frozen() -> None:
         and "releases" not in path.relative_to(PACK_ROOT).parts
         and "__pycache__" not in path.relative_to(PACK_ROOT).parts
     }
-    assert historical_inventory == set(FROZEN_0_3_0_SHA256)
+    assert historical_inventory == set(FROZEN_0_3_0_SHA256) | ADDITIVE_PRODUCT_METADATA
     assert {
         relative: _sha256(PACK_ROOT / relative) for relative in FROZEN_0_3_0_SHA256
     } == FROZEN_0_3_0_SHA256
@@ -97,9 +93,7 @@ def test_historical_0_3_0_archive_is_byte_frozen() -> None:
     assert compiled.pack_digest == (
         "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd"
     )
-    synthesis = next(
-        item for item in compiled.modules if item.module_id == "market_synthesis"
-    )
+    synthesis = next(item for item in compiled.modules if item.module_id == "market_synthesis")
     assert synthesis.module_digest == (
         "sha256:99ccea5e5fe93cd2ad22c20e9a36d30ce61506f8f998bc30da1a0432947495c0"
     )
@@ -138,9 +132,7 @@ def test_0_4_0_is_an_additive_ordered_synthesis_release() -> None:
     assert compiled.pack_digest == (
         "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c"
     )
-    synthesis = next(
-        item for item in compiled.modules if item.module_id == "market_synthesis"
-    )
+    synthesis = next(item for item in compiled.modules if item.module_id == "market_synthesis")
     assert synthesis.module_digest == (
         "sha256:fa6346a4173b7bbae1cd62a06a51b1a184f8408160deebfd95b71b0dfe3f0512"
     )
@@ -214,8 +206,7 @@ async def test_governed_routed_reasoned_brief_matches_exact_expected() -> None:
 
     lifecycle = projection["activation_lifecycle"]
     revisions = [
-        lifecycle[name]["revision"]
-        for name in ("revision_1", "revision_2", "revision_3_rollback")
+        lifecycle[name]["revision"] for name in ("revision_1", "revision_2", "revision_3_rollback")
     ]
     assert [item["revision"] for item in revisions] == [1, 2, 3]
     assert len({item["activation_id"] for item in revisions}) == 1
@@ -260,9 +251,7 @@ async def test_negative_inventory_is_exact_and_leaves_no_downstream_residue() ->
     assert len({item["case_id"] for item in observed}) == 18
     assert all(item["brief_residue_delta"] == 0 for item in observed)
     assert all(item["synthesis_receipt_residue_delta"] == 0 for item in observed)
-    assert all(
-        item["prepared_synthesis_transaction_residue_delta"] == 0 for item in observed
-    )
+    assert all(item["prepared_synthesis_transaction_residue_delta"] == 0 for item in observed)
 
 
 def test_harness_uses_only_public_ace_surfaces_and_golden_is_path_portable() -> None:
