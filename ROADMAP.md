@@ -1,5 +1,13 @@
 # ACE Market Intelligence roadmap
 
+## Candidate — 0.7.0 Intelligence OS onboarding
+
+Market 0.7.0 moves the public root pack to Core 0.8.2 and contributes a discoverable Market
+Intelligence experience to Atrium's generic catalog. Its six outcomes cover competitive, product,
+market, customer, performance, and narrative/messaging intelligence; its five evidence groups keep
+owned marketing and revenue sources opt-in. The release is gated on real public Core 0.8.2 and
+World 0.12 artifacts, a checkout-free two-domain install, and unchanged inert-pack boundaries.
+
 ## Completed — 0.6.0 public Domain Pack and GI2
 
 1. Publish the inert `ace-domain-market-intelligence` distribution.
@@ -21,7 +29,8 @@ GI2 is now passed through public Core 0.4.1, Market 0.6.0, and World 0.8.0 artif
   feedback proposal non-live with no delivery authority.
 
 See the [ACE 0.8 candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
-Market package compatibility remains on the released Core 0.4 line until Core 0.8 is public.
+Market 0.7.0 is the candidate that advances package compatibility from the historical Core 0.4
+line to public Core 0.8.2 without widening the already-published 0.6.0 metadata in place.
 
 ## Completed — GC1 external consumer
 
@@ -37,11 +46,10 @@ The [public execution record](docs/evidence/gc1-market-external-consumer-v1.md) 
 reconciliation is owned by the ACE Core repository and does not change this pack's inert 0.6.0
 artifact.
 
-## Next — public Core 0.8 compatibility and analyst experience
+## Next — analyst experience after Core 0.8 compatibility
 
-- release a Market revision against public `ace-core==0.8.x` rather than widening the 0.6.0
-  compatibility metadata in place;
-- reproduce simultaneous Market + World installation and isolation on the current Core line;
+- publish the prepared Market 0.7 revision only after simultaneous Market + World installation
+  and isolation pass on public Core 0.8.2;
 - standing investigations over the now-proven public Case contract;
 - Monitors and Subscriptions after their shared contracts stabilize;
 - competitive, event, weekly-summary, GTM, and narrative-drift Brief experiences;

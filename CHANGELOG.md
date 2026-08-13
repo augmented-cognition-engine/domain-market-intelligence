@@ -3,9 +3,16 @@
 All notable changes to `ace-domain-market-intelligence` are recorded here. The project follows
 Semantic Versioning.
 
-## Unreleased
+## [0.7.0] — candidate
 
 ### Added
+
+- Added the outcome-led Market Intelligence onboarding profile: six intelligence outcomes and five
+  reviewed evidence groups spanning competitor, product, market, customer, performance, and
+  narrative/messaging intelligence.
+- Made owned marketing and revenue sources explicitly opt-in; profile selection grants no source,
+  monitor, agent, effect, or publication authority.
+- Added the Atrium Intelligence Catalog binding while preserving the pack as inert JSON-only data.
 
 - Two-phase external GC1 consumer verifier over the public `ace cognition` CLI, covering sourced
   proposal, semantic diff, human approval, exact material use, restart, exact later use,
@@ -18,6 +25,13 @@ Semantic Versioning.
   roadmap boundary, and conformance assertions with the World Intelligence sibling repository.
 - Make the released Core 0.4 compatibility boundary explicit instead of implying that Market 0.6
   can co-install with World 0.9/Core 0.5 before a separately tested Market release.
+
+### Changed
+
+- Move the root distribution to `ace-core>=0.8.2,<0.9` and the independent World 0.12 validation
+  line without rewriting the frozen 0.6/GI2 evidence.
+- Advance the source-available public-product adapter candidate to 0.2.0 on the same Core 0.8.2
+  line; it remains outside the root wheel and is not installed transitively.
 
 ## [0.6.0] — 2026-08-09
 

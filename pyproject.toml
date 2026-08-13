@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ace-domain-market-intelligence"
-version = "0.6.0"
+version = "0.7.0"
 description = "Inert ACE Market Intelligence Domain Pack and conformance fixtures"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
-dependencies = ["ace-core>=0.4.1,<0.5"]
+dependencies = ["ace-core>=0.8.2,<0.9"]
 
 [project.urls]
 Homepage = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
@@ -39,7 +39,7 @@ namespaces = true
 
 [dependency-groups]
 dev = [
-    "ace-domain-world-intelligence==0.8.0",
+    "ace-domain-world-intelligence==0.12.0",
     "ace-market-public-product-source",
     "build>=1.2",
     "packaging>=24",

@@ -1,4 +1,4 @@
-"""Publishable identity and data-only boundary for Market Intelligence 0.6.0."""
+"""Publishable identity and data-only boundary for Market Intelligence 0.7.0."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ ADAPTER_PROJECT = tomllib.loads(
 )
 
 ROOT_DISTRIBUTION = "ace-domain-market-intelligence"
-ROOT_VERSION = "0.6.0"
+ROOT_VERSION = "0.7.0"
 ADAPTER_DISTRIBUTION = "ace-market-public-product-source"
 
 
@@ -29,11 +29,11 @@ def test_root_distribution_identity_and_compatibility_are_exact() -> None:
     assert project["name"] == ROOT_DISTRIBUTION
     assert project["version"] == ROOT_VERSION
     assert project["requires-python"] == ">=3.12,<3.13"
-    assert project["dependencies"] == ["ace-core>=0.4.1,<0.5"]
+    assert project["dependencies"] == ["ace-core>=0.8.2,<0.9"]
 
     requirement = Requirement(project["dependencies"][0])
     assert canonicalize_name(requirement.name) == "ace-core"
-    assert requirement.specifier == SpecifierSet(">=0.4.1,<0.5")
+    assert requirement.specifier == SpecifierSet(">=0.8.2,<0.9")
     assert requirement.marker is None
     assert requirement.url is None
 
@@ -115,10 +115,10 @@ def test_connector_is_separate_and_never_a_root_dependency() -> None:
     adapter = ADAPTER_PROJECT["project"]
 
     assert adapter["name"] == ADAPTER_DISTRIBUTION
-    assert adapter["version"] == "0.1.1"
+    assert adapter["version"] == "0.2.0"
     assert adapter["requires-python"] == ">=3.12,<3.13"
     assert adapter["license"] == "Apache-2.0"
-    assert adapter["dependencies"] == ["ace-core>=0.4.1,<0.5"]
+    assert adapter["dependencies"] == ["ace-core>=0.8.2,<0.9"]
     assert adapter["urls"] == {
         "Repository": "https://github.com/augmented-cognition-engine/domain-market-intelligence",
         "Issues": "https://github.com/augmented-cognition-engine/domain-market-intelligence/issues",

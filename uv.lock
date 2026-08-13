@@ -4,7 +4,7 @@ requires-python = "==3.12.*"
 
 [[package]]
 name = "ace-core"
-version = "0.4.1"
+version = "0.8.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -52,14 +52,14 @@ dependencies = [
     { name = "uvicorn", extra = ["standard"] },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/28/f5/9d289d4e1102b697bb74d1d9e9f58a7f6446e4f57b46102445a5a6e19741/ace_core-0.4.1.tar.gz", hash = "sha256:583ab0920a770d0953546c8f23453d2265946ce494d39ff16ea08d523e20eef2", size = 4935100, upload-time = "2026-08-09T17:30:08.645Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7c/54/5df9bdaf0f61003a1260971298b6d0ea6ec39d16fe9a90d775571150dec2/ace_core-0.8.2.tar.gz", hash = "sha256:b4714c97dd290a93b7b26c9f36236d9e089dcf4cc3b3b30b3e9f07178752617a", size = 5515327, upload-time = "2026-08-13T20:26:57.038Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/80/79/17331d5ac172648817de4bdbf06dd00c31282a5bd35368ded693670d3340/ace_core-0.4.1-py3-none-any.whl", hash = "sha256:591c2106894139e008f09979a80523785e64fd9422ac758ae760f3916a6f0bc0", size = 5646377, upload-time = "2026-08-09T17:30:06.897Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/95/85c8ed9051eaf793e2a3ffaf6526cc636cc63a5630ff1a0a3eb5b7a1db40/ace_core-0.8.2-py3-none-any.whl", hash = "sha256:de936efc9aafa0f2e365abeb0bfe9fcf592ba7506bca4d2411ce7c340ca7a4a9", size = 6395374, upload-time = "2026-08-13T20:26:54.262Z" },
 ]
 
 [[package]]
 name = "ace-domain-market-intelligence"
-version = "0.6.0"
+version = "0.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "ace-core" },
@@ -79,11 +79,11 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.4.1,<0.5" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.8.2,<0.9" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "ace-domain-world-intelligence", specifier = "==0.8.0" },
+    { name = "ace-domain-world-intelligence", specifier = "==0.12.0" },
     { name = "ace-market-public-product-source", editable = "adapters/public_product_source" },
     { name = "build", specifier = ">=1.2" },
     { name = "packaging", specifier = ">=24" },
@@ -96,26 +96,26 @@ dev = [
 
 [[package]]
 name = "ace-domain-world-intelligence"
-version = "0.8.0"
+version = "0.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ace-core" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a0/23/b1d5679a4fd58ef06d7d04e2456ca067b1e455298954a64e0f02bc72c504/ace_domain_world_intelligence-0.8.0.tar.gz", hash = "sha256:a91ec786ffc82f92a9d1250a85965fa6cd006f433a88f8692e82f7546fc917c5", size = 37995, upload-time = "2026-08-09T18:33:45.878Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/61/a4/3bb00d689fe7f23643aab0f07c786fd267c459b9ee00a620932696e64e1b/ace_domain_world_intelligence-0.12.0.tar.gz", hash = "sha256:a89c08a0739c655230ade78cb4cac8d47d99dceec62b073d12b5180489a24307", size = 103355, upload-time = "2026-08-13T21:00:25.87Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0e/5d/3ef2cc0bce1ef5722e428795cdb661ce75d0d49f29757fc2aa0c5faa6d60/ace_domain_world_intelligence-0.8.0-py3-none-any.whl", hash = "sha256:ed088e4bef56fca95efd1cc7ac427fa83ed405a1eae414bde7fa3ce0a1f7c395", size = 52532, upload-time = "2026-08-09T18:33:44.612Z" },
+    { url = "https://files.pythonhosted.org/packages/4e/2f/bd61f7582d48f4ae83a80e7c2e5b1d94aa567d1c98007f26790af192fd2e/ace_domain_world_intelligence-0.12.0-py3-none-any.whl", hash = "sha256:8a36f476ccd97933563d3fbc31023225093968e44302560f8200f6ed0ad73be8", size = 106419, upload-time = "2026-08-13T21:00:24.467Z" },
 ]
 
 [[package]]
 name = "ace-market-public-product-source"
-version = "0.1.1"
+version = "0.2.0"
 source = { editable = "adapters/public_product_source" }
 dependencies = [
     { name = "ace-core" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.4.1,<0.5" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.8.2,<0.9" }]
 
 [[package]]
 name = "aiofile"

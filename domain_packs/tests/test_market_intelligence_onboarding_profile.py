@@ -22,7 +22,11 @@ def test_market_intelligence_onboarding_profile_is_domain_owned_and_non_authoriz
         "narrative_and_messaging",
     }
     assert len(profile["source_groups"]) == 5
-    private = next(group for group in profile["source_groups"] if group["evidence_role"] == "private_organizational")
+    private = next(
+        group
+        for group in profile["source_groups"]
+        if group["evidence_role"] == "private_organizational"
+    )
     assert private["default_selected"] is False
     assert private["access_label"] == "Private · permission required"
     assert profile["guardrails"]["authorizes_connections"] is False
