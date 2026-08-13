@@ -15,16 +15,15 @@ engine, graph, state store, authority system, detector runtime, or feedback loop
 [Proof](#current-proof-surface) · [Roadmap](ROADMAP.md) · [Security](SECURITY.md) ·
 [Contributing](CONTRIBUTING.md)
 
-- **Candidate distribution:** `ace-domain-market-intelligence` 0.7.0
+- **Distribution:** `ace-domain-market-intelligence` 0.7.0
 - **Requires:** Python 3.12 and `ace-core>=0.8.2,<0.9`
 - **Artifact boundary:** JSON-only, data-only, inert
-- **Release:** 0.7.0 is a candidate. The latest published artifacts remain the
-  [`v0.6.0` GitHub Release](https://github.com/augmented-cognition-engine/domain-market-intelligence/releases/tag/v0.6.0)
-  and [`0.6.0` PyPI distribution](https://pypi.org/project/ace-domain-market-intelligence/0.6.0/)
-  GI2 and the external GC1 consumer journey passed on that immutable historical release. See the
-  [0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md).
+- **Release:** public
+  [`v0.7.0`](https://github.com/augmented-cognition-engine/domain-market-intelligence/releases/tag/v0.7.0)
+  and [`0.7.0 on PyPI`](https://pypi.org/project/ace-domain-market-intelligence/0.7.0/).
+  GI2 and the historical external GC1 consumer journey remain frozen in their original evidence.
 
-The 0.7 candidate projects Market’s analyst intelligence loop through the
+The 0.7 release projects Market’s analyst intelligence loop through the
 single governed resource plane with an explicit `no_action` Decision and non-live Feedback. That
 proof is additive and does not change the public 0.6.0 installation contract; see the
 [candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
@@ -46,7 +45,7 @@ the reasoning. Live sensing requires a separately reviewed connector; see
 
 ### Install
 
-After publication, install the 0.7.0 package with either command:
+Install the public 0.7.0 package with either command:
 
 ```bash
 uv add "ace-domain-market-intelligence==0.7.0"
@@ -56,10 +55,9 @@ uv add "ace-domain-market-intelligence==0.7.0"
 pip install "ace-domain-market-intelligence==0.7.0"
 ```
 
-The 0.7.0 release gate uses the real public `ace-core==0.8.2` and World Intelligence 0.12.0
-artifacts in a checkout-free environment. Until Market 0.7.0 itself is published, the install
-commands above remain candidate instructions rather than a claim of availability. The published
-0.6.0 artifact and its Core 0.4 compatibility metadata remain unchanged.
+The 0.7.0 release gate used the real public `ace-core==0.8.2` and World Intelligence 0.12.0
+artifacts in a checkout-free environment. The published 0.6.0 artifact and its Core 0.4
+compatibility metadata remain unchanged.
 
 Resolve the pack data from the installed distribution:
 
