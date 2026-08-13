@@ -110,7 +110,10 @@ jobs:
           cp "dist/${ROOT_WHEEL}" "${ISOLATED}/${ROOT_WHEEL}"
           cd "${ISOLATED}"
           uv venv --no-config --python 3.12 isolated-venv
-          uv pip install --no-config --python isolated-venv/bin/python \
+          uv pip install --no-config \
+            --refresh-package ace-core \
+            --refresh-package ace-domain-world-intelligence \
+            --python isolated-venv/bin/python \
             "./${ROOT_WHEEL}" \
             "ace-core==0.8.2" \
             "ace-domain-world-intelligence==0.12.0"

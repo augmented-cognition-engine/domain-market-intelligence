@@ -150,3 +150,10 @@ def test_pack_history_is_explicit_and_preserved() -> None:
     assert (
         PACK_ROOT / "releases" / "v0_6_0" / "conformance" / "p1f_live_bridge_manifest.json"
     ).is_file()
+
+
+def test_public_two_domain_install_refreshes_new_release_metadata() -> None:
+    ci = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+
+    assert "--refresh-package ace-core" in ci
+    assert "--refresh-package ace-domain-world-intelligence" in ci
