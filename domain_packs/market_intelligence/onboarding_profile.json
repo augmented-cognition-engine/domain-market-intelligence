@@ -1,0 +1,135 @@
+{
+  "contract": "ace.intelligence.onboarding-profile/v1alpha1",
+  "profile_id": "onboarding_profile:market-intelligence",
+  "topic_id": "market_intelligence",
+  "domain_label": "Marketing Intelligence",
+  "topic_label": "Your market and competitors",
+  "display_name": "Marketing Intelligence Command Center",
+  "prompt": "What marketing decision do you need to stay ahead of?",
+  "description": "Build a cited, continuously updated picture of competitors, products, customers, markets, narratives, and marketing performance.",
+  "starter_prompts": [
+    "Keep me ahead of competitor, customer, product, and market shifts that could change our strategy.",
+    "Show where competitor claims are moving faster than their evidence or execution.",
+    "Find market and customer changes that should alter our positioning, launches, or investment."
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "competitive_intelligence",
+      "label": "Understand competitors and positioning",
+      "description": "Track offers, pricing, claims, launches, investments, partnerships, and execution evidence.",
+      "icon_hint": "competition",
+      "recommended_topic_labels": ["Competitors", "Offers & pricing", "Claims", "Launches", "Investment & execution"],
+      "recommended_intelligence_labels": ["Position movement", "Claim versus evidence", "Strategy before announcement"]
+    },
+    {
+      "outcome_id": "product_intelligence",
+      "label": "Guide product and portfolio decisions",
+      "description": "Connect product capabilities, pricing, adoption, performance, and unmet needs across the lifecycle.",
+      "icon_hint": "choice",
+      "recommended_topic_labels": ["Products", "Capabilities", "Pricing", "Adoption", "Unmet needs"],
+      "recommended_intelligence_labels": ["Product movement", "Portfolio gaps", "Launch readiness"]
+    },
+    {
+      "outcome_id": "market_understanding",
+      "label": "Understand markets and emerging demand",
+      "description": "Follow category growth, segments, investment, regulation, technology, and demand catalysts.",
+      "icon_hint": "strategy",
+      "recommended_topic_labels": ["Categories", "Segments", "Demand", "Investment", "External forces"],
+      "recommended_intelligence_labels": ["Market momentum", "Demand shifts", "Emerging opportunity"]
+    },
+    {
+      "outcome_id": "customer_understanding",
+      "label": "Understand customers and buying behavior",
+      "description": "Combine customer voice, behavior, needs, objections, satisfaction, and buying-stage evidence.",
+      "icon_hint": "research",
+      "recommended_topic_labels": ["Customer needs", "Buying behavior", "Objections", "Satisfaction", "Segments"],
+      "recommended_intelligence_labels": ["Need movement", "Buying friction", "Retention risk"]
+    },
+    {
+      "outcome_id": "marketing_performance",
+      "label": "Improve marketing performance",
+      "description": "Orient teams around campaign, content, channel, conversion, spend, and revenue evidence.",
+      "icon_hint": "strategy",
+      "recommended_topic_labels": ["Campaigns", "Content", "Channels", "Conversion", "ROMI"],
+      "recommended_intelligence_labels": ["Performance movement", "Efficiency gaps", "Investment opportunity"]
+    },
+    {
+      "outcome_id": "narrative_and_messaging",
+      "label": "Detect narrative and messaging shifts",
+      "description": "See how category language, executive narratives, competitive claims, and customer expectations are changing.",
+      "icon_hint": "risk",
+      "recommended_topic_labels": ["Narratives", "Messaging", "Claims", "Customer language", "Category themes"],
+      "recommended_intelligence_labels": ["Narrative drift", "Message whitespace", "De-positioning opportunity"]
+    }
+  ],
+  "source_groups": [
+    {
+      "source_group_id": "competitor_public_evidence",
+      "label": "Competitor public evidence",
+      "description": "Websites, product pages, pricing, documentation, launches, job postings, and public statements.",
+      "evidence_role": "first_party_claim",
+      "source_ids": ["competitor_web", "competitor_pricing", "competitor_docs", "competitor_jobs", "competitor_newsrooms"],
+      "source_labels": ["Web & product pages", "Pricing", "Documentation", "Job postings", "Newsrooms"],
+      "access_label": "Public · no credentials",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "market_and_company_records",
+      "label": "Market and company records",
+      "description": "Filings, earnings materials, patents, government records, research, and category publications.",
+      "evidence_role": "authoritative_record",
+      "source_ids": ["company_filings", "earnings_materials", "patent_records", "government_records", "market_research"],
+      "source_labels": ["Company filings", "Earnings", "Patents", "Government records", "Market research"],
+      "access_label": "Public + licensed options",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "news_social_and_narratives",
+      "label": "News, social, and narratives",
+      "description": "Independent reporting, executive commentary, events, communities, and category conversation.",
+      "evidence_role": "leading_indicator",
+      "source_ids": ["independent_news", "executive_commentary", "industry_events", "social_channels", "public_communities"],
+      "source_labels": ["Independent news", "Executive commentary", "Events", "Social channels", "Communities"],
+      "access_label": "Public · optional API access",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "customer_voice",
+      "label": "Customer voice",
+      "description": "Reviews plus optional surveys, interviews, support conversations, community posts, and win/loss evidence.",
+      "evidence_role": "independent_measurement",
+      "source_ids": ["public_reviews", "customer_surveys", "customer_interviews", "support_conversations", "win_loss"],
+      "source_labels": ["Reviews", "Surveys", "Interviews", "Support", "Win/loss"],
+      "access_label": "Public + private with permission",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "owned_marketing_and_revenue",
+      "label": "Owned marketing and revenue data",
+      "description": "CRM, web analytics, campaign performance, content engagement, pipeline, and revenue outcomes.",
+      "evidence_role": "private_organizational",
+      "source_ids": ["crm", "web_analytics", "campaign_analytics", "content_analytics", "pipeline_and_revenue"],
+      "source_labels": ["CRM", "Web analytics", "Campaigns", "Content", "Pipeline & revenue"],
+      "access_label": "Private · permission required",
+      "default_selected": false
+    }
+  ],
+  "cadences": [
+    {"cadence_id": "urgent_only", "label": "Urgent only", "description": "Only material competitive, customer, market, or performance thresholds."},
+    {"cadence_id": "daily_pulse", "label": "Daily pulse", "description": "A concise orientation plus urgent shifts and contradictions."},
+    {"cadence_id": "weekly_brief", "label": "Weekly briefing", "description": "The week's movement, implications, opportunities, and next catalysts."}
+  ],
+  "default_cadence_id": "weekly_brief",
+  "first_value": {
+    "public_sources_first": true,
+    "private_sources_optional": true,
+    "completion_label": "Open my first marketing briefing"
+  },
+  "guardrails": {
+    "declarative_only": true,
+    "authorizes_connections": false,
+    "authorizes_monitors": false,
+    "proposed_sources_are_not_connected": true,
+    "feedback_may_reweight_relevance_not_authority": true
+  }
+}
