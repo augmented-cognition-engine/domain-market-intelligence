@@ -24,6 +24,11 @@ engine, graph, state store, authority system, detector runtime, or feedback loop
   are public. GI2 and the external GC1 consumer journey passed. See the
   [0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md).
 
+The unreleased ACE 0.8 candidate also projects Market’s analyst intelligence loop through the
+single governed resource plane with an explicit `no_action` Decision and non-live Feedback. That
+proof is additive and does not change the public 0.6.0 installation contract; see the
+[candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
+
 ## What you install, and what you get
 
 The product is split into three layers, and this repository owns only the third.

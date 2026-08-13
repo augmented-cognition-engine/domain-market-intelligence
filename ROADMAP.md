@@ -10,6 +10,19 @@
 
 GI2 is now passed through public Core 0.4.1, Market 0.6.0, and World 0.8.0 artifacts.
 
+## Candidate — ACE 0.8 Intelligence OS proof
+
+- Reuses the accepted competitive-price Observation, Entity, Shift, Signal, Brief, Decision,
+  Outcome, and governed-feedback records.
+- Adds one exact PREPARED Case over the Shift and Signal supporting the reviewed Brief.
+- Reopens the complete analyst intelligence loop through the same governed resource plane used by
+  World Intelligence.
+- Preserves the explicit `no_action` disposition rather than fabricating an Action, and keeps the
+  feedback proposal non-live with no delivery authority.
+
+See the [ACE 0.8 candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
+Market package compatibility remains on the released Core 0.4 line until Core 0.8 is public.
+
 ## Completed — GC1 external consumer
 
 - Reproduced the two-phase Market governed-cognition journey through public `ace-core==0.4.4` and
@@ -24,12 +37,12 @@ The [public execution record](docs/evidence/gc1-market-external-consumer-v1.md) 
 reconciliation is owned by the ACE Core repository and does not change this pack's inert 0.6.0
 artifact.
 
-## Next — Core 0.5 compatibility and analyst orientation
+## Next — public Core 0.8 compatibility and analyst experience
 
-- release a Market revision against public `ace-core==0.5.x` rather than widening the 0.6.0
+- release a Market revision against public `ace-core==0.8.x` rather than widening the 0.6.0
   compatibility metadata in place;
-- reproduce simultaneous Market + World 0.9 installation and isolation on the current Core line;
-- Cases and standing investigations;
+- reproduce simultaneous Market + World installation and isolation on the current Core line;
+- standing investigations over the now-proven public Case contract;
 - Monitors and Subscriptions after their shared contracts stabilize;
 - competitive, event, weekly-summary, GTM, and narrative-drift Brief experiences;
 - separately reviewed source connectors; and
