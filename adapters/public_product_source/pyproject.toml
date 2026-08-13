@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ace-market-public-product-source"
-version = "0.1.1"
+version = "0.2.0"
 description = "Deterministic transport-injected public product source adapter for ACE Market P1C2"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
-dependencies = ["ace-core>=0.4.1,<0.5"]
+dependencies = ["ace-core>=0.8.2,<0.9"]
 
 [project.urls]
 Repository = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
