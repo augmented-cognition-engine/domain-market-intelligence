@@ -109,9 +109,7 @@ def test_root_distribution_mapping_is_inert_and_data_only() -> None:
     assert {path.suffix for path in files} == {".json"}
     assert (PACK_ROOT / "onboarding_profile.json") in files
     assert (PACK_ROOT / "conformance" / "activation_golden_fixture.json") in files
-    assert (
-        PACK_ROOT / "conformance" / "openai_terra_price_recorded_sources.json"
-    ) in files
+    assert (PACK_ROOT / "conformance" / "openai_terra_price_recorded_sources.json") in files
     assert not (REPO_ROOT / "domain_packs" / "__init__.py").exists()
 
 
