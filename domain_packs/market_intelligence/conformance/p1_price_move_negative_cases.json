@@ -4,7 +4,7 @@
   "fixture_version": "0.8.0",
   "fixture_scope": "prepared_conformance_input",
   "base_fixture_path": "p1_price_move_golden.json",
-  "base_fixture_digest": "sha256:d8df38acf6b018d132f589388dcb891a3f35ceff5ba80c4b32de5550c9520854",
+  "base_fixture_digest": "sha256:7faed11eba364a4a2a76955b70d0c47eaf329cefa378f1e7d7616775f7f12a19",
   "operation_contract": "rfc6902-replace-only",
   "cases": [
     {

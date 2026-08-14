@@ -733,13 +733,13 @@ def test_artifact_bound_cli_verifies_clean_install_and_rejects_tampered_record_m
 
 def test_current_pack_bytes_and_historical_live_inventory_are_exact() -> None:
     current = {
-        "manifest.json": "e03e539b3bcc1035c63cd18caee2ac5f4af171d4d3815e1d967a7c8b81444eb0",
+        "manifest.json": "6a7b56a50b13504c8158c25276d7f0acd471c3b76c215a917ab784223bf237e7",
         "modules/source_mapping.json": "da3f720be7e351a3b3f2ad373c00f74a757bcf1bd83b51e0c6c2157d4575c163",
-        "conformance/manifest.json": "c20efd4aade4872690e9ad8852cefa3295015c90918dcd8cbc54a2bda3e3d1e9",
+        "conformance/manifest.json": "ed73e32b83d0896e0a1d9d84aaeb3b5d8e51c25a97de30fa7f67b630276cafff",
         "conformance/public_product_price_boundary.json": "83f21b052092ee1673d52726a4f94fd710edfbac1d2c4aa68e20bbcdad241bc2",
-        "conformance/p1_price_move_golden.json": "d8df38acf6b018d132f589388dcb891a3f35ceff5ba80c4b32de5550c9520854",
-        "conformance/p1_price_move_negative_cases.json": "75b80e46d839aae6fa964c406cec66267874231e1a21aca00df15d49814b668b",
-        "conformance/p1c_durable_price_move_expected.json": "3caf0373942a94e805ec6461aea092754ab8b89efc939fefded236f528575331",
+        "conformance/p1_price_move_golden.json": "7faed11eba364a4a2a76955b70d0c47eaf329cefa378f1e7d7616775f7f12a19",
+        "conformance/p1_price_move_negative_cases.json": "01fd2471a1460726e45f97a94b6deec6976c577816da1200ac466c4bfb64f13d",
+        "conformance/p1c_durable_price_move_expected.json": "8191ea7a62d19308121892b13470aa0370f3f69267f88acd62533eb36ac721fb",
     }
     for relative, expected in current.items():
         assert hashlib.sha256((PACK_ROOT / relative).read_bytes()).hexdigest() == expected

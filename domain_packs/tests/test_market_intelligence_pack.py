@@ -238,6 +238,7 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
         "modules/detection.json",
         "modules/synthesis.json",
         "modules/personas.json",
+        "modules/decision_outcomes.json",
     }
     for relative_path, resource in resources.items():
         payload = (PACK_ROOT / relative_path).read_bytes()
@@ -272,6 +273,12 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
             "contract": "ace.intelligence.personas/v1alpha1",
             "resource_id": "market_personas",
             "depends_on": ["market_detection", "market_synthesis"],
+        },
+        {
+            "module_id": "market_decision_outcomes",
+            "contract": "ace.intelligence.decision-outcomes/v1alpha1",
+            "resource_id": "market_decision_outcomes",
+            "depends_on": ["market_personas"],
         },
     ]
     assert manifest["capability_requirements"] == [
@@ -444,6 +451,7 @@ def test_pack_compiles_through_the_shared_ace_intelligence_compiler() -> None:
         }
     ]
     assert [(module.module_id, module.contract) for module in compiled.modules] == [
+        ("market_decision_outcomes", "ace.intelligence.decision-outcomes/v1alpha1"),
         ("market_detection", "ace.intelligence.detection/v1alpha1"),
         ("market_ontology", "ace.intelligence.ontology/v1alpha1"),
         ("market_personas", "ace.intelligence.personas/v1alpha1"),

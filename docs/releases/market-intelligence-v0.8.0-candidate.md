@@ -19,6 +19,13 @@ assets derived from one exact Brief and user Decision. It is content-addressed, 
 design, and is wrapped as an effect-free prepared handoff for Core's existing AC5 gate. Exact
 package-plus-destination authority is still resolved by Core immediately before delivery.
 
+The current Pack includes the existing declarative `competitive_price_move_usefulness` policy. A
+bounded provider-free acceptance makes the cited Brief the exact subject of a user Decision,
+prepares and delivers the exact direction package to Core's reference digest mailbox under fresh
+package-and-destination authority, retains the acknowledgment, records a later qualitative Outcome,
+and projects the resulting Feedback proposal. The proposal is not committed: effective policy stays
+at 0.5 while the proposed value is 0.55.
+
 ## Frozen bounded scenario
 
 The candidate binds the July 9 and July 30, 2026 GPT-5.6 Terra pricing publications to the exact
@@ -41,8 +48,9 @@ or current pricing.
 
 Local source and packaging gates on 2026-08-14:
 
-- 150 passed, 1 skipped across the complete Market repository with current Core and World sources;
-- 34 focused Pack, adapter, and release-contract checks passed;
+- 151 passed, 1 skipped across the complete Market repository with current Core and World sources;
+- the current-Pack package → approval → acknowledgment → Outcome → proposal-only Feedback acceptance
+  passed through Core's existing delivery and decision services;
 - root wheel and sdist built as 0.8.0;
 - trusted Builder wheel built as 0.1.0 and contains only its adapter package and two entry points;
 - Ruff lint, format, lock consistency, and diff checks passed.
@@ -60,5 +68,6 @@ approval, admission, source health, Shift/Signal, cited first Brief, restart, an
 
 This release does not claim a universal connector catalog, owned customer-data ingestion, live
 website extraction, autonomous delivery, autonomous policy updates, rendered marketing artifacts,
-or general customer-corpus relevance. Acknowledged delivery and outcome-return proof remain
-coordinated Core/solution-bundle release gates rather than a second Market runtime.
+or general customer-corpus relevance. The reference destination proves exact receipt only; it does
+not prove downstream execution, campaign impact, or beneficial outcome. Product-specific
+Figma/Canva/Claude adapters remain post-v1.

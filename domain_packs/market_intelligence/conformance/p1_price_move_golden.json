@@ -141,19 +141,19 @@
     "confidence": 1.0
   },
   "expected_compilation": {
-    "compiled_pack_id": "pack_ir:47304b9a62a147de39d38ece0290b12a",
-    "pack_digest": "sha256:47304b9a62a147de39d38ece0290b12a2078dcdf032236f3dbceebcb23758e71",
+    "compiled_pack_id": "pack_ir:fd15b1617a103311c202201cd6ff1bcb",
+    "pack_digest": "sha256:fd15b1617a103311c202201cd6ff1bcb75c73c943048cf8c9a6537dd22255e53",
     "source_mapping_module_digest": "sha256:1cc99ea9229b2a912d9a83f8018a946da87ca7e96c731018a491a99e1985cccd",
     "source_mapping_digest": "sha256:d5e3158e95f8d1089d6cf15b7f86effb61af655ef60494b5480258bd49dd771d"
   },
   "expected_binding": {
-    "compiled_overlay_id": "overlay_ir:f496bac5f0b3717df81870e1a21ac692",
-    "overlay_digest": "sha256:f496bac5f0b3717df81870e1a21ac69220927ddd0ce1566d3d054d46226401a0",
+    "compiled_overlay_id": "overlay_ir:1cef91a3d6b7645ae3a1cc4792428577",
+    "overlay_digest": "sha256:1cef91a3d6b7645ae3a1cc4792428577cd0bde73a256c5d83f659d0dcb75a0c4",
     "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
-    "spec_id": "activation_spec:bff0ba89ece3b12f0b34c6225a415b02",
-    "spec_hash": "bff0ba89ece3b12f0b34c6225a415b02cc30c1f418ee49a237737db8efc1c0ca",
-    "revision_id": "activation_revision:e812d276d8c57f1f4c9c8c61f025ec8a",
-    "revision_digest": "sha256:e812d276d8c57f1f4c9c8c61f025ec8a4f048cf82145c3f09e594734a7bb9c85"
+    "spec_id": "activation_spec:38a4bb605e5a7bd1d91bb0ce0563dda4",
+    "spec_hash": "38a4bb605e5a7bd1d91bb0ce0563dda49a643dc5e8e279cf2958d4dfe0eb5e39",
+    "revision_id": "activation_revision:abfa96140537e44d082e378c9ff51694",
+    "revision_digest": "sha256:abfa96140537e44d082e378c9ff5169421b6005e75492c44b4dbb2442ac5f84f"
   },
   "expected_resource_ids": {
     "source_snapshots": [
@@ -168,35 +168,35 @@
     ],
     "observations": [
       {
-        "resource_id": "observation:3abb3c472e256694f442c3257dca2ab5",
-        "resource_digest": "sha256:3abb3c472e256694f442c3257dca2ab5e20b9a03623a48e6d47f6b9f8dff048b"
+        "resource_id": "observation:bc5859dc7cca9d6fd08626175ba1df34",
+        "resource_digest": "sha256:bc5859dc7cca9d6fd08626175ba1df34a1fbdf77de890dea47fef7e54b60585d"
       },
       {
-        "resource_id": "observation:f59d19b3b38818b6438dacf6173be51d",
-        "resource_digest": "sha256:f59d19b3b38818b6438dacf6173be51d9ff2e5b3636a705e302a46e344aeb26d"
+        "resource_id": "observation:2a7e4321403de92b50921724250e9f4b",
+        "resource_digest": "sha256:2a7e4321403de92b50921724250e9f4b22d2435f819c69267c0fe825f950ba0d"
       }
     ],
     "entity_snapshots": [
       {
-        "resource_id": "entity_snapshot:a35f922ce8de378a0121fc913a56185c",
-        "resource_digest": "sha256:a35f922ce8de378a0121fc913a56185c84b5ed7edd5351fb8d19202168ccd9c6"
+        "resource_id": "entity_snapshot:14df041d912a5b0a79a37e685cf80f8f",
+        "resource_digest": "sha256:14df041d912a5b0a79a37e685cf80f8f991c525127512281f84d33a9c0a10401"
       },
       {
-        "resource_id": "entity_snapshot:9d408e80c33acef045339e70b121e8ba",
-        "resource_digest": "sha256:9d408e80c33acef045339e70b121e8ba0d98ad938a17170d983964cabf34835a"
+        "resource_id": "entity_snapshot:e5fd65ad254830e5fe3cd754f21d67e0",
+        "resource_digest": "sha256:e5fd65ad254830e5fe3cd754f21d67e070ae009102ff6b5480625063e787c13a"
       }
     ],
     "shift": {
-      "resource_id": "shift:a269b98b2335f5d334adac9e270997c3",
-      "resource_digest": "sha256:a269b98b2335f5d334adac9e270997c3767da921a77aab4f8f9bae3312f63c85"
+      "resource_id": "shift:a8fadc8e7dc0b2794093c7e31734e3f0",
+      "resource_digest": "sha256:a8fadc8e7dc0b2794093c7e31734e3f01554fd4f20bf540160a53fbbb8d43d0b"
     },
     "signal": {
-      "resource_id": "signal:60a646449850e7baa95dc97a28474282",
-      "resource_digest": "sha256:60a646449850e7baa95dc97a28474282c9fbc29626d9f665f6e5c048756598e7"
+      "resource_id": "signal:4f46b4050f098bd421f4d06a4d15a3d2",
+      "resource_digest": "sha256:4f46b4050f098bd421f4d06a4d15a3d23432781fc0bf82352d92d290d6205d8c"
     },
     "brief": {
-      "resource_id": "brief:1c791d916f81db82d0ac06a5c3f79862",
-      "resource_digest": "sha256:1c791d916f81db82d0ac06a5c3f79862ee7c4615e71ba9e186fb72b7041dd3e2"
+      "resource_id": "brief:492bebfeab84481afe8aa0f7c7c703a0",
+      "resource_digest": "sha256:492bebfeab84481afe8aa0f7c7c703a06a01e088455f41a70c5f95a323b47283"
     }
   },
   "verified_prepared_expectations": [

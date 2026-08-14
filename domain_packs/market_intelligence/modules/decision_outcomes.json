@@ -1,0 +1,33 @@
+{
+  "contract": "ace.intelligence.decision-outcomes/v1alpha1",
+  "module_id": "market_decision_outcomes",
+  "feedback_policies": [
+    {
+      "policy_id": "competitive_price_move_usefulness",
+      "persona_id": "competitive_intelligence_analyst",
+      "routing_rule_id": "route_competitive_price_move",
+      "decision_type": "competitive_response",
+      "eligible_decision_dispositions": [
+        "accept"
+      ],
+      "eligible_action_dispositions": [
+        "no_action"
+      ],
+      "outcome_type": "decision_usefulness",
+      "measure_id": "analyst_usefulness",
+      "initial_value": 0.5,
+      "minimum_value": 0.0,
+      "maximum_value": 1.0,
+      "adjustments": [
+        {
+          "outcome_value_json": "\"not_useful\"",
+          "delta": -0.1
+        },
+        {
+          "outcome_value_json": "\"useful\"",
+          "delta": 0.05
+        }
+      ]
+    }
+  ]
+}
