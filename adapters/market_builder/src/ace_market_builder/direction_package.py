@@ -5,11 +5,10 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Literal, Self
 
-from pydantic import ConfigDict, Field, field_validator, model_validator
-
 from ace.application import PreparedLifecycleDeliveryV1Alpha1, lifecycle_exact_reference
 from ace.core import FrozenContract, canonical_hash
 from ace.core.agent_composition import ExactArtifactReferenceV1Alpha1
+from pydantic import ConfigDict, Field, field_validator, model_validator
 
 MARKET_DIRECTION_PACKAGE_VERSION = "ace.market-intelligence.direction-package/v1alpha1"
 

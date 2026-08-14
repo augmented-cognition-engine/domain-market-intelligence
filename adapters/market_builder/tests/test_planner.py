@@ -13,12 +13,13 @@ from ace.application import (
 )
 from ace.intelligence import IntelligenceOnboardingProfileV1Alpha1
 from ace.intelligence.packs import compile_pack_document
+
+import ace_market_builder.planner as planner_module
 from ace_market_builder import (
     MARKET_INTELLIGENCE_PACK,
     MarketIntelligenceBuilderPlanner,
     MarketIntelligenceBuilderPlannerError,
 )
-import ace_market_builder.planner as planner_module
 
 ROOT = Path(__file__).resolve().parents[3]
 PACK = ROOT / "domain_packs/market_intelligence"

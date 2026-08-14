@@ -60,7 +60,7 @@ def _market_domain_file(relative_path: str):
 
 
 def _time(value: str) -> datetime:
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    parsed = datetime.fromisoformat(value)
     if parsed.tzinfo is None or parsed.utcoffset() is None:
         raise MarketIntelligenceBuilderExecutorError("recorded source time must include a timezone")
     return parsed.astimezone(UTC)

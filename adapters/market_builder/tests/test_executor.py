@@ -15,13 +15,14 @@ from ace.intelligence import (
     IntelligenceResourceMode,
     ResolvedSubjectBindingV1Alpha1,
 )
+
+import ace_market_builder.executor as executor_module
 from ace_market_builder import (
     MARKET_INTELLIGENCE_PROFILE_ID,
     MarketIntelligenceBuilderExecutor,
     MarketIntelligenceBuilderExecutorError,
     load_recorded_market_source_materials,
 )
-import ace_market_builder.executor as executor_module
 
 ROOT = Path(__file__).resolve().parents[3]
 NOW = datetime(2026, 8, 14, 18, tzinfo=UTC)
