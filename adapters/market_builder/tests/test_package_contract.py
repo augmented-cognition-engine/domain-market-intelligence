@@ -64,6 +64,7 @@ def test_market_builder_wheel_contains_only_the_trusted_adapter(tmp_path: Path) 
         entry_points_text = archive.read(entry_points_file).decode("utf-8")
     assert {
         "ace_market_builder/__init__.py",
+        "ace_market_builder/direction_package.py",
         "ace_market_builder/executor.py",
         "ace_market_builder/planner.py",
     } <= names

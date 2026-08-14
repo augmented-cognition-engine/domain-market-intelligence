@@ -13,6 +13,12 @@ The root `ace-domain-market-intelligence` wheel remains inert JSON-only data. Th
 - a trusted executor that, only after Core authorization, uses Core-owned recorded admission,
   PREPARED derivation, first-Brief, source-health, and resource-plane ports.
 
+The adapter also owns the bounded Market direction artifact: objective, audience, story
+architecture, content hierarchy, approved cited claims, constraints, open questions, and required
+assets derived from one exact Brief and user Decision. It is content-addressed, contains no rendered
+design, and is wrapped as an effect-free prepared handoff for Core's existing AC5 gate. Exact
+package-plus-destination authority is still resolved by Core immediately before delivery.
+
 ## Frozen bounded scenario
 
 The candidate binds the July 9 and July 30, 2026 GPT-5.6 Terra pricing publications to the exact
@@ -35,8 +41,8 @@ or current pricing.
 
 Local source and packaging gates on 2026-08-14:
 
-- 147 passed, 1 skipped across the complete Market repository with current Core and World sources;
-- 31 focused Pack, adapter, and release-contract checks passed;
+- 150 passed, 1 skipped across the complete Market repository with current Core and World sources;
+- 34 focused Pack, adapter, and release-contract checks passed;
 - root wheel and sdist built as 0.8.0;
 - trusted Builder wheel built as 0.1.0 and contains only its adapter package and two entry points;
 - Ruff lint, format, lock consistency, and diff checks passed.
@@ -54,5 +60,5 @@ approval, admission, source health, Shift/Signal, cited first Brief, restart, an
 
 This release does not claim a universal connector catalog, owned customer-data ingestion, live
 website extraction, autonomous delivery, autonomous policy updates, rendered marketing artifacts,
-or general customer-corpus relevance. Downstream direction-package handoff and outcome-return proof
-remain coordinated Core/solution-bundle release gates rather than a second Market runtime.
+or general customer-corpus relevance. Acknowledged delivery and outcome-return proof remain
+coordinated Core/solution-bundle release gates rather than a second Market runtime.

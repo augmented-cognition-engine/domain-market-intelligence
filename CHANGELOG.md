@@ -13,6 +13,8 @@ Semantic Versioning.
   requested effects without connecting sources or binding authority.
 - The executor reuses Core-owned recorded admission, PREPARED derivation, cited first-Brief, source
   readiness, and resource-plane ports; it adds no second runtime or connector framework.
+- Added a content-addressed direction-package contract derived from an exact Brief and user Decision,
+  plus an effect-free binding to Core's existing AC5 destination-delivery gate.
 
 ### Changed
 
