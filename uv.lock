@@ -4,7 +4,7 @@ requires-python = "==3.12.*"
 
 [[package]]
 name = "ace-core"
-version = "0.8.2"
+version = "0.8.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -52,9 +52,9 @@ dependencies = [
     { name = "uvicorn", extra = ["standard"] },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7c/54/5df9bdaf0f61003a1260971298b6d0ea6ec39d16fe9a90d775571150dec2/ace_core-0.8.2.tar.gz", hash = "sha256:b4714c97dd290a93b7b26c9f36236d9e089dcf4cc3b3b30b3e9f07178752617a", size = 5515327, upload-time = "2026-08-13T20:26:57.038Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/8c/18bf26962c59b922f1c6d9a063fe61aa636f217f1a8f35e00fcf9c790241/ace_core-0.8.3.tar.gz", hash = "sha256:f87d66ad7e3dd5f73caa8844660390c324b5f2e482cfdadc2e90e03ea6874f40", size = 7463913, upload-time = "2026-08-14T14:29:13.247Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1c/95/85c8ed9051eaf793e2a3ffaf6526cc636cc63a5630ff1a0a3eb5b7a1db40/ace_core-0.8.2-py3-none-any.whl", hash = "sha256:de936efc9aafa0f2e365abeb0bfe9fcf592ba7506bca4d2411ce7c340ca7a4a9", size = 6395374, upload-time = "2026-08-13T20:26:54.262Z" },
+    { url = "https://files.pythonhosted.org/packages/eb/26/6cfce9d958232097805b37eaabd0eb26aeea214c4f109fb512c805781b22/ace_core-0.8.3-py3-none-any.whl", hash = "sha256:a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab", size = 8373546, upload-time = "2026-08-14T14:29:10.587Z" },
 ]
 
 [[package]]
@@ -79,7 +79,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.8.2,<0.9" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.8.3,<0.9" }]
 
 [package.metadata.requires-dev]
 dev = [

@@ -1,0 +1,42 @@
+{
+  "contract": "ace.market-intelligence.p1f-core-compatibility-expected/v1",
+  "expected": {
+    "attention_disposition": "route",
+    "brief_id": "brief:e5d12048f564cd283422b4f5fe38eb79",
+    "brief_record_kinds": [
+      "brief",
+      "brief_synthesis_receipt"
+    ],
+    "brief_replayed": true,
+    "brief_template_id": "competitive_price_move_brief",
+    "brief_title": "Competitive Price Move Brief",
+    "citation_count": 2,
+    "claim_count": 4,
+    "contract": "ace.market-intelligence.p1f-live-bridge-evidence/v1alpha1",
+    "delivery_authority": false,
+    "derivation_record_kinds": [
+      "shift",
+      "signal",
+      "attention_disposition",
+      "live_derivation_receipt"
+    ],
+    "derivation_replayed": true,
+    "external_actions": [],
+    "mode": "live",
+    "observed_price_change": {
+      "baseline": 1200.0,
+      "current": 1080.0
+    },
+    "provider_calls": 1,
+    "replay_provider_calls": 0,
+    "routing_rule_id": "route_competitive_price_move",
+    "shift_id": "shift:625f8d25545f2b6197e67ae96e37b4cb",
+    "signal_id": "signal:8a0e21bbc3501aed3c5a28b0a005d33f",
+    "source_record_count": 10
+  },
+  "fixture_version": "0.8.3",
+  "platform_dependency": {
+    "ace_core_version": "0.8.3",
+    "ace_core_wheel_sha256": "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+  }
+}

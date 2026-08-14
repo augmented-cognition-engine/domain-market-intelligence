@@ -80,7 +80,7 @@ from ace.intelligence.packs import (
 )
 from ace.testing import InMemoryImmutableRecordStore
 
-CORE_WHEEL_SHA256 = "267cfed8ec3057439abf2a55e4f595e34c92f3b10f4e37c21a2e253a80b9dc4d"
+CORE_WHEEL_SHA256 = "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
 OLD_DERIVATION_KEY = "derivation:market-intelligence:p1c:prepared-price-move:v1"
 INPUT_NAME = "p1d1_prepared_brief_input.json"
 EXPECTED_NAME = "p1d1_prepared_brief_expected.json"
@@ -108,22 +108,19 @@ def _time(value: str) -> datetime:
 
 def _pack_file(path: str) -> bytes:
     try:
-        return (
-            resources.files("domain_packs.market_intelligence")
-            .joinpath(path)
-            .read_bytes()
-        )
+        return resources.files("domain_packs.market_intelligence").joinpath(path).read_bytes()
     except (FileNotFoundError, ModuleNotFoundError):
         return (
-            Path(__file__).resolve().parents[1]
-            / "domain_packs"
-            / "market_intelligence"
-            / path
+            Path(__file__).resolve().parents[1] / "domain_packs" / "market_intelligence" / path
         ).read_bytes()
 
 
 def load_fixture(name: str) -> dict[str, Any]:
     return json.loads(_pack_file(f"releases/v0_4_0/conformance/{name}"))
+
+
+def load_compatibility_fixture(name: str) -> dict[str, Any]:
+    return json.loads(_pack_file(f"conformance/compatibility/core_0_8_3/{name}"))
 
 
 def _load_historical_fixture(name: str) -> dict[str, Any]:
@@ -136,10 +133,7 @@ def compile_market_pack(*, release: str | None = None):
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
-        {
-            item["path"]: _pack_file(f"{prefix}{item['path']}")
-            for item in manifest["resources"]
-        },
+        {item["path"]: _pack_file(f"{prefix}{item['path']}") for item in manifest["resources"]},
     )
 
 
@@ -236,11 +230,7 @@ class PackArchive:
                 reference.pack_digest,
             )
         )
-        return (
-            None
-            if pack is None
-            else type(pack).model_validate(pack.model_dump(mode="python"))
-        )
+        return None if pack is None else type(pack).model_validate(pack.model_dump(mode="python"))
 
 
 class WrongPackResolver:
@@ -367,9 +357,7 @@ def _prepared_context(*, binding, fixture: dict[str, Any], scenario: dict[str, A
 
 def _manual_p1b_brief(*, binding, pack, fixture, context) -> BriefV1Alpha1:
     synthesis_ir = next(
-        item
-        for item in pack.modules
-        if item.contract == "ace.intelligence.synthesis/v1alpha1"
+        item for item in pack.modules if item.contract == "ace.intelligence.synthesis/v1alpha1"
     )
     synthesis = SynthesisModuleV1.model_validate_json(synthesis_ir.canonical_payload)
     citations = tuple(
@@ -383,9 +371,7 @@ def _manual_p1b_brief(*, binding, pack, fixture, context) -> BriefV1Alpha1:
             retrieved_at=observation.ingested_at,
             locator=item["source"]["locator"],
         )
-        for observation, item in zip(
-            context["observations"], fixture["snapshots"], strict=True
-        )
+        for observation, item in zip(context["observations"], fixture["snapshots"], strict=True)
     )
     expected = fixture["expected_prepared_brief"]
     claim = GroundedClaimV1Alpha1(
@@ -395,11 +381,16 @@ def _manual_p1b_brief(*, binding, pack, fixture, context) -> BriefV1Alpha1:
     )
     shift = context["shift"]
     signal = context["signal"]
+    brief_as_of = max(
+        shift.detected_at,
+        signal.detected_at,
+        *(item.ingested_at for item in context["observations"]),
+    )
     return BriefV1Alpha1(
         product_id=fixture["scenario"]["product_id"],
         mode=IntelligenceResourceMode.PREPARED,
         activation_revision=binding.reference,
-        as_of=context["entity_snapshots"][1].as_of,
+        as_of=brief_as_of,
         lineage=(
             LineageReferenceV1Alpha1(
                 resource_kind=LineageResourceKind.SHIFT,
@@ -564,9 +555,7 @@ class FixtureProvider:
         by_kind: dict[str, tuple[str, ...]] = {}
         for kind in ("observation", "entity_snapshot", "shift", "signal"):
             by_kind[kind] = tuple(
-                item.record_key
-                for item in request.context_items
-                if item.record_kind == kind
+                item.record_key for item in request.context_items if item.record_kind == kind
             )
         return {
             "all_observations": by_kind["observation"],
@@ -590,9 +579,7 @@ class FixtureProvider:
                     payload["grounding_kind"] == "cited"
                 ):
                     supports = groups["shift"]
-                elif self.mutation == "unknown_support" and (
-                    payload["grounding_kind"] == "cited"
-                ):
+                elif self.mutation == "unknown_support" and (payload["grounding_kind"] == "cited"):
                     supports = (*supports, "observation:unknown-support")
                 elif self.mutation == "unused_selected_support" and (
                     payload["grounding_kind"] == "cited"
@@ -642,9 +629,7 @@ class FixtureProvider:
             route=ProviderRouteV1Alpha1(**self.fixture["reasoning"]["provider_route"]),
             usage=ProviderUsageV1Alpha1(**self.fixture["reasoning"]["provider_usage"]),
             structured_json=canonical_json(draft.model_dump(mode="json")),
-            referenced_context_ids=tuple(
-                str(item.context_id) for item in request.context_items
-            ),
+            referenced_context_ids=tuple(str(item.context_id) for item in request.context_items),
         )
 
 
@@ -708,11 +693,16 @@ def _prebuilt_p1d1_brief(*, binding, context, generated_at: datetime) -> BriefV1
     )
     shift = context["shift"]
     signal = context["signal"]
+    brief_as_of = max(
+        shift.detected_at,
+        signal.detected_at,
+        *(item.ingested_at for item in context["observations"]),
+    )
     return BriefV1Alpha1(
         product_id=binding.prepared_binding.revision.spec.product_id,
         mode=IntelligenceResourceMode.PREPARED,
         activation_revision=binding.prepared_binding.reference,
-        as_of=signal.as_of,
+        as_of=brief_as_of,
         lineage=(
             LineageReferenceV1Alpha1(
                 resource_kind=LineageResourceKind.SHIFT,
@@ -816,12 +806,8 @@ async def build_environment(
         version=fixture["fixture_version"],
         product_id=product_id,
         activation_key=activation_key,
-        compilation_receipt_ref=fixture["activation"][
-            "revision_2_compilation_receipt_ref"
-        ],
-        conformance_receipt_ref=fixture["activation"][
-            "revision_2_conformance_receipt_ref"
-        ],
+        compilation_receipt_ref=fixture["activation"]["revision_2_compilation_receipt_ref"],
+        conformance_receipt_ref=fixture["activation"]["revision_2_conformance_receipt_ref"],
         boundary=boundary,
     )
     revision2 = prepare_activation_revision(
@@ -856,8 +842,7 @@ async def build_environment(
         prebuilt_brief = _prebuilt_p1d1_brief(
             binding=rev2_binding,
             context=new_context,
-            generated_at=_time(fixture["derivation"]["signal_detected_at"])
-            + timedelta(seconds=10),
+            generated_at=_time(fixture["derivation"]["signal_detected_at"]) + timedelta(seconds=10),
         )
     pre_brief_batch = _batch(
         binding=rev2_binding,
@@ -873,9 +858,7 @@ async def build_environment(
     reasoning_artifact = CapabilityArtifactIdentityV1Alpha1(
         **fixture["reasoning"]["reasoning_artifact"]
     )
-    append_artifact = CapabilityArtifactIdentityV1Alpha1(
-        **fixture["reasoning"]["append_artifact"]
-    )
+    append_artifact = CapabilityArtifactIdentityV1Alpha1(**fixture["reasoning"]["append_artifact"])
     updated_at = _time(fixture["activation"]["revision_2_occurred_at"])
     execution_head = _head(
         product_id,
@@ -895,9 +878,7 @@ async def build_environment(
         configuration_ref=execution_head.state_id,
         authority="reason",
         grant_ref="authority_grant:market-p1d1-reason",
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            execution_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(execution_head),
     )
     append_binding = GovernedOperationBindingV1Alpha1(
         product_id=product_id,
@@ -905,9 +886,7 @@ async def build_environment(
         configuration_ref=append_head.state_id,
         authority="append_immutable_records",
         grant_ref="authority_grant:market-p1d1-append",
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            append_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(append_head),
     )
     for head in (
         execution_head,
@@ -981,10 +960,8 @@ async def build_environment(
         activation_revision=rev2_binding.prepared_binding.reference,
         pack=rev2_binding.prepared_binding.revision.spec.pack,
         attention_receipt_id=str(pre_brief_admission.attention_receipt.receipt_id),
-        attention_receipt_digest=str(
-            pre_brief_admission.attention_receipt.receipt_digest
-        ),
-        brief_as_of=new_context["signal"].as_of,
+        attention_receipt_digest=str(pre_brief_admission.attention_receipt.receipt_digest),
+        brief_as_of=pre_brief_batch.attention_evaluated_at,
         context_cutoff_at=pre_brief_batch.attention_evaluated_at,
         requested_at=requested_at,
     )
@@ -1065,9 +1042,7 @@ async def run_positive() -> PositiveResult:
         product_id=product_id,
         actor_ref=env.request.authenticated_context.actor_ref,
         authentication_receipt_ref=replay_fixture["fresh_authentication_receipt_ref"],
-        authentication_receipt_digest=replay_fixture[
-            "fresh_authentication_receipt_digest"
-        ],
+        authentication_receipt_digest=replay_fixture["fresh_authentication_receipt_digest"],
         authenticated_at=_time(replay_fixture["fresh_authenticated_at"]),
         expires_at=_time(replay_fixture["fresh_expires_at"]),
     )
@@ -1162,9 +1137,7 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
         )
     record_kind_counts: dict[str, int] = {}
     for record in env.store.records.values():
-        record_kind_counts[record.record_kind] = (
-            record_kind_counts.get(record.record_kind, 0) + 1
-        )
+        record_kind_counts[record.record_kind] = record_kind_counts.get(record.record_kind, 0) + 1
     provider_request = env.provider.requests[0]
     return {
         "platform_dependency": {
@@ -1199,9 +1172,7 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
             "brief": _reference_projection(result.historical_manual_brief),
             "readable_after_rollback": True,
             "attention_receipt_id": str(env.old_admission.attention_receipt.receipt_id),
-            "attention_receipt_digest": str(
-                env.old_admission.attention_receipt.receipt_digest
-            ),
+            "attention_receipt_digest": str(env.old_admission.attention_receipt.receipt_digest),
         },
         "pre_brief_derivation": {
             "batch_id": str(env.pre_brief_batch.batch_id),
@@ -1209,12 +1180,9 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
             "derivation_key": env.pre_brief_batch.derivation_key,
             "brief": None,
             "resources": [
-                _reference_projection(item)
-                for item in env.pre_brief_admission.resources
+                _reference_projection(item) for item in env.pre_brief_admission.resources
             ],
-            "attention_receipt": env.pre_brief_admission.attention_receipt.model_dump(
-                mode="json"
-            ),
+            "attention_receipt": env.pre_brief_admission.attention_receipt.model_dump(mode="json"),
             "transaction_receipt": env.pre_brief_admission.transaction_receipt.model_dump(
                 mode="json"
             ),
@@ -1225,21 +1193,15 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
             "request_digest": provider_request.request_digest,
             "attempt_key": provider_request.attempt_key,
             "instruction_json": provider_request.instruction_json,
-            "context_ids": [
-                str(item.context_id) for item in provider_request.context_items
-            ],
-            "context_record_keys": [
-                item.record_key for item in provider_request.context_items
-            ],
+            "context_ids": [str(item.context_id) for item in provider_request.context_items],
+            "context_record_keys": [item.record_key for item in provider_request.context_items],
         },
         "brief": first.brief.model_dump(mode="json"),
         "synthesis_receipt": first.synthesis_receipt.model_dump(mode="json"),
         "atomic_append_transaction": first.transaction_receipt.model_dump(mode="json"),
         "replay": {
-            "same_service_equal": result.same_service_replay
-            == replace(first, replayed=True),
-            "rollback_fresh_service_equal": result.rollback_replay
-            == replace(first, replayed=True),
+            "same_service_equal": result.same_service_replay == replace(first, replayed=True),
+            "rollback_fresh_service_equal": result.rollback_replay == replace(first, replayed=True),
             "provider_calls": env.provider.calls,
             "forbidden_replay_provider_calls": result.forbidden_provider_calls,
         },
@@ -1266,13 +1228,9 @@ def assert_positive(result: PositiveResult, projection: dict[str, Any]) -> None:
     if env.pre_brief_batch.brief is not None:
         raise AssertionError("route-triggered derivation must not contain a Brief")
     if len(env.pre_brief_admission.resources) != 6:
-        raise AssertionError(
-            "P1D1 pre-Brief closure must contain exactly six resources"
-        )
+        raise AssertionError("P1D1 pre-Brief closure must contain exactly six resources")
     if len(env.pre_brief_admission.transaction_receipt.records) != 7:
-        raise AssertionError(
-            "pre-Brief transaction must include six resources and attention"
-        )
+        raise AssertionError("pre-Brief transaction must include six resources and attention")
     if (
         env.old_admission.attention_receipt.receipt_id
         == env.pre_brief_admission.attention_receipt.receipt_id
@@ -1318,12 +1276,21 @@ def assert_positive(result: PositiveResult, projection: dict[str, Any]) -> None:
     if any(projection["persistence"]["live_counts"].values()):
         raise AssertionError("P1D1 persisted LIVE material")
     historical = fixture["historical_archive"]
-    if (
-        result.historical_manual_brief.resource_id != historical["manual_brief_id"]
-        or result.historical_manual_brief.resource_digest
-        != historical["manual_brief_digest"]
+    if historical != {
+        "pack_version": "0.3.0",
+        "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+        "pack_digest": ("sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd"),
+        "manual_brief_id": "brief:1bf59d3e6c5a47634c345a9366b555be",
+        "manual_brief_digest": (
+            "sha256:1bf59d3e6c5a47634c345a9366b555be04e45f3ab2f8099d54b998cef4c6d5b8"
+        ),
+    }:
+        raise AssertionError("historical archive coordinates changed")
+    if any(
+        citation.retrieved_at > result.historical_manual_brief.as_of
+        for citation in result.historical_manual_brief.citations
     ):
-        raise AssertionError("historical manual P1B Brief identity changed")
+        raise AssertionError("compatibility replay admitted future citation evidence")
 
 
 def _synthesis_output_counts(store) -> dict[str, int]:
@@ -1401,18 +1368,14 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
             env=old_attention,
             request=_rebuild_request(
                 old_attention,
-                attention_receipt_id=str(
-                    old_attention.old_admission.attention_receipt.receipt_id
-                ),
+                attention_receipt_id=str(old_attention.old_admission.attention_receipt.receipt_id),
                 attention_receipt_digest=str(
                     old_attention.old_admission.attention_receipt.receipt_digest
                 ),
             ),
         )
     )
-    await request_case(
-        "wrong_attention_digest", attention_receipt_digest="sha256:" + "f" * 64
-    )
+    await request_case("wrong_attention_digest", attention_receipt_digest="sha256:" + "f" * 64)
 
     prebuilt = await build_environment(prebuilt_brief_derivation=True)
     observed.append(
@@ -1455,6 +1418,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
             request=_rebuild_request(
                 as_of,
                 brief_as_of=as_of.request.brief_as_of - timedelta(seconds=1),
+                context_cutoff_at=(as_of.request.context_cutoff_at - timedelta(seconds=1)),
             ),
         )
     )
@@ -1465,8 +1429,8 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
             env=cutoff,
             request=_rebuild_request(
                 cutoff,
-                context_cutoff_at=cutoff.new_context["signal"].detected_at
-                - timedelta(seconds=1),
+                brief_as_of=(cutoff.new_context["signal"].detected_at - timedelta(seconds=1)),
+                context_cutoff_at=cutoff.new_context["signal"].detected_at - timedelta(seconds=1),
             ),
         )
     )
@@ -1513,9 +1477,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
             store=env.store,
             runtime_use=env.runtime,
             provider=forbidden,
-            clock=SequenceClock(
-                _time(env.fixture["rollback_replay"]["delivery_evaluated_at"])
-            ),
+            clock=SequenceClock(_time(env.fixture["rollback_replay"]["delivery_evaluated_at"])),
         )
         archive_service = BriefSynthesisService(
             activation_service=env.activation_service,
@@ -1525,9 +1487,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
             reasoning=replay_reasoning,
             execution_binding=env.execution_binding,
             append_binding=env.append_binding,
-            clock=SequenceClock(
-                _time(env.fixture["rollback_replay"]["delivery_evaluated_at"])
-            ),
+            clock=SequenceClock(_time(env.fixture["rollback_replay"]["delivery_evaluated_at"])),
         )
         before = _synthesis_output_counts(env.store)
         try:
@@ -1544,8 +1504,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
                     "forbidden_provider_calls": forbidden.calls,
                     "brief_residue_delta": after["brief"] - before["brief"],
                     "synthesis_receipt_residue_delta": (
-                        after["brief_synthesis_receipt"]
-                        - before["brief_synthesis_receipt"]
+                        after["brief_synthesis_receipt"] - before["brief_synthesis_receipt"]
                     ),
                     "prepared_synthesis_transaction_residue_delta": (
                         after["prepared_synthesis_transaction_receipt"]
@@ -1568,11 +1527,11 @@ async def run_acceptance(
     projection = await positive_projection(result)
     assert_positive(result, projection)
     if check_expected:
-        expected = load_fixture(EXPECTED_NAME)
+        expected = load_compatibility_fixture(EXPECTED_NAME)
         if projection != expected["expected"]:
             raise AssertionError("P1D1 result differs from pinned expected artifact")
     if check_negative:
-        negative = load_fixture(NEGATIVE_NAME)
+        negative = load_compatibility_fixture(NEGATIVE_NAME)
         if await run_negative_inventory() != negative["cases"]:
             raise AssertionError("P1D1 negative inventory differs from pinned artifact")
     return projection
@@ -1605,24 +1564,17 @@ def _installed_from_exact_wheel(
         ) from exc
     direct_url_raw = distribution.read_text("direct_url.json")
     if direct_url_raw is None:
-        raise SystemExit(
-            f"{distribution_name} lacks exact local-wheel installation provenance"
-        )
+        raise SystemExit(f"{distribution_name} lacks exact local-wheel installation provenance")
     direct_url = json.loads(direct_url_raw)
     parsed = urlsplit(direct_url.get("url", ""))
-    installed_from = (
-        Path(unquote(parsed.path)).resolve() if parsed.scheme == "file" else None
-    )
+    installed_from = Path(unquote(parsed.path)).resolve() if parsed.scheme == "file" else None
     if installed_from != wheel.resolve():
         raise SystemExit(
-            f"{distribution_name} was not installed from the supplied exact wheel: "
-            f"{installed_from}"
+            f"{distribution_name} was not installed from the supplied exact wheel: {installed_from}"
         )
     wheel_sha256 = _sha256(wheel)
     archive_info = direct_url.get("archive_info")
-    archive_hashes = (
-        archive_info.get("hashes") if isinstance(archive_info, dict) else None
-    )
+    archive_hashes = archive_info.get("hashes") if isinstance(archive_info, dict) else None
     installed_archive_sha256 = (
         archive_hashes.get("sha256") if isinstance(archive_hashes, dict) else None
     )
@@ -1632,8 +1584,7 @@ def _installed_from_exact_wheel(
             installed_archive_sha256 = legacy_hash.removeprefix("sha256=")
     if installed_archive_sha256 != wheel_sha256:
         raise SystemExit(
-            f"{distribution_name} direct-url archive digest does not match the "
-            "supplied exact wheel"
+            f"{distribution_name} direct-url archive digest does not match the supplied exact wheel"
         )
     owned_files = {str(item): item for item in (distribution.files or ())}
     owned_file = owned_files.get(owned_relative_path)
@@ -1655,9 +1606,7 @@ def _installed_from_exact_wheel(
             f"{owned_relative_path}: {record_hash.mode}"
         )
     installed_digest = hashlib.sha256(resolved_import.read_bytes()).digest()
-    installed_record_value = (
-        base64.urlsafe_b64encode(installed_digest).decode().rstrip("=")
-    )
+    installed_record_value = base64.urlsafe_b64encode(installed_digest).decode().rstrip("=")
     if installed_record_value != record_hash.value:
         raise SystemExit(
             f"{distribution_name} installed bytes do not match the RECORD hash for "
@@ -1702,13 +1651,10 @@ def _verify_installed_market(market_wheel: Path) -> dict[str, Any]:
     owned_json = sorted(
         str(item)
         for item in (distribution.files or ())
-        if str(item).startswith("domain_packs/market_intelligence/")
-        and str(item).endswith(".json")
+        if str(item).startswith("domain_packs/market_intelligence/") and str(item).endswith(".json")
     )
     if len(owned_json) != 25:
-        raise SystemExit(
-            "ace-ext-b2b-marketing must RECORD-own exactly 25 Market JSON files"
-        )
+        raise SystemExit("ace-ext-b2b-marketing must RECORD-own exactly 25 Market JSON files")
     package_root = resources.files("domain_packs.market_intelligence")
     verified = []
     prefix = "domain_packs/market_intelligence/"
@@ -1728,9 +1674,7 @@ def _verify_installed_market(market_wheel: Path) -> dict[str, Any]:
         if "/releases/v0_4_0/conformance/p1d1_" in f"/{item['record_path']}"
     ]
     if len(p1d1_resources) != 4:
-        raise SystemExit(
-            "Market wheel does not RECORD-own all four P1D1 JSON artifacts"
-        )
+        raise SystemExit("Market wheel does not RECORD-own all four P1D1 JSON artifacts")
     return {
         "wheel": str(market_wheel.resolve()),
         "wheel_sha256": _sha256(market_wheel),
@@ -1789,9 +1733,7 @@ def main() -> None:
             "market": _verify_installed_market(args.market_wheel),
         }
     if args.emit_negative_cases:
-        print(
-            json.dumps(asyncio.run(run_negative_inventory()), indent=2, sort_keys=True)
-        )
+        print(json.dumps(asyncio.run(run_negative_inventory()), indent=2, sort_keys=True))
         return
     projection = asyncio.run(
         run_acceptance(
@@ -1808,9 +1750,7 @@ def main() -> None:
                 "status": "passed",
                 "core_origin": str(Path(ace.__file__).resolve()),
                 "core_distribution_origin": _installed_origin("ace-core"),
-                "market_distribution_origin": _installed_origin(
-                    "ace-ext-b2b-marketing"
-                ),
+                "market_distribution_origin": _installed_origin("ace-ext-b2b-marketing"),
                 "pack": projection["packs"]["v0_4_0"],
                 "brief_id": projection["brief"]["resource_id"],
                 "brief_digest": projection["brief"]["resource_digest"],

@@ -57,12 +57,9 @@ from ace_market_public_product_source import (
     PublicProductSourceAdapter,
 )
 
-EXACT_CORE_WHEEL_SHA256 = (
-    "902e52ffd3c5850aadd9b1b1cb69f190a8c6d0f93c288bb229d2b1c1e7077f10"
-)
-EXACT_ADAPTER_WHEEL_SHA256 = (
-    "6e1cc3c710e7a1e9d8d464a356cadb1c41ea5663dacf57041943456594671c99"
-)
+EXACT_CORE_WHEEL_SHA256 = "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+LEGACY_CORE_WHEEL_SHA256 = "902e52ffd3c5850aadd9b1b1cb69f190a8c6d0f93c288bb229d2b1c1e7077f10"
+EXACT_ADAPTER_WHEEL_SHA256 = "6e1cc3c710e7a1e9d8d464a356cadb1c41ea5663dacf57041943456594671c99"
 INPUT_NAME = "p1c2_live_source_input.json"
 EXPECTED_NAME = "p1c2_live_expected.json"
 
@@ -82,14 +79,16 @@ def _pack_file(name: str) -> bytes:
     try:
         root = resources.files("domain_packs.market_intelligence")
     except ModuleNotFoundError:
-        root = (
-            Path(__file__).resolve().parents[1] / "domain_packs" / "market_intelligence"
-        )
+        root = Path(__file__).resolve().parents[1] / "domain_packs" / "market_intelligence"
     return root.joinpath(name).read_bytes()
 
 
 def load_fixture(name: str) -> dict[str, Any]:
     return json.loads(_pack_file(f"releases/v0_3_0/conformance/{name}"))
+
+
+def load_compatibility_fixture(name: str) -> dict[str, Any]:
+    return json.loads(_pack_file(f"conformance/compatibility/core_0_8_3/{name}"))
 
 
 def compile_market_pack():
@@ -98,9 +97,7 @@ def compile_market_pack():
     return compile_pack_document(
         manifest_bytes,
         {
-            resource["path"]: _pack_file(
-                f"releases/v0_3_0/{resource['path']}"
-            )
+            resource["path"]: _pack_file(f"releases/v0_3_0/{resource['path']}")
             for resource in manifest["resources"]
         },
     )
@@ -202,9 +199,7 @@ class InjectedTransport:
 
 
 class ExactAdapterRegistry:
-    def __init__(
-        self, *, artifact, adapter, return_unconditionally: bool = False
-    ) -> None:
+    def __init__(self, *, artifact, adapter, return_unconditionally: bool = False) -> None:
         self.artifact = artifact
         self.adapter = adapter
         self.return_unconditionally = return_unconditionally
@@ -222,9 +217,7 @@ class ExactSourceDefinitionResolver:
         self.definition = definition
         self.calls = 0
 
-    async def resolve_source_definition(
-        self, *, product_id, source_definition_ref, resolved_at
-    ):
+    async def resolve_source_definition(self, *, product_id, source_definition_ref, resolved_at):
         del resolved_at
         self.calls += 1
         if (
@@ -355,9 +348,7 @@ class LiveConformanceEnvironment:
     transport: InjectedTransport
     clock: SequenceClock
 
-    def service(
-        self, *, clock: SequenceClock | None = None
-    ) -> LiveSourceIngressService:
+    def service(self, *, clock: SequenceClock | None = None) -> LiveSourceIngressService:
         return LiveSourceIngressService(
             activation_service=self.activation_service,
             source_definitions=self.source_definitions,
@@ -371,7 +362,11 @@ class LiveConformanceEnvironment:
     def install_current_heads(self) -> None:
         activation_id = self.committed_activation.revision.activation_id
         activation_head = self.activation_store.heads[
-            ("domain_activation", self.request.product_id, activation_id)
+            (
+                self.committed_activation.commit_receipt.state_kind,
+                self.request.product_id,
+                activation_id,
+            )
         ]
         for head in (
             activation_head,
@@ -382,9 +377,7 @@ class LiveConformanceEnvironment:
             if isinstance(head, GovernedStateHeadPreconditionV1Alpha1):
                 head = GovernedStateHeadV1(
                     **head.model_dump(mode="python", exclude={"contract"}),
-                    updated_at=_time(
-                        self.fixture["scenario"]["activation_committed_at"]
-                    ),
+                    updated_at=_time(self.fixture["scenario"]["activation_committed_at"]),
                 )
             self.immutable_store.set_governed_state_head(head)
 
@@ -523,9 +516,7 @@ async def build_environment(
         subject_binding_id=scenario["subject_binding_id"],
         entity_type_id=scenario["entity_type_id"],
         entity_ref=scenario["entity_ref"],
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            source_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(source_head),
     )
     runtime_use = ExactRuntimeUseResolver(
         context=context,
@@ -550,9 +541,7 @@ async def build_environment(
             redirect_chain=tuple(transport_fixture["redirect_chain"]),
             resolved_ip_addresses=tuple(transport_fixture["resolved_ip_addresses"]),
             connected_ip_addresses=tuple(transport_fixture["connected_ip_addresses"]),
-            dns_rebinding_protection_applied=transport_fixture[
-                "dns_rebinding_protection_applied"
-            ],
+            dns_rebinding_protection_applied=transport_fixture["dns_rebinding_protection_applied"],
             credentials_used=transport_fixture["credentials_used"],
             locator=transport_fixture["locator"],
             observed_at=_time(scenario["observed_at"]),
@@ -566,9 +555,7 @@ async def build_environment(
         artifact_digest=artifact.artifact_digest,
     )
     registry = ExactAdapterRegistry(artifact=artifact, adapter=adapter)
-    store = immutable_store or InMemoryImmutableRecordStore(
-        fail_after_records=fail_after_records
-    )
+    store = immutable_store or InMemoryImmutableRecordStore(fail_after_records=fail_after_records)
     clock = SequenceClock(
         _time(scenario["capture_started_at"]),
         _time(scenario["rechecked_at"]),
@@ -593,9 +580,7 @@ async def build_environment(
     return environment
 
 
-def identity_projection(
-    environment: LiveConformanceEnvironment, admission
-) -> dict[str, Any]:
+def identity_projection(environment: LiveConformanceEnvironment, admission) -> dict[str, Any]:
     transaction = admission.transaction_receipt
     record_rows = [
         {
@@ -651,12 +636,8 @@ def identity_projection(
             "idempotency_key": environment.request.idempotency_key,
         },
         "runtime_use": {
-            "capability_use": admission.acquisition_receipt.capability_use.model_dump(
-                mode="json"
-            ),
-            "authority_use": admission.acquisition_receipt.authority_use.model_dump(
-                mode="json"
-            ),
+            "capability_use": admission.acquisition_receipt.capability_use.model_dump(mode="json"),
+            "authority_use": admission.acquisition_receipt.authority_use.model_dump(mode="json"),
             "capability_state_ref": admission.acquisition_receipt.capability_use.capability_state_ref,
             "capability_use_receipt_id": admission.acquisition_receipt.capability_use.receipt_id,
             "capability_use_receipt_digest": admission.acquisition_receipt.capability_use.receipt_digest,
@@ -670,12 +651,9 @@ def identity_projection(
             "authority_evaluated_at": _iso(
                 admission.acquisition_receipt.authority_use.evaluated_at
             ),
-            "grant_expires_at": _iso(
-                admission.acquisition_receipt.authority_use.expires_at
-            ),
+            "grant_expires_at": _iso(admission.acquisition_receipt.authority_use.expires_at),
             "governed_heads": [
-                item.model_dump(mode="json")
-                for item in transaction.governed_state_preconditions
+                item.model_dump(mode="json") for item in transaction.governed_state_preconditions
             ],
         },
         "live_records": {
@@ -703,9 +681,7 @@ def identity_projection(
             "mode": observation.mode.value,
             "entity_ref": entity.entity_ref,
             "attributes": entity.attributes.parsed_value(),
-            "observation_lineage": [
-                item.model_dump(mode="json") for item in entity.lineage
-            ],
+            "observation_lineage": [item.model_dump(mode="json") for item in entity.lineage],
             "source_uri": admission.source_snapshot.source_uri,
             "captured_payload_json": admission.source_snapshot.captured_payload_json,
         },
@@ -715,8 +691,7 @@ def identity_projection(
                 {
                     record.record_kind
                     for record in environment.immutable_store.records.values()
-                    if record.record_kind
-                    in environment.fixture["prohibited_record_kinds"]
+                    if record.record_kind in environment.fixture["prohibited_record_kinds"]
                 }
             ),
             "reusable_authority": admission.reusable_authority,
@@ -728,15 +703,9 @@ def identity_projection(
 
 async def run_acceptance(*, assert_expected: bool = True) -> tuple[dict[str, Any], Any]:
     fixture = load_fixture(INPUT_NAME)
-    if (
-        fixture["platform_dependency"]["ace_core_wheel_sha256"]
-        != EXACT_CORE_WHEEL_SHA256
-    ):
-        raise AssertionError("fixture does not bind the reviewed Core wheel")
-    if (
-        fixture["adapter_artifact"]["artifact_digest"]
-        != f"sha256:{EXACT_ADAPTER_WHEEL_SHA256}"
-    ):
+    if fixture["platform_dependency"]["ace_core_wheel_sha256"] != LEGACY_CORE_WHEEL_SHA256:
+        raise AssertionError("historical fixture Core coordinate changed")
+    if fixture["adapter_artifact"]["artifact_digest"] != f"sha256:{EXACT_ADAPTER_WHEEL_SHA256}":
         raise AssertionError("fixture does not bind the frozen adapter wheel")
     environment = await build_environment(fixture=fixture)
     first_service = environment.service()
@@ -755,8 +724,7 @@ async def run_acceptance(*, assert_expected: bool = True) -> tuple[dict[str, Any
     actual_attributes = admission.entity_snapshot.attributes.parsed_value()
     if actual_attributes != fixture["expected_attributes"]:
         raise AssertionError(
-            "LIVE entity attributes did not match the exact Market mapping: "
-            f"{actual_attributes!r}"
+            f"LIVE entity attributes did not match the exact Market mapping: {actual_attributes!r}"
         )
     if (
         len(environment.immutable_store.records) != 5
@@ -778,11 +746,9 @@ async def run_acceptance(*, assert_expected: bool = True) -> tuple[dict[str, Any
     if projection["scope"]["prohibited_record_kinds_present"]:
         raise AssertionError("out-of-scope downstream records were admitted")
     if assert_expected:
-        expected = load_fixture(EXPECTED_NAME)
+        expected = load_compatibility_fixture(EXPECTED_NAME)
         if projection != expected["expected"]:
-            raise AssertionError(
-                "P1C2 LIVE identity projection changed from its exact pin"
-            )
+            raise AssertionError("P1C2 LIVE identity projection changed from its exact pin")
     return projection, (environment, conformance)
 
 
@@ -806,24 +772,17 @@ def _installed_from_exact_wheel(
     distribution = importlib.metadata.distribution(distribution_name)
     direct_url_raw = distribution.read_text("direct_url.json")
     if direct_url_raw is None:
-        raise SystemExit(
-            f"{distribution_name} lacks exact local-wheel installation provenance"
-        )
+        raise SystemExit(f"{distribution_name} lacks exact local-wheel installation provenance")
     direct_url = json.loads(direct_url_raw)
     parsed = urlsplit(direct_url.get("url", ""))
-    installed_from = (
-        Path(unquote(parsed.path)).resolve() if parsed.scheme == "file" else None
-    )
+    installed_from = Path(unquote(parsed.path)).resolve() if parsed.scheme == "file" else None
     if installed_from != wheel.resolve():
         raise SystemExit(
-            f"{distribution_name} was not installed from the supplied exact wheel: "
-            f"{installed_from}"
+            f"{distribution_name} was not installed from the supplied exact wheel: {installed_from}"
         )
     wheel_sha256 = _sha256(wheel)
     archive_info = direct_url.get("archive_info")
-    archive_hashes = (
-        archive_info.get("hashes") if isinstance(archive_info, dict) else None
-    )
+    archive_hashes = archive_info.get("hashes") if isinstance(archive_info, dict) else None
     installed_archive_sha256 = (
         archive_hashes.get("sha256") if isinstance(archive_hashes, dict) else None
     )
@@ -834,8 +793,7 @@ def _installed_from_exact_wheel(
             installed_archive_sha256 = legacy_hash.removeprefix(prefix)
     if installed_archive_sha256 != wheel_sha256:
         raise SystemExit(
-            f"{distribution_name} direct-url archive digest does not match the "
-            "supplied exact wheel"
+            f"{distribution_name} direct-url archive digest does not match the supplied exact wheel"
         )
     owned_files = {str(item): item for item in (distribution.files or ())}
     owned_file = owned_files.get(owned_relative_path)
@@ -857,9 +815,7 @@ def _installed_from_exact_wheel(
             f"{owned_relative_path}: {record_hash.mode}"
         )
     installed_digest = hashlib.sha256(resolved_import.read_bytes()).digest()
-    installed_record_value = (
-        base64.urlsafe_b64encode(installed_digest).decode().rstrip("=")
-    )
+    installed_record_value = base64.urlsafe_b64encode(installed_digest).decode().rstrip("=")
     if installed_record_value != record_hash.value:
         raise SystemExit(
             f"{distribution_name} installed bytes do not match the RECORD hash for "
@@ -888,9 +844,7 @@ def main() -> None:
     _verify_wheel(args.core_wheel, EXACT_CORE_WHEEL_SHA256, name="Core")
     _verify_wheel(args.adapter_wheel, EXACT_ADAPTER_WHEEL_SHA256, name="adapter")
     _verify_wheel(args.market_wheel, args.market_wheel_sha256, name="Market")
-    market_manifest = resources.files("domain_packs.market_intelligence").joinpath(
-        "manifest.json"
-    )
+    market_manifest = resources.files("domain_packs.market_intelligence").joinpath("manifest.json")
     verification = {
         "core": _installed_from_exact_wheel(
             distribution_name="ace-core",
@@ -911,9 +865,7 @@ def main() -> None:
             owned_relative_path="domain_packs/market_intelligence/manifest.json",
         ),
     }
-    projection, _ = asyncio.run(
-        run_acceptance(assert_expected=not args.emit_projection)
-    )
+    projection, _ = asyncio.run(run_acceptance(assert_expected=not args.emit_projection))
     projection["artifact_verification"] = verification
     print(json.dumps(projection, indent=2, sort_keys=True))
 

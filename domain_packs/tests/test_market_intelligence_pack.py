@@ -19,20 +19,12 @@ DETECTION_PATH = PACK_ROOT / "modules" / "detection.json"
 SYNTHESIS_PATH = PACK_ROOT / "modules" / "synthesis.json"
 PERSONAS_PATH = PACK_ROOT / "modules" / "personas.json"
 CONFORMANCE_MANIFEST_PATH = PACK_ROOT / "conformance" / "manifest.json"
-PUBLIC_SOURCE_BOUNDARY_PATH = (
-    PACK_ROOT / "conformance" / "public_product_price_boundary.json"
-)
+PUBLIC_SOURCE_BOUNDARY_PATH = PACK_ROOT / "conformance" / "public_product_price_boundary.json"
 PRICE_MOVE_FIXTURE_PATH = PACK_ROOT / "conformance" / "p1_price_move_golden.json"
 NEGATIVE_CASES_PATH = PACK_ROOT / "conformance" / "p1_price_move_negative_cases.json"
-DURABLE_EXPECTED_PATH = (
-    PACK_ROOT / "conformance" / "p1c_durable_price_move_expected.json"
-)
-ACTIVATION_FIXTURE_PATH = (
-    PACK_ROOT / "conformance" / "activation_golden_fixture.json"
-)
-RECORDED_SOURCES_PATH = (
-    PACK_ROOT / "conformance" / "openai_terra_price_recorded_sources.json"
-)
+DURABLE_EXPECTED_PATH = PACK_ROOT / "conformance" / "p1c_durable_price_move_expected.json"
+ACTIVATION_FIXTURE_PATH = PACK_ROOT / "conformance" / "activation_golden_fixture.json"
+RECORDED_SOURCES_PATH = PACK_ROOT / "conformance" / "openai_terra_price_recorded_sources.json"
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -68,8 +60,7 @@ def _attributes_by_entity(
 ) -> dict[str, dict[str, dict[str, Any]]]:
     return {
         entity["entity_type_id"]: {
-            attribute["attribute_id"]: attribute
-            for attribute in entity.get("attributes", [])
+            attribute["attribute_id"]: attribute for attribute in entity.get("attributes", [])
         }
         for entity in ontology["entity_types"]
     }
@@ -80,9 +71,7 @@ def _matches_value_type(value: Any, value_type: str) -> bool:
         return isinstance(value, str)
     if value_type == "number":
         return isinstance(value, (int, float)) and not isinstance(value, bool)
-    raise AssertionError(
-        f"fixture test does not yet support ontology value type: {value_type}"
-    )
+    raise AssertionError(f"fixture test does not yet support ontology value type: {value_type}")
 
 
 def _parse_time(value: str) -> datetime:
@@ -208,9 +197,7 @@ def _prepared_observations_and_snapshots(
     return observations, snapshots
 
 
-def _apply_negative_case(
-    fixture: dict[str, Any], case: dict[str, Any]
-) -> dict[str, Any]:
+def _apply_negative_case(fixture: dict[str, Any], case: dict[str, Any]) -> dict[str, Any]:
     mutated = deepcopy(fixture)
     for operation in case["operations"]:
         assert operation["op"] == "replace"
@@ -368,13 +355,8 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
     context = fixture["comparison_context"]
     assert context["competitor"]["entity_key"] == "competitor:openai"
     assert context["relation"]["target_entity_key"] == "product:gpt-5-6-terra-input-tokens"
-    assert (
-        len({snapshot["resolved_subject"]["entity_ref"] for snapshot in snapshots}) == 1
-    )
-    assert (
-        len({snapshot["source"]["source_definition_ref"] for snapshot in snapshots})
-        == 1
-    )
+    assert len({snapshot["resolved_subject"]["entity_ref"] for snapshot in snapshots}) == 1
+    assert len({snapshot["source"]["source_definition_ref"] for snapshot in snapshots}) == 1
     assert {snapshot["source"]["source_uri"] for snapshot in snapshots} == {
         "https://openai.com/index/gpt-5-6/",
         "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/",
@@ -387,9 +369,7 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
         source = snapshot["source"]
         assert set(boundary["required_source_snapshot_fields"]) <= set(source)
         assert source["boundary_id"] == boundary["boundary_id"]
-        assert (
-            source["source_type_ref"] == boundary["source_semantics"]["source_type_ref"]
-        )
+        assert source["source_type_ref"] == boundary["source_semantics"]["source_type_ref"]
         assert source["acquisition_mode"] == "prepared_fixture"
         assert "source_snapshot_ref" not in source
         assert "source_snapshot_digest" not in source
@@ -405,9 +385,7 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
         declarations = entity_attributes[subject["entity_type_id"]]
         assert set(values) == set(declarations)
         assert all(
-            _matches_value_type(
-                values[attribute_id], declarations[attribute_id]["value_type"]
-            )
+            _matches_value_type(values[attribute_id], declarations[attribute_id]["value_type"])
             for attribute_id in values
         )
 
@@ -435,10 +413,7 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
         "signal_type": "competitive_price_move",
     }
     assert expected["is_material"] is (abs(percent_change) >= rule["threshold"])
-    assert (
-        synthesis["brief_templates"][0]["claim_policy"]
-        == "citation_or_explicit_inference"
-    )
+    assert synthesis["brief_templates"][0]["claim_policy"] == "citation_or_explicit_inference"
     route = personas["signal_routing_rules"][0]
     assert route["signal_type"] == rule["signal_type"]
     assert route["brief_template_id"] == synthesis["brief_templates"][0]["template_id"]
@@ -455,9 +430,7 @@ def test_pack_compiles_through_the_shared_ace_intelligence_compiler() -> None:
     assert compiled.contract == "ace.intelligence.compiled-domain-pack/v1alpha1"
     assert compiled.metadata.pack_id == "market_intelligence"
     assert compiled.metadata.version == "0.8.0"
-    assert [
-        item.model_dump(mode="json") for item in compiled.capability_requirements
-    ] == [
+    assert [item.model_dump(mode="json") for item in compiled.capability_requirements] == [
         {
             "requirement_id": "public_product_snapshot",
             "capability": "source_snapshot",
@@ -481,9 +454,7 @@ def test_pack_compiles_through_the_shared_ace_intelligence_compiler() -> None:
     assert compiled.compiled_pack_id == expected["compiled_pack_id"]
     assert compiled.pack_digest == expected["pack_digest"]
     mapping_ir = next(
-        module
-        for module in compiled.modules
-        if module.module_id == "market_source_mapping"
+        module for module in compiled.modules if module.module_id == "market_source_mapping"
     )
     assert mapping_ir.module_digest == expected["source_mapping_module_digest"]
     assert SourceMappingModuleV1.model_validate_json(
@@ -505,8 +476,7 @@ def test_pack_passes_fixed_activation_fixture_for_recorded_terra_price_move() ->
     receipt = run_domain_pack_conformance(
         manifest_document=MANIFEST_PATH.read_bytes(),
         resources={
-            item["path"]: (PACK_ROOT / item["path"]).read_bytes()
-            for item in manifest["resources"]
+            item["path"]: (PACK_ROOT / item["path"]).read_bytes() for item in manifest["resources"]
         },
         fixture_document=ACTIVATION_FIXTURE_PATH.read_bytes(),
     )
@@ -525,9 +495,7 @@ def test_recorded_terra_sources_pin_exact_payloads_and_disclaim_freshness() -> N
     inventory = _load_json(RECORDED_SOURCES_PATH)
 
     assert inventory["source_group_id"] == "competitor_public_evidence"
-    assert inventory["source_definition_ref"] == (
-        "source_definition:openai-gpt-5-6-terra-pricing"
-    )
+    assert inventory["source_definition_ref"] == ("source_definition:openai-gpt-5-6-terra-pricing")
     assert inventory["subject_binding"] == {
         "subject_binding_id": "listed_product",
         "entity_type_id": "product",
@@ -581,8 +549,7 @@ def test_prepared_conformance_inventory_pins_every_market_fixture() -> None:
         assert artifact["digest"] == f"sha256:{hashlib.sha256(payload).hexdigest()}"
     assert negative_cases["base_fixture_path"] == PRICE_MOVE_FIXTURE_PATH.name
     assert (
-        negative_cases["base_fixture_digest"]
-        == artifacts[PRICE_MOVE_FIXTURE_PATH.name]["digest"]
+        negative_cases["base_fixture_digest"] == artifacts[PRICE_MOVE_FIXTURE_PATH.name]["digest"]
     )
     assert negative_cases["operation_contract"] == "rfc6902-replace-only"
     assert len({case["case_id"] for case in negative_cases["cases"]}) == len(
@@ -602,6 +569,7 @@ def test_distribution_configuration_ships_the_inert_market_pack() -> None:
         "*.json",
         "modules/*.json",
         "conformance/*.json",
+        "conformance/compatibility/core_0_8_3/*.json",
         "releases/*/*.json",
         "releases/*/modules/*.json",
         "releases/*/conformance/*.json",
@@ -741,13 +709,9 @@ def test_price_move_rule_runs_through_shared_intelligence_resources() -> None:
     )
     expected_binding = fixture["expected_binding"]
     assert (
-        binding.revision.spec.overlay.compiled_overlay_id
-        == expected_binding["compiled_overlay_id"]
+        binding.revision.spec.overlay.compiled_overlay_id == expected_binding["compiled_overlay_id"]
     )
-    assert (
-        binding.revision.spec.overlay.overlay_digest
-        == expected_binding["overlay_digest"]
-    )
+    assert binding.revision.spec.overlay.overlay_digest == expected_binding["overlay_digest"]
     assert binding.revision.activation_id == expected_binding["activation_id"]
     assert binding.revision.spec.spec_id == expected_binding["spec_id"]
     assert binding.revision.spec.spec_hash == expected_binding["spec_hash"]
@@ -757,8 +721,7 @@ def test_price_move_rule_runs_through_shared_intelligence_resources() -> None:
         item.resource_id for item in observations
     ]
     assert [item.as_of for item in observations] == [
-        _parse_time(item["source"]["source_published_at"])
-        for item in fixture["snapshots"]
+        _parse_time(item["source"]["source_published_at"]) for item in fixture["snapshots"]
     ]
     assert all(item.observed_at < item.ingested_at for item in observations)
     assert all(
@@ -794,20 +757,18 @@ def test_price_move_rule_runs_through_shared_intelligence_resources() -> None:
             compiled.pack_digest,
         )
     }
-    assert {
-        observation.source_mapping.mapping_digest for observation in observations
-    } == {fixture["expected_compilation"]["source_mapping_digest"]}
-    assert {
-        observation.source_mapping.module_digest for observation in observations
-    } == {fixture["expected_compilation"]["source_mapping_module_digest"]}
+    assert {observation.source_mapping.mapping_digest for observation in observations} == {
+        fixture["expected_compilation"]["source_mapping_digest"]
+    }
+    assert {observation.source_mapping.module_digest for observation in observations} == {
+        fixture["expected_compilation"]["source_mapping_module_digest"]
+    }
     assert "competitor" not in snapshots[0].attributes.parsed_value()
     assert {item.resource_kind for item in brief.lineage} == {
         LineageResourceKind.SIGNAL,
         LineageResourceKind.SHIFT,
     }
-    assert set(brief.claims[0].citation_ids) == {
-        citation.citation_id for citation in citations
-    }
+    assert set(brief.claims[0].citation_ids) == {citation.citation_id for citation in citations}
     expected_ids = fixture["expected_resource_ids"]
     assert [
         {"source_ref": item.source_ref, "source_digest": item.source_digest}
@@ -835,9 +796,7 @@ def test_price_move_rule_runs_through_shared_intelligence_resources() -> None:
     } == (expected_ids["brief"])
 
 
-def test_public_source_activation_requires_exact_capability_and_authority_bindings() -> (
-    None
-):
+def test_public_source_activation_requires_exact_capability_and_authority_bindings() -> None:
     try:
         from ace.intelligence import OrganizationOverlayV1
         from ace.intelligence.packs import compile_overlay, prepare_domain_activation
@@ -879,18 +838,14 @@ def test_public_source_activation_requires_exact_capability_and_authority_bindin
         prepare_domain_activation(
             **common,
             capability_bindings=(
-                capability_binding.model_copy(
-                    update={"contract": "ace.source.snapshot/v2alpha1"}
-                ),
+                capability_binding.model_copy(update={"contract": "ace.source.snapshot/v2alpha1"}),
             ),
             authority_bindings=(authority_binding,),
         )
 
 
 @pytest.mark.asyncio
-async def test_market_pack_commits_and_reloads_through_core_without_live_authority() -> (
-    None
-):
+async def test_market_pack_commits_and_reloads_through_core_without_live_authority() -> None:
     try:
         from ace.application.domain_activation import (
             DomainActivationAdmissionService,
@@ -1017,8 +972,7 @@ async def test_market_pack_commits_and_reloads_through_core_without_live_authori
     assert committed.commit_receipt.product_id == prepared.revision.spec.product_id
     assert committed.commit_receipt.revision_id == prepared.revision.revision_id
     assert (
-        committed.commit_receipt.approval.receipt_ref
-        == fixture["scenario"]["approval_receipt_ref"]
+        committed.commit_receipt.approval.receipt_ref == fixture["scenario"]["approval_receipt_ref"]
     )
     assert [grant.grant_ref for grant in committed.commit_receipt.authority_grants] == [
         boundary["prepared_binding"]["authority"]["grant_ref"]

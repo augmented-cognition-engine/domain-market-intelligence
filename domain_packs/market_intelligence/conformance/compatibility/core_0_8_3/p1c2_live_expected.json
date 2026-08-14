@@ -1,0 +1,268 @@
+{
+  "artifact_scope": "governed_live_source_consumer_conformance_expected",
+  "contract": "ace.market-intelligence.live-source-expected/v1alpha1",
+  "expected": {
+    "activation": {
+      "activation_id": "domain_activation:b50f9dd61d6299362f64ddac9e0bb284",
+      "commit_receipt_hash": "b02dd2370cdd681625dbf4e4307f5948c90690fc501805c71f685a5aab7fe63e",
+      "commit_receipt_id": "governed_state_commit:b02dd2370cdd681625dbf4e4307f5948",
+      "live_authority": false,
+      "revision_digest": "sha256:ba6d851d20dd730bb88496a85d0414023b09c1cecbe7a62fe1b28fc61fdc8398",
+      "revision_id": "activation_revision:ba6d851d20dd730bb88496a85d041402",
+      "spec_hash": "e6624655da41664463fd4571cd6271b665517f9f6523dcdf2957a1db5070c5c0",
+      "spec_id": "activation_spec:e6624655da41664463fd4571cd6271b6"
+    },
+    "adapter": {
+      "artifact_digest": "sha256:6e1cc3c710e7a1e9d8d464a356cadb1c41ea5663dacf57041943456594671c99",
+      "capability": "source_snapshot",
+      "capture_calls": 1,
+      "contract": "ace.source.snapshot/v1alpha1",
+      "contract_version": "ace.core.capability-artifact-identity/v1alpha1",
+      "implementation_id": "market_public_product_source",
+      "implementation_version": "0.1.1",
+      "required_wheel_sha256": "6e1cc3c710e7a1e9d8d464a356cadb1c41ea5663dacf57041943456594671c99",
+      "transport_calls": 1
+    },
+    "live_records": {
+      "acquisition_locator": "json-pointer:/listed_price",
+      "acquisition_receipt_digest": "sha256:dc005682ac4f94ad82f1dcde35e5287872d0ac8fcefc44f58b0a4b47d3a83851",
+      "acquisition_receipt_id": "source_acquisition_receipt:dc005682ac4f94ad82f1dcde35e52878",
+      "admission_receipt_digest": "sha256:dfa505a364a294d718a83ddb8ed0b56bdc12543add9f7cdc39ecd41e16692eb8",
+      "admission_receipt_id": "live_source_admission_receipt:dfa505a364a294d718a83ddb8ed0b56b",
+      "available_at": "2026-08-06T12:01:04Z",
+      "entity_snapshot_digest": "sha256:0bceed4d2f73ac67e3f288d330ab54ae28294a567054d38bac6e01eb3ed0f094",
+      "entity_snapshot_id": "entity_snapshot:0bceed4d2f73ac67e3f288d330ab54ae",
+      "observation_digest": "sha256:514a32c21b21aa3b49884c4887a03061f8d2a2036ef69cfa25cd9f409b36eff9",
+      "observation_id": "observation:514a32c21b21aa3b49884c4887a03061",
+      "record_count": 5,
+      "record_space": "live",
+      "records": [
+        {
+          "material_hash": "sha256:780e9ff8f2855cbb3e0029ad68150faff2885d4fa996fa02c3a62b98d5524d21",
+          "processing_order": 0,
+          "record_key": "source_acquisition_receipt:dc005682ac4f94ad82f1dcde35e52878",
+          "record_kind": "source_acquisition",
+          "storage_id": "immutable_record:3b72c8821b922b6ae592c813e5a366f2"
+        },
+        {
+          "material_hash": "sha256:643d9222260ae639f596accadf2eb86f5d224f04f0bfa1f65715ba2db955522e",
+          "processing_order": 1,
+          "record_key": "source_snapshot:a44c8811b2888873d3f25d835e2d4b2c",
+          "record_kind": "source_snapshot",
+          "storage_id": "immutable_record:ad7339cf1d47822fb7f4426335dfad3a"
+        },
+        {
+          "material_hash": "sha256:7a07999b04ee4ab577d6c9c74101b2fafbd9332d23dcc4738d20d790a04ac7df",
+          "processing_order": 2,
+          "record_key": "observation:514a32c21b21aa3b49884c4887a03061",
+          "record_kind": "observation",
+          "storage_id": "immutable_record:c66bf0f6f91221b94693be8ad8e1626d"
+        },
+        {
+          "material_hash": "sha256:cfdfcc9a1a14c22eed903335fb1382bf05fc47d5470209c10671aa833a78fea5",
+          "processing_order": 3,
+          "record_key": "entity_snapshot:0bceed4d2f73ac67e3f288d330ab54ae",
+          "record_kind": "entity_snapshot",
+          "storage_id": "immutable_record:b383d1c09a92dce01ca21a07ed845955"
+        },
+        {
+          "material_hash": "sha256:5353e99d4291c42526c69f2b85f5c2d3c618acca5da46cacc83ec2d0580a61c4",
+          "processing_order": 4,
+          "record_key": "live_source_admission_receipt:dfa505a364a294d718a83ddb8ed0b56b",
+          "record_kind": "source_admission",
+          "storage_id": "immutable_record:0d02ef0afe8c539764db8d3f4c89e269"
+        }
+      ],
+      "source_snapshot_digest": "sha256:a44c8811b2888873d3f25d835e2d4b2c0ff55fc2a7fbf81a2f63b6337fcae4b6",
+      "source_snapshot_locator": "json-pointer:/listed_price",
+      "source_snapshot_ref": "source_snapshot:a44c8811b2888873d3f25d835e2d4b2c",
+      "transaction_id": "append_only_transaction:3783cc16bb4e1bb2d8ce205064acee34",
+      "transaction_receipt_digest": "sha256:7479b2863f5c4d73b163fb43b61355ff879acf6f658d4ef62a720955faf47412",
+      "transaction_receipt_id": "append_only_receipt:3783cc16bb4e1bb2d8ce205064acee34"
+    },
+    "mapped_result": {
+      "attributes": {
+        "currency": "USD",
+        "name": "Edge X1",
+        "price": 1080.0
+      },
+      "captured_payload_json": "{\"currency\":\"USD\",\"listed_price\":\"1080.00\",\"product_name\":\"Edge X1\"}",
+      "entity_ref": "product:northstar_edge_x1",
+      "mode": "live",
+      "observation_lineage": [
+        {
+          "contract": "ace.intelligence.lineage-reference/v1alpha1",
+          "relation": "derived_from",
+          "resource_as_of": "2026-08-06T12:01:02Z",
+          "resource_available_at": "2026-08-06T12:01:03Z",
+          "resource_digest": "sha256:514a32c21b21aa3b49884c4887a03061f8d2a2036ef69cfa25cd9f409b36eff9",
+          "resource_id": "observation:514a32c21b21aa3b49884c4887a03061",
+          "resource_kind": "observation"
+        }
+      ],
+      "source_uri": "https://public.example.test/products/edge-x1"
+    },
+    "pack": {
+      "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+      "mapping_digest": "sha256:ed421cef871bc9467fee82bd1168bbd66bab9b7c05c3477d8ba795e18d913c96",
+      "mapping_id": "product_price_snapshot",
+      "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+      "source_mapping_module_digest": "sha256:74b631b62884f99301b60325e2ee1ada7a130f57b9c55a3397a0dd9252bc7226",
+      "source_mapping_module_id": "market_source_mapping"
+    },
+    "platform": {
+      "required_ace_core_wheel_sha256": "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+    },
+    "request": {
+      "actor_ref": "actor:market-analyst",
+      "idempotency_key": "live-source:market-northstar:edge-x1:2026-08-06",
+      "operation": "capture",
+      "product_id": "product:market-northstar",
+      "request_digest": "sha256:22299ec035e6f29bc3230509782332c37ae0a59b41cf440031aabadc4d9ec531",
+      "request_id": "live_source_ingress_request:22299ec035e6f29bc3230509782332c3"
+    },
+    "runtime_use": {
+      "authority_evaluated_at": "2026-08-06T12:01:01Z",
+      "authority_use": {
+        "actor_ref": "actor:market-analyst",
+        "authenticated_context": {
+          "actor_ref": "actor:market-analyst",
+          "authenticated_at": "2026-08-06T12:00:00Z",
+          "authentication_receipt_digest": "sha256:0ce61ba0b03daab3fefbad8d6db949628655a7a9d7ca80fd6d1cbe0ff4eb28a0",
+          "authentication_receipt_ref": "authentication_receipt:market-p1c2-live",
+          "contract": "ace.core.authenticated-runtime-context/v1alpha1",
+          "expires_at": "2026-08-06T12:15:00Z",
+          "product_id": "product:market-northstar"
+        },
+        "authority": "source_read",
+        "contract": "ace.core.authority-use-receipt/v1alpha1",
+        "evaluated_at": "2026-08-06T12:01:01Z",
+        "expires_at": "2026-08-06T12:10:00Z",
+        "grant_hash": "826147d65d5e6e628acca16c5f4f89e1b1424f9d9c0c6ff262dec369c424cfa4",
+        "grant_ref": "authority_grant:market-public-source-read",
+        "operation": "capture",
+        "product_id": "product:market-northstar",
+        "receipt_digest": "sha256:4f7c273102fd04e49c62d9f7766060d1644b144aed83dc48726d6f0ad33c1f46",
+        "receipt_id": "authority_use_receipt:4f7c273102fd04e49c62d9f7766060d1",
+        "state_head_precondition": {
+          "commit_receipt_id": "governed_state_commit:market-public-source-read-v4",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-northstar",
+          "revision_id": "authority_grant_revision:market-public-source-read-v4",
+          "sequence": 4,
+          "state_id": "authority_grant:market-public-source-read",
+          "state_kind": "authority_grant"
+        },
+        "use_subject_digest": "sha256:22299ec035e6f29bc3230509782332c37ae0a59b41cf440031aabadc4d9ec531",
+        "use_subject_ref": "live_source_ingress_request:22299ec035e6f29bc3230509782332c3"
+      },
+      "authority_use_receipt_digest": "sha256:4f7c273102fd04e49c62d9f7766060d1644b144aed83dc48726d6f0ad33c1f46",
+      "authority_use_receipt_id": "authority_use_receipt:4f7c273102fd04e49c62d9f7766060d1",
+      "capability_evaluated_at": "2026-08-06T12:01:01Z",
+      "capability_state_ref": "capability_state:330bb7abf744dcc4bc8ec67354750512",
+      "capability_use": {
+        "actor_ref": "actor:market-analyst",
+        "artifact": {
+          "artifact_digest": "sha256:6e1cc3c710e7a1e9d8d464a356cadb1c41ea5663dacf57041943456594671c99",
+          "capability": "source_snapshot",
+          "contract": "ace.source.snapshot/v1alpha1",
+          "contract_version": "ace.core.capability-artifact-identity/v1alpha1",
+          "implementation_id": "market_public_product_source",
+          "implementation_version": "0.1.1"
+        },
+        "authenticated_context": {
+          "actor_ref": "actor:market-analyst",
+          "authenticated_at": "2026-08-06T12:00:00Z",
+          "authentication_receipt_digest": "sha256:0ce61ba0b03daab3fefbad8d6db949628655a7a9d7ca80fd6d1cbe0ff4eb28a0",
+          "authentication_receipt_ref": "authentication_receipt:market-p1c2-live",
+          "contract": "ace.core.authenticated-runtime-context/v1alpha1",
+          "expires_at": "2026-08-06T12:15:00Z",
+          "product_id": "product:market-northstar"
+        },
+        "capability_state_ref": "capability_state:330bb7abf744dcc4bc8ec67354750512",
+        "configuration_ref": "config:public-northstar-edge-x1",
+        "contract": "ace.core.capability-use-receipt/v1alpha1",
+        "evaluated_at": "2026-08-06T12:01:01Z",
+        "operation": "capture",
+        "product_id": "product:market-northstar",
+        "receipt_digest": "sha256:8d1f45642136671254154f0bbc39b25f45426778ccdc183b9ecb4f98106294de",
+        "receipt_id": "capability_use_receipt:8d1f45642136671254154f0bbc39b25f",
+        "resolved_at": "2026-08-06T12:01:01Z",
+        "state_head_precondition": {
+          "commit_receipt_id": "governed_state_commit:market-public-product-source-v1",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-northstar",
+          "revision_id": "capability_state_revision:market-public-product-source-v1",
+          "sequence": 1,
+          "state_id": "capability_state:330bb7abf744dcc4bc8ec67354750512",
+          "state_kind": "capability_state"
+        },
+        "use_subject_digest": "sha256:22299ec035e6f29bc3230509782332c37ae0a59b41cf440031aabadc4d9ec531",
+        "use_subject_ref": "live_source_ingress_request:22299ec035e6f29bc3230509782332c3"
+      },
+      "capability_use_receipt_digest": "sha256:8d1f45642136671254154f0bbc39b25f45426778ccdc183b9ecb4f98106294de",
+      "capability_use_receipt_id": "capability_use_receipt:8d1f45642136671254154f0bbc39b25f",
+      "governed_heads": [
+        {
+          "commit_receipt_id": "governed_state_commit:market-public-source-read-v4",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-northstar",
+          "revision_id": "authority_grant_revision:market-public-source-read-v4",
+          "sequence": 4,
+          "state_id": "authority_grant:market-public-source-read",
+          "state_kind": "authority_grant"
+        },
+        {
+          "commit_receipt_id": "governed_state_commit:market-public-product-source-v1",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-northstar",
+          "revision_id": "capability_state_revision:market-public-product-source-v1",
+          "sequence": 1,
+          "state_id": "capability_state:330bb7abf744dcc4bc8ec67354750512",
+          "state_kind": "capability_state"
+        },
+        {
+          "commit_receipt_id": "governed_state_commit:b02dd2370cdd681625dbf4e4307f5948",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-northstar",
+          "revision_id": "activation_revision:ba6d851d20dd730bb88496a85d041402",
+          "sequence": 1,
+          "state_id": "domain_activation:b50f9dd61d6299362f64ddac9e0bb284",
+          "state_kind": "domain_activation_v1alpha1"
+        },
+        {
+          "commit_receipt_id": "governed_state_commit:public-northstar-edge-x1-v3",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-northstar",
+          "revision_id": "source_definition_revision:public-northstar-edge-x1-v3",
+          "sequence": 3,
+          "state_id": "source_definition:public-northstar-edge-x1",
+          "state_kind": "source_definition"
+        }
+      ],
+      "grant_expires_at": "2026-08-06T12:10:00Z",
+      "grant_hash": "826147d65d5e6e628acca16c5f4f89e1b1424f9d9c0c6ff262dec369c424cfa4",
+      "grant_ref": "authority_grant:market-public-source-read"
+    },
+    "scope": {
+      "admission_disposition": "committed",
+      "exact_record_order": [
+        "source_acquisition",
+        "source_snapshot",
+        "observation",
+        "entity_snapshot",
+        "source_admission"
+      ],
+      "live_acquisition": true,
+      "prohibited_record_kinds_present": [],
+      "reusable_authority": false
+    }
+  },
+  "fixture_id": "p1c2_live_public_product_source",
+  "fixture_version": "0.1.1",
+  "limitation": "This deterministic injected transport result proves LIVE runtime conformance, not captured public evidence or endpoint reachability.",
+  "platform_dependency": {
+    "ace_core_version": "0.8.3",
+    "ace_core_wheel_sha256": "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+  }
+}

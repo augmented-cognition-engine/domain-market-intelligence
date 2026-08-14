@@ -1,0 +1,1232 @@
+{
+  "contract": "ace.market-intelligence.p1d1-core-compatibility-expected/v1",
+  "expected": {
+    "activation_lifecycle": {
+      "revision_1": {
+        "commit_receipt": {
+          "actor_ref": "principal:market-pack-test-author",
+          "approval": {
+            "actor_ref": "principal:market-pack-test-author",
+            "approved_at": "2025-12-31T23:59:59Z",
+            "disposition": "approved",
+            "product_id": "product:market-intelligence-conformance",
+            "receipt_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "receipt_ref": "receipt:prepared-market-pack-approval",
+            "subject_ref": "activation_spec:66c79014c7a04dd082b949d1e49cfb42"
+          },
+          "audit_id": "governed_state_audit:09cb0bc11a69147abf46d0c65d7a4e4b",
+          "authority_grants": [
+            {
+              "authority": "source_read",
+              "effective_at": "2026-01-01T00:00:00Z",
+              "expires_at": null,
+              "grant_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "grant_ref": "authority_grant:prepared-public-product-source-read",
+              "product_id": "product:market-intelligence-conformance",
+              "state": "active"
+            }
+          ],
+          "authority_stage": "committed",
+          "committed_at": "2026-01-01T00:00:01Z",
+          "contract": "ace.core.governed-state-commit-receipt/v1alpha1",
+          "material_hash": "a6ee050fb15d6bb1c4d2cbade4111a40b60e1e3b2a235f89b421cfccf45de0a1",
+          "prior_revision_id": null,
+          "product_id": "product:market-intelligence-conformance",
+          "receipt_hash": "09cb0bc11a69147abf46d0c65d7a4e4b2955b341d12317ed0e10b82afa0ae547",
+          "receipt_id": "governed_state_commit:09cb0bc11a69147abf46d0c65d7a4e4b",
+          "revision_id": "activation_revision:a6ee050fb15d6bb1c4d2cbade4111a40",
+          "sequence": 1,
+          "state_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "state_kind": "domain_activation_v1alpha1"
+        },
+        "revision": {
+          "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "actor_ref": "principal:market-pack-test-author",
+          "approval_receipt_ref": "receipt:prepared-market-pack-approval",
+          "contract": "ace.intelligence.domain-activation-revision/v1alpha1",
+          "occurred_at": "2026-01-01T00:00:00Z",
+          "prior_revision_id": null,
+          "revision": 1,
+          "revision_hash": "a6ee050fb15d6bb1c4d2cbade4111a40b60e1e3b2a235f89b421cfccf45de0a1",
+          "revision_id": "activation_revision:a6ee050fb15d6bb1c4d2cbade4111a40",
+          "rollback_of_revision_id": null,
+          "spec": {
+            "activation_key": "market_intelligence",
+            "authority_bindings": [
+              {
+                "authority": "source_read",
+                "grant_ref": "authority_grant:prepared-public-product-source-read",
+                "request_id": "read_public_product_source"
+              }
+            ],
+            "capability_bindings": [
+              {
+                "artifact_digest": "sha256:95bd06faa9a1cfb09db646399c8374ea711fb5f7abd7e1bf146e184c43785de2",
+                "capability": "source_snapshot",
+                "configuration_ref": "config:prepared-public-product-sources",
+                "contract": "ace.source.snapshot/v1alpha1",
+                "implementation_id": "prepared_public_product_snapshot_fixture",
+                "implementation_version": "0.2.0",
+                "requirement_id": "public_product_snapshot",
+                "secret_ref": null
+              }
+            ],
+            "compilation_receipt_ref": "receipt:prepared-market-pack-compilation",
+            "conformance_receipt_refs": [
+              "receipt:prepared-price-move-conformance"
+            ],
+            "contract": "ace.intelligence.domain-activation-spec/v1alpha1",
+            "overlay": {
+              "compiled_overlay_id": "overlay_ir:0cb0ba28f522efd70a811d154aad0e2d",
+              "contract": "ace.intelligence.compiled-overlay/v1alpha1",
+              "overlay_digest": "sha256:0cb0ba28f522efd70a811d154aad0e2da7a496daa8019ebb7ac22b6129ea3219",
+              "overlay_id": "market_intelligence_conformance",
+              "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+              "pack_id": "market_intelligence",
+              "pack_version": "0.3.0",
+              "values": [],
+              "version": "0.3.0"
+            },
+            "pack": {
+              "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+              "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+              "pack_id": "market_intelligence",
+              "pack_version": "0.3.0"
+            },
+            "product_id": "product:market-intelligence-conformance",
+            "spec_hash": "66c79014c7a04dd082b949d1e49cfb42a2d2d9b5e51448c57781bc482ea4f9f5",
+            "spec_id": "activation_spec:66c79014c7a04dd082b949d1e49cfb42"
+          },
+          "state": "active"
+        }
+      },
+      "revision_2": {
+        "commit_receipt": {
+          "actor_ref": "principal:market-pack-test-author",
+          "approval": {
+            "actor_ref": "principal:market-pack-test-author",
+            "approved_at": "2026-08-06T14:59:59Z",
+            "disposition": "approved",
+            "product_id": "product:market-intelligence-conformance",
+            "receipt_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "receipt_ref": "receipt:p1d1-market-pack-approval",
+            "subject_ref": "activation_spec:e00cd99ee31ce6488eead07241fd8779"
+          },
+          "audit_id": "governed_state_audit:84fa5ac643b10a94718907f4af075cb3",
+          "authority_grants": [
+            {
+              "authority": "source_read",
+              "effective_at": "2026-08-06T15:00:00Z",
+              "expires_at": null,
+              "grant_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "grant_ref": "authority_grant:prepared-public-product-source-read",
+              "product_id": "product:market-intelligence-conformance",
+              "state": "active"
+            }
+          ],
+          "authority_stage": "committed",
+          "committed_at": "2026-08-06T15:00:01Z",
+          "contract": "ace.core.governed-state-commit-receipt/v1alpha1",
+          "material_hash": "394d4709a59d74c06a826e9726baa78d8cb060457d024ddcfe5b581ecba2aec3",
+          "prior_revision_id": "activation_revision:a6ee050fb15d6bb1c4d2cbade4111a40",
+          "product_id": "product:market-intelligence-conformance",
+          "receipt_hash": "84fa5ac643b10a94718907f4af075cb3170172ec01e5748131ee4489a6f668ec",
+          "receipt_id": "governed_state_commit:84fa5ac643b10a94718907f4af075cb3",
+          "revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d",
+          "sequence": 2,
+          "state_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "state_kind": "domain_activation_v1alpha1"
+        },
+        "revision": {
+          "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "actor_ref": "principal:market-pack-test-author",
+          "approval_receipt_ref": "receipt:p1d1-market-pack-approval",
+          "contract": "ace.intelligence.domain-activation-revision/v1alpha1",
+          "occurred_at": "2026-08-06T15:00:00Z",
+          "prior_revision_id": "activation_revision:a6ee050fb15d6bb1c4d2cbade4111a40",
+          "revision": 2,
+          "revision_hash": "394d4709a59d74c06a826e9726baa78d8cb060457d024ddcfe5b581ecba2aec3",
+          "revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d",
+          "rollback_of_revision_id": null,
+          "spec": {
+            "activation_key": "market_intelligence",
+            "authority_bindings": [
+              {
+                "authority": "source_read",
+                "grant_ref": "authority_grant:prepared-public-product-source-read",
+                "request_id": "read_public_product_source"
+              }
+            ],
+            "capability_bindings": [
+              {
+                "artifact_digest": "sha256:95bd06faa9a1cfb09db646399c8374ea711fb5f7abd7e1bf146e184c43785de2",
+                "capability": "source_snapshot",
+                "configuration_ref": "config:prepared-public-product-sources",
+                "contract": "ace.source.snapshot/v1alpha1",
+                "implementation_id": "prepared_public_product_snapshot_fixture",
+                "implementation_version": "0.2.0",
+                "requirement_id": "public_product_snapshot",
+                "secret_ref": null
+              }
+            ],
+            "compilation_receipt_ref": "receipt:p1d1-market-pack-compilation",
+            "conformance_receipt_refs": [
+              "receipt:p1d1-prepared-brief-conformance"
+            ],
+            "contract": "ace.intelligence.domain-activation-spec/v1alpha1",
+            "overlay": {
+              "compiled_overlay_id": "overlay_ir:c624a41b6329d49834265f49d0929c1a",
+              "contract": "ace.intelligence.compiled-overlay/v1alpha1",
+              "overlay_digest": "sha256:c624a41b6329d49834265f49d0929c1ae9e32900f27810f00dfbeaffd5e9e174",
+              "overlay_id": "market_intelligence_conformance",
+              "pack_digest": "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c",
+              "pack_id": "market_intelligence",
+              "pack_version": "0.4.0",
+              "values": [],
+              "version": "0.4.0"
+            },
+            "pack": {
+              "compiled_pack_id": "pack_ir:c87b61600105da2a72d6d7a9fa7cb7dd",
+              "pack_digest": "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c",
+              "pack_id": "market_intelligence",
+              "pack_version": "0.4.0"
+            },
+            "product_id": "product:market-intelligence-conformance",
+            "spec_hash": "e00cd99ee31ce6488eead07241fd8779c37e8b3b3bd510f9212f8b47f4e2583e",
+            "spec_id": "activation_spec:e00cd99ee31ce6488eead07241fd8779"
+          },
+          "state": "active"
+        }
+      },
+      "revision_3_rollback": {
+        "commit_receipt": {
+          "actor_ref": "principal:market-pack-test-author",
+          "approval": {
+            "actor_ref": "principal:market-pack-test-author",
+            "approved_at": "2026-08-06T15:23:59Z",
+            "disposition": "approved",
+            "product_id": "product:market-intelligence-conformance",
+            "receipt_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "receipt_ref": "receipt:p1d1-market-pack-rollback-approval",
+            "subject_ref": "activation_spec:66c79014c7a04dd082b949d1e49cfb42"
+          },
+          "audit_id": "governed_state_audit:e8b3abe78d7a1f3b27cbb613eb127066",
+          "authority_grants": [
+            {
+              "authority": "source_read",
+              "effective_at": "2026-08-06T15:24:00Z",
+              "expires_at": null,
+              "grant_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "grant_ref": "authority_grant:prepared-public-product-source-read",
+              "product_id": "product:market-intelligence-conformance",
+              "state": "active"
+            }
+          ],
+          "authority_stage": "committed",
+          "committed_at": "2026-08-06T15:24:01Z",
+          "contract": "ace.core.governed-state-commit-receipt/v1alpha1",
+          "material_hash": "7cc5b971eaa98e5effcb32bb6eb543829c725f65e5e4e15e77163feb6d36e0ca",
+          "prior_revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d",
+          "product_id": "product:market-intelligence-conformance",
+          "receipt_hash": "e8b3abe78d7a1f3b27cbb613eb1270663c7665e58edd4e8680922e24b0d0366e",
+          "receipt_id": "governed_state_commit:e8b3abe78d7a1f3b27cbb613eb127066",
+          "revision_id": "activation_revision:7cc5b971eaa98e5effcb32bb6eb54382",
+          "sequence": 3,
+          "state_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "state_kind": "domain_activation_v1alpha1"
+        },
+        "revision": {
+          "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "actor_ref": "principal:market-pack-test-author",
+          "approval_receipt_ref": "receipt:p1d1-market-pack-rollback-approval",
+          "contract": "ace.intelligence.domain-activation-revision/v1alpha1",
+          "occurred_at": "2026-08-06T15:24:00Z",
+          "prior_revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d",
+          "revision": 3,
+          "revision_hash": "7cc5b971eaa98e5effcb32bb6eb543829c725f65e5e4e15e77163feb6d36e0ca",
+          "revision_id": "activation_revision:7cc5b971eaa98e5effcb32bb6eb54382",
+          "rollback_of_revision_id": "activation_revision:a6ee050fb15d6bb1c4d2cbade4111a40",
+          "spec": {
+            "activation_key": "market_intelligence",
+            "authority_bindings": [
+              {
+                "authority": "source_read",
+                "grant_ref": "authority_grant:prepared-public-product-source-read",
+                "request_id": "read_public_product_source"
+              }
+            ],
+            "capability_bindings": [
+              {
+                "artifact_digest": "sha256:95bd06faa9a1cfb09db646399c8374ea711fb5f7abd7e1bf146e184c43785de2",
+                "capability": "source_snapshot",
+                "configuration_ref": "config:prepared-public-product-sources",
+                "contract": "ace.source.snapshot/v1alpha1",
+                "implementation_id": "prepared_public_product_snapshot_fixture",
+                "implementation_version": "0.2.0",
+                "requirement_id": "public_product_snapshot",
+                "secret_ref": null
+              }
+            ],
+            "compilation_receipt_ref": "receipt:prepared-market-pack-compilation",
+            "conformance_receipt_refs": [
+              "receipt:prepared-price-move-conformance"
+            ],
+            "contract": "ace.intelligence.domain-activation-spec/v1alpha1",
+            "overlay": {
+              "compiled_overlay_id": "overlay_ir:0cb0ba28f522efd70a811d154aad0e2d",
+              "contract": "ace.intelligence.compiled-overlay/v1alpha1",
+              "overlay_digest": "sha256:0cb0ba28f522efd70a811d154aad0e2da7a496daa8019ebb7ac22b6129ea3219",
+              "overlay_id": "market_intelligence_conformance",
+              "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+              "pack_id": "market_intelligence",
+              "pack_version": "0.3.0",
+              "values": [],
+              "version": "0.3.0"
+            },
+            "pack": {
+              "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+              "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+              "pack_id": "market_intelligence",
+              "pack_version": "0.3.0"
+            },
+            "product_id": "product:market-intelligence-conformance",
+            "spec_hash": "66c79014c7a04dd082b949d1e49cfb42a2d2d9b5e51448c57781bc482ea4f9f5",
+            "spec_id": "activation_spec:66c79014c7a04dd082b949d1e49cfb42"
+          },
+          "state": "active"
+        }
+      }
+    },
+    "atomic_append_transaction": {
+      "committed_at": "2026-08-06T15:23:15Z",
+      "contract": "ace.core.append-only-transaction-receipt/v1alpha1",
+      "disposition": "committed",
+      "governed_state_preconditions": [
+        {
+          "commit_receipt_id": "governed_state_commit:authority_grant-1",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-intelligence-conformance",
+          "revision_id": "authority_grant_revision:1",
+          "sequence": 1,
+          "state_id": "authority_grant:market-p1d1-append",
+          "state_kind": "authority_grant"
+        },
+        {
+          "commit_receipt_id": "governed_state_commit:capability_state-1",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-intelligence-conformance",
+          "revision_id": "capability_state_revision:1",
+          "sequence": 1,
+          "state_id": "capability_state:fa81a97f9b4760db08a9c88b275f77db",
+          "state_kind": "capability_state"
+        },
+        {
+          "commit_receipt_id": "governed_state_commit:84fa5ac643b10a94718907f4af075cb3",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-intelligence-conformance",
+          "revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d",
+          "sequence": 2,
+          "state_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "state_kind": "domain_activation_v1alpha1"
+        },
+        {
+          "commit_receipt_id": "governed_state_commit:governed_operation_configuration-1",
+          "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+          "product_id": "product:market-intelligence-conformance",
+          "revision_id": "governed_operation_configuration_revision:1",
+          "sequence": 1,
+          "state_id": "governed_operation_configuration:market-p1d1-append",
+          "state_kind": "governed_operation_configuration"
+        }
+      ],
+      "product_id": "product:market-intelligence-conformance",
+      "receipt_hash": "sha256:17d5adcc2b930d39c54d2a013a41f11a11522d41c9e97e1e8dd914822662618b",
+      "receipt_id": "append_only_receipt:9519bd315fbe1d4b8593970a972f0f69",
+      "record_space": "prepared",
+      "records": [
+        {
+          "as_of": "2026-08-06T15:22:00Z",
+          "available_at": "2026-08-06T15:23:15Z",
+          "contract": "ace.core.immutable-record-reference/v1alpha1",
+          "material_hash": "sha256:73b8f6f55624de60ec5bc60d393278cee1423b5b75f4490104ccc21f65a4512d",
+          "payload_contract": "ace.intelligence.brief/v1alpha1",
+          "processing_order": 0,
+          "product_id": "product:market-intelligence-conformance",
+          "record_key": "brief:5ed451cc6b6a436edabc5471b7d38bee",
+          "record_kind": "brief",
+          "record_space": "prepared",
+          "storage_id": "immutable_record:289a7d01478a039a1aa636f62eeb7c7f"
+        },
+        {
+          "as_of": "2026-08-06T15:23:15Z",
+          "available_at": "2026-08-06T15:23:15Z",
+          "contract": "ace.core.immutable-record-reference/v1alpha1",
+          "material_hash": "sha256:a87f6ee2b5bba2fbe8ccb0d1e0f24b0ac67589027057c0c9435ef1f83d52d625",
+          "payload_contract": "ace.intelligence.brief-synthesis-receipt/v1alpha1",
+          "processing_order": 1,
+          "product_id": "product:market-intelligence-conformance",
+          "record_key": "brief_synthesis_receipt:4d3c4e9e1864d7876743dabba2c7762f",
+          "record_kind": "brief_synthesis_receipt",
+          "record_space": "prepared",
+          "storage_id": "immutable_record:dee953ecee92a1f59c54496aeefb14ee"
+        }
+      ],
+      "request_hash": "sha256:7d990024aaf2c435bf53de0442bb8660ba5b87e8f74fcf999667c1155fcae241",
+      "transaction_id": "append_only_transaction:9519bd315fbe1d4b8593970a972f0f69",
+      "transaction_key": "brief_synthesis:4d7758b5d3f5d3dbd42f257123796e4d"
+    },
+    "brief": {
+      "activation_revision": {
+        "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+        "activation_key": "market_intelligence",
+        "contract": "ace.intelligence.activation-revision-reference/v1alpha1",
+        "product_id": "product:market-intelligence-conformance",
+        "revision": 2,
+        "revision_digest": "sha256:394d4709a59d74c06a826e9726baa78d8cb060457d024ddcfe5b581ecba2aec3",
+        "revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d"
+      },
+      "as_of": "2026-08-06T15:22:00Z",
+      "body_markdown": "# Competitive Price Move Brief\n\nThe listed Edge X1 price changed from USD 1,200 to USD 1,080\\. The prepared price move warrants review, but its market effect is not established\\. Review the listed price change and gather attributable relationship evidence before considering a competitive response\\. Ownership, motive, and market effect are not established\\.\n\n## What Changed\n\n- The listed Edge X1 price changed from USD 1,200 to USD 1,080\\. (cited supports: observation:00e74e6471b7cae46edaf50c1aa3f082, observation:99afd2d20ce86632f103703316423dbb)\n\n## Why It Matters\n\n- The prepared price move warrants review, but its market effect is not established\\. (inference supports: entity\\_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895, entity\\_snapshot:dde925ec621f5dc7cb9fe6a1df07955b, shift:114f503a9f552323f83169939dab101b; uncertainty: The selected records contain no measured market response\\.)\n\n## Recommendation\n\n- Review the listed price change and gather attributable relationship evidence before considering a competitive response\\. (inference supports: signal:81e067a429ad212467ca87ba5fec09fc; uncertainty: The selected records do not establish who owns the product or why the price changed\\.)\n\n## Limitations\n\n- Ownership, motive, and market effect are not established\\. (inference supports: shift:114f503a9f552323f83169939dab101b; uncertainty: No competitor or makes relationship is persisted in the selected closure\\.)\n",
+      "brief_type_ref": "competitive_intelligence",
+      "citations": [
+        {
+          "acquisition_mode": "prepared_fixture",
+          "acquisition_receipt_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "acquisition_receipt_ref": "receipt:p1d1-prepared-acquisition:edge_x1_baseline",
+          "citation_digest": "sha256:08b85552c86d7738f7103dc11ca6207b7ef667119e4f7406f28dc31a604be5a4",
+          "citation_id": "citation:08b85552c86d7738f7103dc11ca6207b",
+          "contract": "ace.intelligence.citation/v1alpha1",
+          "excerpt": null,
+          "locator": null,
+          "retrieved_at": "2026-08-06T15:10:30Z",
+          "source_as_of": "2026-08-06T15:10:00Z",
+          "source_digest": "sha256:7cffea08a2729e1fc28a8ba368cc429b0aa0c2f445942ce5053fceda9a419144",
+          "source_ref": "source_snapshot:7cffea08a2729e1fc28a8ba368cc429b"
+        },
+        {
+          "acquisition_mode": "prepared_fixture",
+          "acquisition_receipt_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "acquisition_receipt_ref": "receipt:p1d1-prepared-acquisition:edge_x1_current",
+          "citation_digest": "sha256:126dd510c8001d7df6da542a90c8094cec73e127fbceb73df07ef7a69933bd73",
+          "citation_id": "citation:126dd510c8001d7df6da542a90c8094c",
+          "contract": "ace.intelligence.citation/v1alpha1",
+          "excerpt": null,
+          "locator": null,
+          "retrieved_at": "2026-08-06T15:20:30Z",
+          "source_as_of": "2026-08-06T15:20:00Z",
+          "source_digest": "sha256:6a93c7911c910acbf9bad8c13c38d056efd55dc681ca5f5df5a5820747b7b253",
+          "source_ref": "source_snapshot:6a93c7911c910acbf9bad8c13c38d056"
+        }
+      ],
+      "claims": [
+        {
+          "citation_ids": [
+            "citation:08b85552c86d7738f7103dc11ca6207b",
+            "citation:126dd510c8001d7df6da542a90c8094c"
+          ],
+          "claim_digest": "sha256:2aea9b905e2c789e4a439a7f5a4af90e640275643bbf08824a48e6886cc5c6b1",
+          "claim_id": "grounded_claim:2aea9b905e2c789e4a439a7f5a4af90e",
+          "confidence": 1.0,
+          "contract": "ace.intelligence.grounded-claim/v1alpha1",
+          "grounding_kind": "cited",
+          "inference_basis_refs": [],
+          "statement": "The listed Edge X1 price changed from USD 1,200 to USD 1,080.",
+          "uncertainty": null
+        },
+        {
+          "citation_ids": [],
+          "claim_digest": "sha256:90f1c68b13e9b6898b472b11420c7c7a88b902535837b3c012689315cd4e0108",
+          "claim_id": "grounded_claim:90f1c68b13e9b6898b472b11420c7c7a",
+          "confidence": 0.8,
+          "contract": "ace.intelligence.grounded-claim/v1alpha1",
+          "grounding_kind": "inference",
+          "inference_basis_refs": [
+            "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+            "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+            "shift:114f503a9f552323f83169939dab101b"
+          ],
+          "statement": "The prepared price move warrants review, but its market effect is not established.",
+          "uncertainty": "The selected records contain no measured market response."
+        },
+        {
+          "citation_ids": [],
+          "claim_digest": "sha256:d4dbd8c9b5eb1b5e81dd9730efd1d8df5aa16c268364fc872c16784f55ed7e2d",
+          "claim_id": "grounded_claim:d4dbd8c9b5eb1b5e81dd9730efd1d8df",
+          "confidence": 0.8,
+          "contract": "ace.intelligence.grounded-claim/v1alpha1",
+          "grounding_kind": "inference",
+          "inference_basis_refs": [
+            "signal:81e067a429ad212467ca87ba5fec09fc"
+          ],
+          "statement": "Review the listed price change and gather attributable relationship evidence before considering a competitive response.",
+          "uncertainty": "The selected records do not establish who owns the product or why the price changed."
+        },
+        {
+          "citation_ids": [],
+          "claim_digest": "sha256:3553f18b859b9c9072b8d529e51d30a99ffc27f208f41c8454792e2244ead6a8",
+          "claim_id": "grounded_claim:3553f18b859b9c9072b8d529e51d30a9",
+          "confidence": 1.0,
+          "contract": "ace.intelligence.grounded-claim/v1alpha1",
+          "grounding_kind": "inference",
+          "inference_basis_refs": [
+            "shift:114f503a9f552323f83169939dab101b"
+          ],
+          "statement": "Ownership, motive, and market effect are not established.",
+          "uncertainty": "No competitor or makes relationship is persisted in the selected closure."
+        }
+      ],
+      "contract": "ace.intelligence.brief/v1alpha1",
+      "executive_summary": "The listed Edge X1 price changed from USD 1,200 to USD 1,080. The prepared price move warrants review, but its market effect is not established. Review the listed price change and gather attributable relationship evidence before considering a competitive response. Ownership, motive, and market effect are not established.",
+      "generated_at": "2026-08-06T15:23:15Z",
+      "lineage": [
+        {
+          "contract": "ace.intelligence.lineage-reference/v1alpha1",
+          "relation": "supports",
+          "resource_as_of": "2026-08-06T15:10:00Z",
+          "resource_available_at": "2026-08-06T15:10:30Z",
+          "resource_digest": "sha256:9c43b8f5ccfa2565c74b1b1ff7819895c412622eccdc6a41b1d052dd1cbee311",
+          "resource_id": "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+          "resource_kind": "entity_snapshot"
+        },
+        {
+          "contract": "ace.intelligence.lineage-reference/v1alpha1",
+          "relation": "supports",
+          "resource_as_of": "2026-08-06T15:20:00Z",
+          "resource_available_at": "2026-08-06T15:20:30Z",
+          "resource_digest": "sha256:dde925ec621f5dc7cb9fe6a1df07955b1c3f81f58d34fa8a3a5781aa41eed590",
+          "resource_id": "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+          "resource_kind": "entity_snapshot"
+        },
+        {
+          "contract": "ace.intelligence.lineage-reference/v1alpha1",
+          "relation": "supports",
+          "resource_as_of": "2026-08-06T15:10:00Z",
+          "resource_available_at": "2026-08-06T15:10:30Z",
+          "resource_digest": "sha256:00e74e6471b7cae46edaf50c1aa3f08296d5d9ddd5494a254cde5375c480af05",
+          "resource_id": "observation:00e74e6471b7cae46edaf50c1aa3f082",
+          "resource_kind": "observation"
+        },
+        {
+          "contract": "ace.intelligence.lineage-reference/v1alpha1",
+          "relation": "supports",
+          "resource_as_of": "2026-08-06T15:20:00Z",
+          "resource_available_at": "2026-08-06T15:20:30Z",
+          "resource_digest": "sha256:99afd2d20ce86632f103703316423dbbefd6cb4b774bda8ce11f4ed1e6feac50",
+          "resource_id": "observation:99afd2d20ce86632f103703316423dbb",
+          "resource_kind": "observation"
+        },
+        {
+          "contract": "ace.intelligence.lineage-reference/v1alpha1",
+          "relation": "supports",
+          "resource_as_of": "2026-08-06T15:20:00Z",
+          "resource_available_at": "2026-08-06T15:21:00Z",
+          "resource_digest": "sha256:114f503a9f552323f83169939dab101ba658a9cd3952e88b669d418ab8f58d77",
+          "resource_id": "shift:114f503a9f552323f83169939dab101b",
+          "resource_kind": "shift"
+        },
+        {
+          "contract": "ace.intelligence.lineage-reference/v1alpha1",
+          "relation": "supports",
+          "resource_as_of": "2026-08-06T15:20:00Z",
+          "resource_available_at": "2026-08-06T15:21:30Z",
+          "resource_digest": "sha256:81e067a429ad212467ca87ba5fec09fcbb0459f693607482a95a28cae75c8385",
+          "resource_id": "signal:81e067a429ad212467ca87ba5fec09fc",
+          "resource_kind": "signal"
+        }
+      ],
+      "mode": "prepared",
+      "product_id": "product:market-intelligence-conformance",
+      "resource_digest": "sha256:5ed451cc6b6a436edabc5471b7d38bee828dcf9d620c0e0da65792c7ecc0a718",
+      "resource_id": "brief:5ed451cc6b6a436edabc5471b7d38bee",
+      "title": "Competitive Price Move Brief"
+    },
+    "historical_manual_p1b": {
+      "attention_receipt_digest": "sha256:0b795001b5418da078d945c3490f9f8c2f0d0b3a937bfd67af63633e6c4667cb",
+      "attention_receipt_id": "attention_disposition:0b795001b5418da078d945c3490f9f8c",
+      "brief": {
+        "as_of": "2026-02-15T12:02:30Z",
+        "available_at": "2026-02-15T12:03:00Z",
+        "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+        "mode": "prepared",
+        "product_id": "product:market-intelligence-conformance",
+        "resource_contract": "ace.intelligence.brief/v1alpha1",
+        "resource_digest": "sha256:407d8ba23fe08b3adcd6deb6216ccf19b54350a95882ca9f888a78d0e9685b00",
+        "resource_id": "brief:407d8ba23fe08b3adcd6deb6216ccf19",
+        "resource_kind": "brief"
+      },
+      "readable_after_rollback": true
+    },
+    "packs": {
+      "v0_3_0": {
+        "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
+        "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+        "synthesis_module_digest": "sha256:99ccea5e5fe93cd2ad22c20e9a36d30ce61506f8f998bc30da1a0432947495c0"
+      },
+      "v0_4_0": {
+        "compiled_pack_id": "pack_ir:c87b61600105da2a72d6d7a9fa7cb7dd",
+        "pack_digest": "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c",
+        "synthesis_module_digest": "sha256:fa6346a4173b7bbae1cd62a06a51b1a184f8408160deebfd95b71b0dfe3f0512"
+      }
+    },
+    "persistence": {
+      "delivery_authority": false,
+      "live_counts": {
+        "attention_disposition": 0,
+        "brief": 0,
+        "entity_snapshot": 0,
+        "observation": 0,
+        "shift": 0,
+        "signal": 0
+      },
+      "prepared_counts": {
+        "attention_disposition": 2,
+        "brief": 2,
+        "entity_snapshot": 4,
+        "observation": 4,
+        "shift": 2,
+        "signal": 2
+      },
+      "record_kind_counts": {
+        "action_authorization": 1,
+        "attention_disposition": 2,
+        "authority_use": 2,
+        "brief": 2,
+        "brief_synthesis_receipt": 1,
+        "capability_use": 2,
+        "context_use": 6,
+        "entity_snapshot": 4,
+        "observation": 4,
+        "request_acceptance": 1,
+        "shift": 2,
+        "signal": 2,
+        "structured_result": 1,
+        "terminal_receipt": 1
+      },
+      "transaction_count": 6
+    },
+    "platform_dependency": {
+      "ace_core_wheel_sha256": "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+    },
+    "pre_brief_derivation": {
+      "attention_receipt": {
+        "activation_revision": {
+          "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+          "activation_key": "market_intelligence",
+          "contract": "ace.intelligence.activation-revision-reference/v1alpha1",
+          "product_id": "product:market-intelligence-conformance",
+          "revision": 2,
+          "revision_digest": "sha256:394d4709a59d74c06a826e9726baa78d8cb060457d024ddcfe5b581ecba2aec3",
+          "revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d"
+        },
+        "brief_template_id": "competitive_price_move_brief",
+        "contract": "ace.intelligence.attention-disposition-receipt/v1alpha1",
+        "delivery_authority": false,
+        "disposition": "route",
+        "evaluated_at": "2026-08-06T15:22:00Z",
+        "mode": "prepared",
+        "pack": {
+          "compiled_pack_id": "pack_ir:c87b61600105da2a72d6d7a9fa7cb7dd",
+          "pack_digest": "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c",
+          "pack_id": "market_intelligence",
+          "pack_version": "0.4.0"
+        },
+        "persona_ids": [
+          "competitive_intelligence_analyst"
+        ],
+        "product_id": "product:market-intelligence-conformance",
+        "receipt_digest": "sha256:b37b124a8e2c036368a91f5e97011d83cd17fb3ad84e2ed6445852f8285d4bc1",
+        "receipt_id": "attention_disposition:b37b124a8e2c036368a91f5e97011d83",
+        "receipt_kind": "attention_disposition",
+        "routing_rule_id": "route_competitive_price_move",
+        "signal": {
+          "as_of": "2026-08-06T15:20:00Z",
+          "available_at": "2026-08-06T15:21:30Z",
+          "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+          "mode": "prepared",
+          "product_id": "product:market-intelligence-conformance",
+          "resource_contract": "ace.intelligence.signal/v1alpha1",
+          "resource_digest": "sha256:81e067a429ad212467ca87ba5fec09fcbb0459f693607482a95a28cae75c8385",
+          "resource_id": "signal:81e067a429ad212467ca87ba5fec09fc",
+          "resource_kind": "signal"
+        },
+        "source_lineage": [
+          {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:21:00Z",
+            "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+            "mode": "prepared",
+            "product_id": "product:market-intelligence-conformance",
+            "resource_contract": "ace.intelligence.shift/v1alpha1",
+            "resource_digest": "sha256:114f503a9f552323f83169939dab101ba658a9cd3952e88b669d418ab8f58d77",
+            "resource_id": "shift:114f503a9f552323f83169939dab101b",
+            "resource_kind": "shift"
+          }
+        ],
+        "suppression_reason": null
+      },
+      "batch_digest": "sha256:47b2a72e5a82d050f92f0a2e157f9616a6f0079ef67ed374178c5c1e0e97ce31",
+      "batch_id": "resource_admission:f82cb0ea68f151cb542be9c7924af13f",
+      "brief": null,
+      "derivation_key": "derivation:market-intelligence:p1d1:prepared-price-move:v1",
+      "resources": [
+        {
+          "as_of": "2026-08-06T15:10:00Z",
+          "available_at": "2026-08-06T15:10:30Z",
+          "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+          "mode": "prepared",
+          "product_id": "product:market-intelligence-conformance",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:00e74e6471b7cae46edaf50c1aa3f08296d5d9ddd5494a254cde5375c480af05",
+          "resource_id": "observation:00e74e6471b7cae46edaf50c1aa3f082",
+          "resource_kind": "observation"
+        },
+        {
+          "as_of": "2026-08-06T15:20:00Z",
+          "available_at": "2026-08-06T15:20:30Z",
+          "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+          "mode": "prepared",
+          "product_id": "product:market-intelligence-conformance",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:99afd2d20ce86632f103703316423dbbefd6cb4b774bda8ce11f4ed1e6feac50",
+          "resource_id": "observation:99afd2d20ce86632f103703316423dbb",
+          "resource_kind": "observation"
+        },
+        {
+          "as_of": "2026-08-06T15:10:00Z",
+          "available_at": "2026-08-06T15:10:30Z",
+          "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+          "mode": "prepared",
+          "product_id": "product:market-intelligence-conformance",
+          "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+          "resource_digest": "sha256:9c43b8f5ccfa2565c74b1b1ff7819895c412622eccdc6a41b1d052dd1cbee311",
+          "resource_id": "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+          "resource_kind": "entity_snapshot"
+        },
+        {
+          "as_of": "2026-08-06T15:20:00Z",
+          "available_at": "2026-08-06T15:20:30Z",
+          "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+          "mode": "prepared",
+          "product_id": "product:market-intelligence-conformance",
+          "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+          "resource_digest": "sha256:dde925ec621f5dc7cb9fe6a1df07955b1c3f81f58d34fa8a3a5781aa41eed590",
+          "resource_id": "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+          "resource_kind": "entity_snapshot"
+        },
+        {
+          "as_of": "2026-08-06T15:20:00Z",
+          "available_at": "2026-08-06T15:21:00Z",
+          "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+          "mode": "prepared",
+          "product_id": "product:market-intelligence-conformance",
+          "resource_contract": "ace.intelligence.shift/v1alpha1",
+          "resource_digest": "sha256:114f503a9f552323f83169939dab101ba658a9cd3952e88b669d418ab8f58d77",
+          "resource_id": "shift:114f503a9f552323f83169939dab101b",
+          "resource_kind": "shift"
+        },
+        {
+          "as_of": "2026-08-06T15:20:00Z",
+          "available_at": "2026-08-06T15:21:30Z",
+          "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+          "mode": "prepared",
+          "product_id": "product:market-intelligence-conformance",
+          "resource_contract": "ace.intelligence.signal/v1alpha1",
+          "resource_digest": "sha256:81e067a429ad212467ca87ba5fec09fcbb0459f693607482a95a28cae75c8385",
+          "resource_id": "signal:81e067a429ad212467ca87ba5fec09fc",
+          "resource_kind": "signal"
+        }
+      ],
+      "transaction_receipt": {
+        "committed_at": "2026-08-06T15:22:00Z",
+        "contract": "ace.core.append-only-transaction-receipt/v1alpha1",
+        "disposition": "committed",
+        "product_id": "product:market-intelligence-conformance",
+        "receipt_hash": "sha256:091d8fadc7f2e169326ef4144e154084b3da981ff9303878f4eff41ff86fea21",
+        "receipt_id": "append_only_receipt:5e76f0e2cbff318e08ab4f3d334470a1",
+        "record_space": "prepared",
+        "records": [
+          {
+            "as_of": "2026-08-06T15:10:00Z",
+            "available_at": "2026-08-06T15:10:30Z",
+            "contract": "ace.core.immutable-record-reference/v1alpha1",
+            "material_hash": "sha256:c95dc39daf771005ca6fa1ddb78eb7c461860ff251b84232242fd9db1f6a95a3",
+            "payload_contract": "ace.intelligence.observation/v1alpha1",
+            "processing_order": 0,
+            "product_id": "product:market-intelligence-conformance",
+            "record_key": "observation:00e74e6471b7cae46edaf50c1aa3f082",
+            "record_kind": "observation",
+            "record_space": "prepared",
+            "storage_id": "immutable_record:206c5aceae66969aaefabb32b08bffc1"
+          },
+          {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:20:30Z",
+            "contract": "ace.core.immutable-record-reference/v1alpha1",
+            "material_hash": "sha256:2728aefd483b170be19c34afc5060ba0f84999866a9d0d7317fe90b023a368e1",
+            "payload_contract": "ace.intelligence.observation/v1alpha1",
+            "processing_order": 1,
+            "product_id": "product:market-intelligence-conformance",
+            "record_key": "observation:99afd2d20ce86632f103703316423dbb",
+            "record_kind": "observation",
+            "record_space": "prepared",
+            "storage_id": "immutable_record:36ac2507f2a0e421cf0fff0d95b9dd9a"
+          },
+          {
+            "as_of": "2026-08-06T15:10:00Z",
+            "available_at": "2026-08-06T15:10:30Z",
+            "contract": "ace.core.immutable-record-reference/v1alpha1",
+            "material_hash": "sha256:39344d3db36c07c22500c9eca2381a8443f54d51b8c4a932ed645c495047ab85",
+            "payload_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+            "processing_order": 2,
+            "product_id": "product:market-intelligence-conformance",
+            "record_key": "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+            "record_kind": "entity_snapshot",
+            "record_space": "prepared",
+            "storage_id": "immutable_record:2236ffbe484f441fbd95654b3677729d"
+          },
+          {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:20:30Z",
+            "contract": "ace.core.immutable-record-reference/v1alpha1",
+            "material_hash": "sha256:771a2b25f9b4a4e1442448322db447e357236c90369dc4266bbcd73e57375352",
+            "payload_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+            "processing_order": 3,
+            "product_id": "product:market-intelligence-conformance",
+            "record_key": "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+            "record_kind": "entity_snapshot",
+            "record_space": "prepared",
+            "storage_id": "immutable_record:e818bd635440fd63393fe867e047d30b"
+          },
+          {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:21:00Z",
+            "contract": "ace.core.immutable-record-reference/v1alpha1",
+            "material_hash": "sha256:22dd7a45fd9818b6d972d8989d9a2f356b9234f5bd21f304a47f43b890cda1d2",
+            "payload_contract": "ace.intelligence.shift/v1alpha1",
+            "processing_order": 4,
+            "product_id": "product:market-intelligence-conformance",
+            "record_key": "shift:114f503a9f552323f83169939dab101b",
+            "record_kind": "shift",
+            "record_space": "prepared",
+            "storage_id": "immutable_record:1ef8689c0ff8da2ee5127476f4e4c9ce"
+          },
+          {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:21:30Z",
+            "contract": "ace.core.immutable-record-reference/v1alpha1",
+            "material_hash": "sha256:7145eb543fdc09d8747b310b6e09411152d7e3cb58cc3d236fbf2eae29ff45df",
+            "payload_contract": "ace.intelligence.signal/v1alpha1",
+            "processing_order": 5,
+            "product_id": "product:market-intelligence-conformance",
+            "record_key": "signal:81e067a429ad212467ca87ba5fec09fc",
+            "record_kind": "signal",
+            "record_space": "prepared",
+            "storage_id": "immutable_record:4dbe333e5cca523b163595b008ebf8f7"
+          },
+          {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:22:00Z",
+            "contract": "ace.core.immutable-record-reference/v1alpha1",
+            "material_hash": "sha256:108b43cabd4950740e217861f3833aa6b1960b53c61b30f67b2ea0384633cd85",
+            "payload_contract": "ace.intelligence.attention-disposition-receipt/v1alpha1",
+            "processing_order": 6,
+            "product_id": "product:market-intelligence-conformance",
+            "record_key": "attention_disposition:b37b124a8e2c036368a91f5e97011d83",
+            "record_kind": "attention_disposition",
+            "record_space": "prepared",
+            "storage_id": "immutable_record:63cf0546bbe6d3c7ac37e09b02a6f08c"
+          }
+        ],
+        "request_hash": "sha256:a1d67fbf173b2237f826f0202ac92b118bba4de5b62c24262888474757e8a89a",
+        "transaction_id": "append_only_transaction:5e76f0e2cbff318e08ab4f3d334470a1",
+        "transaction_key": "derivation:market-intelligence:p1d1:prepared-price-move:v1"
+      }
+    },
+    "provider_request": {
+      "attempt_key": "reasoning:market-intelligence:p1d1:prepared-price-move:v1",
+      "context_ids": [
+        "frozen_context:49454c780ea32a43562e40bf9ef7ac08",
+        "frozen_context:4c087c98453b77851536160ea03d9d00",
+        "frozen_context:9b0b9c5ce802e9ad542f1c611093f09e",
+        "frozen_context:bbf2d87588f4e3c2fddf1acaaa792dd2",
+        "frozen_context:d2098f9d913c402f3df4a17fba2be00e",
+        "frozen_context:da5d1e72134937e1f567fb7923c935d2"
+      ],
+      "context_record_keys": [
+        "shift:114f503a9f552323f83169939dab101b",
+        "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+        "observation:00e74e6471b7cae46edaf50c1aa3f082",
+        "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+        "observation:99afd2d20ce86632f103703316423dbb",
+        "signal:81e067a429ad212467ca87ba5fec09fc"
+      ],
+      "instruction_json": "{\"brief_type\":\"competitive_intelligence\",\"claim_policy\":\"citation_or_explicit_inference\",\"instruction_authority\":\"trusted_application\",\"objective\":\"Explain a material competitor price change, its evidence, uncertainty, and the decision it may affect.\",\"output_contract\":\"ace.intelligence.brief-synthesis-draft/v1alpha1\",\"personas\":[{\"description\":\"Validates competitive changes, evidence, implications, and recommended responses.\",\"display_name\":\"Competitive Intelligence Analyst\",\"persona_id\":\"competitive_intelligence_analyst\"}],\"recommendation_required\":true,\"required_sections\":[\"what_changed\",\"why_it_matters\",\"recommendation\",\"limitations\"],\"support_reference_policy\":\"exact_resource_ids_only\"}",
+      "request_digest": "sha256:7226e9648c734648713027efdc08dc3f130f52907f42d73737e6f76c041c7cef",
+      "request_id": "governed_reasoning_request:7226e9648c734648713027efdc08dc3f"
+    },
+    "replay": {
+      "forbidden_replay_provider_calls": 0,
+      "provider_calls": 1,
+      "rollback_fresh_service_equal": true,
+      "same_service_equal": true
+    },
+    "synthesis_receipt": {
+      "activation_commit": {
+        "contract": "ace.core.receipt-reference/v1alpha1",
+        "receipt_digest": "sha256:84fa5ac643b10a94718907f4af075cb3170172ec01e5748131ee4489a6f668ec",
+        "receipt_id": "governed_state_commit:84fa5ac643b10a94718907f4af075cb3"
+      },
+      "activation_revision": {
+        "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+        "activation_key": "market_intelligence",
+        "contract": "ace.intelligence.activation-revision-reference/v1alpha1",
+        "product_id": "product:market-intelligence-conformance",
+        "revision": 2,
+        "revision_digest": "sha256:394d4709a59d74c06a826e9726baa78d8cb060457d024ddcfe5b581ecba2aec3",
+        "revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d"
+      },
+      "actual_section_ids": [
+        "what_changed",
+        "why_it_matters",
+        "recommendation",
+        "limitations"
+      ],
+      "attention_receipt_digest": "sha256:b37b124a8e2c036368a91f5e97011d83cd17fb3ad84e2ed6445852f8285d4bc1",
+      "attention_receipt_id": "attention_disposition:b37b124a8e2c036368a91f5e97011d83",
+      "brief_digest": "sha256:5ed451cc6b6a436edabc5471b7d38bee828dcf9d620c0e0da65792c7ecc0a718",
+      "brief_id": "brief:5ed451cc6b6a436edabc5471b7d38bee",
+      "claim_supports": [
+        {
+          "citation_ids": [
+            "citation:08b85552c86d7738f7103dc11ca6207b",
+            "citation:126dd510c8001d7df6da542a90c8094c"
+          ],
+          "citation_supports": [
+            {
+              "citation_id": "citation:08b85552c86d7738f7103dc11ca6207b",
+              "contract": "ace.intelligence.brief-citation-support-binding/v1alpha1",
+              "support_record_id": "observation:00e74e6471b7cae46edaf50c1aa3f082"
+            },
+            {
+              "citation_id": "citation:126dd510c8001d7df6da542a90c8094c",
+              "contract": "ace.intelligence.brief-citation-support-binding/v1alpha1",
+              "support_record_id": "observation:99afd2d20ce86632f103703316423dbb"
+            }
+          ],
+          "claim_id": "grounded_claim:2aea9b905e2c789e4a439a7f5a4af90e",
+          "contract": "ace.intelligence.brief-claim-support-binding/v1alpha1",
+          "grounding_kind": "cited",
+          "inference_basis_refs": [],
+          "support_record_ids": [
+            "observation:00e74e6471b7cae46edaf50c1aa3f082",
+            "observation:99afd2d20ce86632f103703316423dbb"
+          ]
+        },
+        {
+          "citation_ids": [],
+          "citation_supports": [],
+          "claim_id": "grounded_claim:90f1c68b13e9b6898b472b11420c7c7a",
+          "contract": "ace.intelligence.brief-claim-support-binding/v1alpha1",
+          "grounding_kind": "inference",
+          "inference_basis_refs": [
+            "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+            "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+            "shift:114f503a9f552323f83169939dab101b"
+          ],
+          "support_record_ids": [
+            "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+            "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+            "shift:114f503a9f552323f83169939dab101b"
+          ]
+        },
+        {
+          "citation_ids": [],
+          "citation_supports": [],
+          "claim_id": "grounded_claim:d4dbd8c9b5eb1b5e81dd9730efd1d8df",
+          "contract": "ace.intelligence.brief-claim-support-binding/v1alpha1",
+          "grounding_kind": "inference",
+          "inference_basis_refs": [
+            "signal:81e067a429ad212467ca87ba5fec09fc"
+          ],
+          "support_record_ids": [
+            "signal:81e067a429ad212467ca87ba5fec09fc"
+          ]
+        },
+        {
+          "citation_ids": [],
+          "citation_supports": [],
+          "claim_id": "grounded_claim:3553f18b859b9c9072b8d529e51d30a9",
+          "contract": "ace.intelligence.brief-claim-support-binding/v1alpha1",
+          "grounding_kind": "inference",
+          "inference_basis_refs": [
+            "shift:114f503a9f552323f83169939dab101b"
+          ],
+          "support_record_ids": [
+            "shift:114f503a9f552323f83169939dab101b"
+          ]
+        }
+      ],
+      "contract": "ace.intelligence.brief-synthesis-receipt/v1alpha1",
+      "created_at": "2026-08-06T15:23:15Z",
+      "derivation_key": "derivation:market-intelligence:p1d1:prepared-price-move:v1",
+      "mode": "prepared",
+      "module_digest": "sha256:fa6346a4173b7bbae1cd62a06a51b1a184f8408160deebfd95b71b0dfe3f0512",
+      "module_id": "market_synthesis",
+      "pack": {
+        "compiled_pack_id": "pack_ir:c87b61600105da2a72d6d7a9fa7cb7dd",
+        "pack_digest": "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c",
+        "pack_id": "market_intelligence",
+        "pack_version": "0.4.0"
+      },
+      "persona_ids": [
+        "competitive_intelligence_analyst"
+      ],
+      "product_id": "product:market-intelligence-conformance",
+      "reasoning_attempt_key": "reasoning:market-intelligence:p1d1:prepared-price-move:v1",
+      "reasoning_request_digest": "sha256:7226e9648c734648713027efdc08dc3f130f52907f42d73737e6f76c041c7cef",
+      "reasoning_request_id": "governed_reasoning_request:7226e9648c734648713027efdc08dc3f",
+      "reasoning_result_digest": "sha256:6d45fb169a38090310bee0665eebb422ef5c0e7011dde6516ae1194b498c9cb3",
+      "reasoning_result_id": "structured_final_result:6d45fb169a38090310bee0665eebb422",
+      "reasoning_terminal": {
+        "contract": "ace.core.receipt-reference/v1alpha1",
+        "receipt_digest": "sha256:f0e5f06f9defb3ae841685149f0627f1791684b40d632dc485652646746f6144",
+        "receipt_id": "reasoning_terminal:f0e5f06f9defb3ae841685149f0627f1"
+      },
+      "receipt_digest": "sha256:4d3c4e9e1864d7876743dabba2c7762f6dacc12d81d8fa8c8e9c89585361e7c5",
+      "receipt_id": "brief_synthesis_receipt:4d3c4e9e1864d7876743dabba2c7762f",
+      "recommendation_claim_id": "grounded_claim:d4dbd8c9b5eb1b5e81dd9730efd1d8df",
+      "request_digest": "sha256:4ad6fc8b8bea276545260d9c4e9563dc2fa331bab662c7a5452f172d01d3e0f8",
+      "request_id": "brief_synthesis_request:4ad6fc8b8bea276545260d9c4e9563dc",
+      "required_section_ids": [
+        "what_changed",
+        "why_it_matters",
+        "recommendation",
+        "limitations"
+      ],
+      "section_claims": [
+        {
+          "claim_ids": [
+            "grounded_claim:2aea9b905e2c789e4a439a7f5a4af90e"
+          ],
+          "contract": "ace.intelligence.brief-section-claim-binding/v1alpha1",
+          "section_id": "what_changed"
+        },
+        {
+          "claim_ids": [
+            "grounded_claim:90f1c68b13e9b6898b472b11420c7c7a"
+          ],
+          "contract": "ace.intelligence.brief-section-claim-binding/v1alpha1",
+          "section_id": "why_it_matters"
+        },
+        {
+          "claim_ids": [
+            "grounded_claim:d4dbd8c9b5eb1b5e81dd9730efd1d8df"
+          ],
+          "contract": "ace.intelligence.brief-section-claim-binding/v1alpha1",
+          "section_id": "recommendation"
+        },
+        {
+          "claim_ids": [
+            "grounded_claim:3553f18b859b9c9072b8d529e51d30a9"
+          ],
+          "contract": "ace.intelligence.brief-section-claim-binding/v1alpha1",
+          "section_id": "limitations"
+        }
+      ],
+      "selected_context": [
+        {
+          "context": {
+            "as_of": "2026-08-06T15:10:00Z",
+            "available_at": "2026-08-06T15:10:30Z",
+            "context_digest": "sha256:bbf2d87588f4e3c2fddf1acaaa792dd29ed544972adeb4f6bbc829dde9222900",
+            "context_id": "frozen_context:bbf2d87588f4e3c2fddf1acaaa792dd2",
+            "contract": "ace.core.context-binding/v1alpha1",
+            "material_digest": "sha256:39344d3db36c07c22500c9eca2381a8443f54d51b8c4a932ed645c495047ab85",
+            "storage_id": "immutable_record:2236ffbe484f441fbd95654b3677729d"
+          },
+          "contract": "ace.intelligence.brief-selected-context-binding/v1alpha1",
+          "record": {
+            "as_of": "2026-08-06T15:10:00Z",
+            "available_at": "2026-08-06T15:10:30Z",
+            "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+            "mode": "prepared",
+            "product_id": "product:market-intelligence-conformance",
+            "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+            "resource_digest": "sha256:9c43b8f5ccfa2565c74b1b1ff7819895c412622eccdc6a41b1d052dd1cbee311",
+            "resource_id": "entity_snapshot:9c43b8f5ccfa2565c74b1b1ff7819895",
+            "resource_kind": "entity_snapshot"
+          }
+        },
+        {
+          "context": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:20:30Z",
+            "context_digest": "sha256:4c087c98453b77851536160ea03d9d0048d9a91867a1aeb325763c90cdaa7381",
+            "context_id": "frozen_context:4c087c98453b77851536160ea03d9d00",
+            "contract": "ace.core.context-binding/v1alpha1",
+            "material_digest": "sha256:771a2b25f9b4a4e1442448322db447e357236c90369dc4266bbcd73e57375352",
+            "storage_id": "immutable_record:e818bd635440fd63393fe867e047d30b"
+          },
+          "contract": "ace.intelligence.brief-selected-context-binding/v1alpha1",
+          "record": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:20:30Z",
+            "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+            "mode": "prepared",
+            "product_id": "product:market-intelligence-conformance",
+            "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+            "resource_digest": "sha256:dde925ec621f5dc7cb9fe6a1df07955b1c3f81f58d34fa8a3a5781aa41eed590",
+            "resource_id": "entity_snapshot:dde925ec621f5dc7cb9fe6a1df07955b",
+            "resource_kind": "entity_snapshot"
+          }
+        },
+        {
+          "context": {
+            "as_of": "2026-08-06T15:10:00Z",
+            "available_at": "2026-08-06T15:10:30Z",
+            "context_digest": "sha256:9b0b9c5ce802e9ad542f1c611093f09ea70abbe7b9aa07d22aa9bdf5568c75bd",
+            "context_id": "frozen_context:9b0b9c5ce802e9ad542f1c611093f09e",
+            "contract": "ace.core.context-binding/v1alpha1",
+            "material_digest": "sha256:c95dc39daf771005ca6fa1ddb78eb7c461860ff251b84232242fd9db1f6a95a3",
+            "storage_id": "immutable_record:206c5aceae66969aaefabb32b08bffc1"
+          },
+          "contract": "ace.intelligence.brief-selected-context-binding/v1alpha1",
+          "record": {
+            "as_of": "2026-08-06T15:10:00Z",
+            "available_at": "2026-08-06T15:10:30Z",
+            "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+            "mode": "prepared",
+            "product_id": "product:market-intelligence-conformance",
+            "resource_contract": "ace.intelligence.observation/v1alpha1",
+            "resource_digest": "sha256:00e74e6471b7cae46edaf50c1aa3f08296d5d9ddd5494a254cde5375c480af05",
+            "resource_id": "observation:00e74e6471b7cae46edaf50c1aa3f082",
+            "resource_kind": "observation"
+          }
+        },
+        {
+          "context": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:20:30Z",
+            "context_digest": "sha256:d2098f9d913c402f3df4a17fba2be00e354e9d16a983b0c2ebafc078d81ad854",
+            "context_id": "frozen_context:d2098f9d913c402f3df4a17fba2be00e",
+            "contract": "ace.core.context-binding/v1alpha1",
+            "material_digest": "sha256:2728aefd483b170be19c34afc5060ba0f84999866a9d0d7317fe90b023a368e1",
+            "storage_id": "immutable_record:36ac2507f2a0e421cf0fff0d95b9dd9a"
+          },
+          "contract": "ace.intelligence.brief-selected-context-binding/v1alpha1",
+          "record": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:20:30Z",
+            "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+            "mode": "prepared",
+            "product_id": "product:market-intelligence-conformance",
+            "resource_contract": "ace.intelligence.observation/v1alpha1",
+            "resource_digest": "sha256:99afd2d20ce86632f103703316423dbbefd6cb4b774bda8ce11f4ed1e6feac50",
+            "resource_id": "observation:99afd2d20ce86632f103703316423dbb",
+            "resource_kind": "observation"
+          }
+        },
+        {
+          "context": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:21:00Z",
+            "context_digest": "sha256:49454c780ea32a43562e40bf9ef7ac08bf7d77929469cf0605341f08b810bd83",
+            "context_id": "frozen_context:49454c780ea32a43562e40bf9ef7ac08",
+            "contract": "ace.core.context-binding/v1alpha1",
+            "material_digest": "sha256:22dd7a45fd9818b6d972d8989d9a2f356b9234f5bd21f304a47f43b890cda1d2",
+            "storage_id": "immutable_record:1ef8689c0ff8da2ee5127476f4e4c9ce"
+          },
+          "contract": "ace.intelligence.brief-selected-context-binding/v1alpha1",
+          "record": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:21:00Z",
+            "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+            "mode": "prepared",
+            "product_id": "product:market-intelligence-conformance",
+            "resource_contract": "ace.intelligence.shift/v1alpha1",
+            "resource_digest": "sha256:114f503a9f552323f83169939dab101ba658a9cd3952e88b669d418ab8f58d77",
+            "resource_id": "shift:114f503a9f552323f83169939dab101b",
+            "resource_kind": "shift"
+          }
+        },
+        {
+          "context": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:21:30Z",
+            "context_digest": "sha256:da5d1e72134937e1f567fb7923c935d213147b20dfbdd30528afa336e82916cb",
+            "context_id": "frozen_context:da5d1e72134937e1f567fb7923c935d2",
+            "contract": "ace.core.context-binding/v1alpha1",
+            "material_digest": "sha256:7145eb543fdc09d8747b310b6e09411152d7e3cb58cc3d236fbf2eae29ff45df",
+            "storage_id": "immutable_record:4dbe333e5cca523b163595b008ebf8f7"
+          },
+          "contract": "ace.intelligence.brief-selected-context-binding/v1alpha1",
+          "record": {
+            "as_of": "2026-08-06T15:20:00Z",
+            "available_at": "2026-08-06T15:21:30Z",
+            "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
+            "mode": "prepared",
+            "product_id": "product:market-intelligence-conformance",
+            "resource_contract": "ace.intelligence.signal/v1alpha1",
+            "resource_digest": "sha256:81e067a429ad212467ca87ba5fec09fcbb0459f693607482a95a28cae75c8385",
+            "resource_id": "signal:81e067a429ad212467ca87ba5fec09fc",
+            "resource_kind": "signal"
+          }
+        }
+      ],
+      "synthesis_key": "synthesis:market-intelligence:p1d1:prepared-price-move:v1",
+      "template_digest": "sha256:f960449b8ca85a1be41d2d800198e1f6b5c4d5f14a87c00dc55099f8eedcdc91",
+      "template_id": "competitive_price_move_brief",
+      "write_authorization": {
+        "contract": "ace.core.receipt-reference/v1alpha1",
+        "receipt_digest": "sha256:5b168ca798cc971d080e8df1797f2f87114dec90c7616595e248ff43ad08de5f",
+        "receipt_id": "governed_action_authorization:5b168ca798cc971d080e8df1797f2f87"
+      },
+      "write_intent_digest": "sha256:7263c8ee52699de637c8c2e5352ba687546e1bcad65dc23c6e4517337bf9776e",
+      "write_intent_id": "prepared_brief_append_intent:7263c8ee52699de637c8c2e5352ba687"
+    },
+    "synthesis_request": {
+      "activation_revision": {
+        "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+        "activation_key": "market_intelligence",
+        "contract": "ace.intelligence.activation-revision-reference/v1alpha1",
+        "product_id": "product:market-intelligence-conformance",
+        "revision": 2,
+        "revision_digest": "sha256:394d4709a59d74c06a826e9726baa78d8cb060457d024ddcfe5b581ecba2aec3",
+        "revision_id": "activation_revision:394d4709a59d74c06a826e9726baa78d"
+      },
+      "attention_receipt_digest": "sha256:b37b124a8e2c036368a91f5e97011d83cd17fb3ad84e2ed6445852f8285d4bc1",
+      "attention_receipt_id": "attention_disposition:b37b124a8e2c036368a91f5e97011d83",
+      "authenticated_context": {
+        "actor_ref": "principal:competitive-intelligence-analyst",
+        "authenticated_at": "2026-08-06T15:09:00Z",
+        "authentication_receipt_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "authentication_receipt_ref": "authentication:p1d1-market-analyst",
+        "contract": "ace.core.authenticated-runtime-context/v1alpha1",
+        "expires_at": "2026-08-06T15:40:00Z",
+        "product_id": "product:market-intelligence-conformance"
+      },
+      "brief_as_of": "2026-08-06T15:22:00Z",
+      "context_cutoff_at": "2026-08-06T15:22:00Z",
+      "contract": "ace.intelligence.brief-synthesis-request/v1alpha1",
+      "derivation_key": "derivation:market-intelligence:p1d1:prepared-price-move:v1",
+      "mode": "prepared",
+      "pack": {
+        "compiled_pack_id": "pack_ir:c87b61600105da2a72d6d7a9fa7cb7dd",
+        "pack_digest": "sha256:c87b61600105da2a72d6d7a9fa7cb7dde2fd6edbc0e63327c541b80a96dcd66c",
+        "pack_id": "market_intelligence",
+        "pack_version": "0.4.0"
+      },
+      "product_id": "product:market-intelligence-conformance",
+      "reasoning_attempt_key": "reasoning:market-intelligence:p1d1:prepared-price-move:v1",
+      "request_digest": "sha256:4ad6fc8b8bea276545260d9c4e9563dc2fa331bab662c7a5452f172d01d3e0f8",
+      "request_id": "brief_synthesis_request:4ad6fc8b8bea276545260d9c4e9563dc",
+      "requested_at": "2026-08-06T15:23:00Z",
+      "synthesis_key": "synthesis:market-intelligence:p1d1:prepared-price-move:v1"
+    }
+  },
+  "fixture_version": "0.8.3",
+  "platform_dependency": {
+    "ace_core_version": "0.8.3",
+    "ace_core_wheel_sha256": "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+  }
+}

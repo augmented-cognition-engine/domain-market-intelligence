@@ -29,11 +29,11 @@ def test_root_distribution_identity_and_compatibility_are_exact() -> None:
     assert project["name"] == ROOT_DISTRIBUTION
     assert project["version"] == ROOT_VERSION
     assert project["requires-python"] == ">=3.12,<3.13"
-    assert project["dependencies"] == ["ace-core>=0.8.2,<0.9"]
+    assert project["dependencies"] == ["ace-core>=0.8.3,<0.9"]
 
     requirement = Requirement(project["dependencies"][0])
     assert canonicalize_name(requirement.name) == "ace-core"
-    assert requirement.specifier == SpecifierSet(">=0.8.2,<0.9")
+    assert requirement.specifier == SpecifierSet(">=0.8.3,<0.9")
     assert requirement.marker is None
     assert requirement.url is None
 
@@ -94,6 +94,7 @@ def test_root_distribution_mapping_is_inert_and_data_only() -> None:
         "*.json",
         "modules/*.json",
         "conformance/*.json",
+        "conformance/compatibility/core_0_8_3/*.json",
         "releases/*/*.json",
         "releases/*/modules/*.json",
         "releases/*/conformance/*.json",
@@ -105,7 +106,7 @@ def test_root_distribution_mapping_is_inert_and_data_only() -> None:
     assert "entry-points" not in project
 
     files = sorted(path for path in PACK_ROOT.rglob("*") if path.is_file())
-    assert len(files) == 53
+    assert len(files) == 61
     assert {path.suffix for path in files} == {".json"}
     assert (PACK_ROOT / "onboarding_profile.json") in files
     assert (PACK_ROOT / "conformance" / "activation_golden_fixture.json") in files

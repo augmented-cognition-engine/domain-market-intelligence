@@ -9,7 +9,7 @@ description = "Inert ACE Market Intelligence Domain Pack and conformance fixture
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
-dependencies = ["ace-core>=0.8.2,<0.9"]
+dependencies = ["ace-core>=0.8.3,<0.9"]
 
 [project.urls]
 Homepage = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
@@ -32,6 +32,7 @@ namespaces = true
     "*.json",
     "modules/*.json",
     "conformance/*.json",
+    "conformance/compatibility/core_0_8_3/*.json",
     "releases/*/*.json",
     "releases/*/modules/*.json",
     "releases/*/conformance/*.json",

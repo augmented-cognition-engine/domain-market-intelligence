@@ -1,0 +1,57 @@
+{
+  "artifacts": [
+    {
+      "path": "p1c2_live_expected.json",
+      "sha256": "626f0cdba9a593e85168c04d8cd0284c8243f1302dcc3a528387184cff8f972d"
+    },
+    {
+      "path": "p1d1_prepared_brief_expected.json",
+      "sha256": "a3a7d12baf4dccf957657b34168ee85587fd399ef84c01949220af10ab44105b"
+    },
+    {
+      "path": "p1d1_prepared_brief_negative_cases.json",
+      "sha256": "2a40e925d8b1cb056ff5e16e2a560885802404b0750be1f8a27132acc8079fdb"
+    },
+    {
+      "path": "p1e_governed_feedback_expected.json",
+      "sha256": "a2f3ddb0d40440d560ba69fd5093cfcc6810058210e50edf63353331ca35e397"
+    },
+    {
+      "path": "p1e_governed_feedback_negative_cases.json",
+      "sha256": "f1791b67add65ed68db8fc2d8ba5b45153fdfc9cd2c56e939452eacec7069dd2"
+    },
+    {
+      "path": "p1f_live_bridge_expected.json",
+      "sha256": "fedefab031632cb29ac5ac3e16ca8bdeb5826980344ef4a081c05072e289b14f"
+    },
+    {
+      "path": "p1f_live_bridge_negative_cases.json",
+      "sha256": "b939b03a09e7418a7a66d7a84a05e930208eb37069b45f062a7d7a8aee025e79"
+    }
+  ],
+  "acceptance_scripts": {
+    "p1c2": "3e5a84505f82bfdddf6e1ba0eb6e55412a6984882acd5d3d743ea6cd8e59be8f",
+    "p1d1": "1449d60038af5531c1689a0e965fc57342b896f31aabc47e06a2aa2a5b4ca66a",
+    "p1e": "30534b3b54150227da08e7adeeae6691da7ff6efecdf49e58d74d08756a99d95",
+    "p1f": "e9bfa9e4853bc6421f2da7cc7df669dc061f65ab65765dde64736bd476fa91e1"
+  },
+  "contract": "ace.market-intelligence.core-compatibility-manifest/v1",
+  "platform_dependency": {
+    "ace_core_version": "0.8.3",
+    "ace_core_wheel": "ace_core-0.8.3-py3-none-any.whl",
+    "ace_core_wheel_sha256": "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+  },
+  "scope": {
+    "archive_bytes_modified": false,
+    "provider_calls_external": false,
+    "semantic_entailment_validation_claimed": false,
+    "semantic_time_compatibility": true,
+    "versioned_activation_state_kind": true
+  },
+  "source_archives": [
+    "releases/v0_3_0",
+    "releases/v0_4_0",
+    "releases/v0_5_0",
+    "releases/v0_6_0"
+  ]
+}

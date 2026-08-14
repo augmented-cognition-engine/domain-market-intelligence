@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {
+      "case_id": "divergent_derivation_replay",
+      "expected": "same derivation key with changed request identity fails closed"
+    },
+    {
+      "case_id": "divergent_brief_replay",
+      "expected": "same synthesis key with changed request identity fails closed"
+    },
+    {
+      "case_id": "prepared_mode_promotion",
+      "expected": "PREPARED request cannot enter the LIVE Brief service"
+    },
+    {
+      "case_id": "unadmitted_snapshot_coordinate",
+      "expected": "a resource coordinate not bound to the admitted envelope fails closed"
+    }
+  ],
+  "contract": "ace.market-intelligence.p1f-live-bridge-negative-cases/v1alpha1",
+  "fixture_version": "0.8.3",
+  "platform_dependency": {
+    "ace_core_version": "0.8.3",
+    "ace_core_wheel_sha256": "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+  }
+}
