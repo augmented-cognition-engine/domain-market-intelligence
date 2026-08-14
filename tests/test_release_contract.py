@@ -17,6 +17,9 @@ ADAPTER_PROJECT = tomllib.loads(
         encoding="utf-8"
     )
 )
+BUILDER_PROJECT = tomllib.loads(
+    (REPO_ROOT / "adapters" / "market_builder" / "pyproject.toml").read_text(encoding="utf-8")
+)
 
 ROOT_DISTRIBUTION = "ace-domain-market-intelligence"
 ROOT_VERSION = "0.8.0"
@@ -161,3 +164,20 @@ def test_public_two_domain_install_refreshes_new_release_metadata() -> None:
 
     assert "--refresh-package ace-core" in ci
     assert "--refresh-package ace-domain-world-intelligence" in ci
+
+
+def test_release_attaches_exact_trusted_builder_without_widening_root_wheel() -> None:
+    publish = (REPO_ROOT / ".github" / "workflows" / "publish.yml").read_text(encoding="utf-8")
+    builder = BUILDER_PROJECT["project"]
+
+    assert builder["name"] == "ace-app-market-intelligence-builder"
+    assert builder["version"] == "0.1.0"
+    assert builder["dependencies"] == [
+        "ace-core>=0.9,<1.1",
+        "ace-domain-market-intelligence>=0.8,<1",
+    ]
+    assert "release-market-builder:" in publish
+    assert "uv build --out-dir dist/market-builder adapters/market_builder" in publish
+    assert "ace_app_market_intelligence_builder-0.1.0-py3-none-any.whl" in publish
+    assert "ace_app_market_intelligence_builder-0.1.0.tar.gz" in publish
+    assert 'gh release upload "${TAG}" dist/market-builder/*' in publish
