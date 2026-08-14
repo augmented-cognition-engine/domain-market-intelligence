@@ -27,6 +27,7 @@ jobs:
     name: verify tag and build root distribution
     runs-on: ubuntu-latest
     outputs:
+      tag: ${{ steps.request.outputs.tag }}
       wheel: ${{ steps.version.outputs.wheel }}
       sdist: ${{ steps.version.outputs.sdist }}
     steps:
@@ -127,3 +128,44 @@ jobs:
         with:
           packages-dir: dist
           print-hash: true
+
+  release-market-builder:
+    name: attach the trusted Market Builder
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ needs.verify.outputs.tag }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Build and validate only the separate trusted Builder
+        run: |
+          set -euo pipefail
+          uv build --out-dir dist/market-builder adapters/market_builder
+          rm -f dist/market-builder/.gitignore
+          wheel="ace_app_market_intelligence_builder-0.1.0-py3-none-any.whl"
+          sdist="ace_app_market_intelligence_builder-0.1.0.tar.gz"
+          entries="$(find dist/market-builder -maxdepth 1 -type f -printf '%f\n' | sort)"
+          expected="$(printf '%s\n%s\n' "${wheel}" "${sdist}" | sort)"
+          if [ "${entries}" != "${expected}" ]; then
+            echo "::error::unexpected Market Builder artifacts: ${entries}"
+            exit 1
+          fi
+          uvx --from twine twine check --strict \
+            "dist/market-builder/${wheel}" "dist/market-builder/${sdist}"
+
+      - name: Attach the independently packaged Builder to the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.verify.outputs.tag }}
+        run: >-
+          gh release upload "${TAG}" dist/market-builder/*
+          --repo "${GITHUB_REPOSITORY}" --clobber
