@@ -40,6 +40,12 @@
       "path": "modules/personas.json",
       "media_type": "application/json",
       "digest": "sha256:ed1c0da8c45867504c5894085d10944389f954890d62cfb33d10ca7caff8a83d"
+    },
+    {
+      "resource_id": "market_decision_outcomes",
+      "path": "modules/decision_outcomes.json",
+      "media_type": "application/json",
+      "digest": "sha256:0b953e30af3ec818bb7959903085da95bf93385d01c9aa1fa7b61abae54e34ce"
     }
   ],
   "modules": [
@@ -78,6 +84,14 @@
       "depends_on": [
         "market_detection",
         "market_synthesis"
+      ]
+    },
+    {
+      "module_id": "market_decision_outcomes",
+      "contract": "ace.intelligence.decision-outcomes/v1alpha1",
+      "resource_id": "market_decision_outcomes",
+      "depends_on": [
+        "market_personas"
       ]
     }
   ],

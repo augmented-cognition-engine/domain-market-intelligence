@@ -24,8 +24,8 @@ from .executor import MARKET_INTELLIGENCE_PROFILE_ID
 MARKET_INTELLIGENCE_PACK = CompiledPackRefV1(
     pack_id="market_intelligence",
     pack_version="0.8.0",
-    compiled_pack_id="pack_ir:47304b9a62a147de39d38ece0290b12a",
-    pack_digest="sha256:47304b9a62a147de39d38ece0290b12a2078dcdf032236f3dbceebcb23758e71",
+    compiled_pack_id="pack_ir:fd15b1617a103311c202201cd6ff1bcb",
+    pack_digest="sha256:fd15b1617a103311c202201cd6ff1bcb75c73c943048cf8c9a6537dd22255e53",
 )
 MARKET_INTELLIGENCE_PLANNER_VERSION = "0.1.0"
 _INVENTORY_PATH = "domain_packs/market_intelligence/conformance/openai_terra_price_recorded_sources.json"

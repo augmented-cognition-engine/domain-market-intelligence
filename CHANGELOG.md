@@ -15,6 +15,11 @@ Semantic Versioning.
   readiness, and resource-plane ports; it adds no second runtime or connector framework.
 - Added a content-addressed direction-package contract derived from an exact Brief and user Decision,
   plus an effect-free binding to Core's existing AC5 destination-delivery gate.
+- Restored the existing bounded decision/outcome policy in the current 0.8.0 Pack after it was
+  accidentally omitted from the unpublished candidate root.
+- Added a provider-free current-Pack acceptance covering exact Brief disposition, direction-package
+  preparation, fresh package-and-destination authority, acknowledged reference delivery, later
+  Outcome, and a visible non-effective Feedback proposal.
 
 ### Changed
 
@@ -27,7 +32,8 @@ Semantic Versioning.
 
 The root wheel remains JSON-only and inert. The trusted Builder is a distinct distribution requiring
 Core 0.9 or later and receives execution authority only from the Core host after exact user review
-and approval.
+and approval. The reference acknowledgment proves receipt, not downstream execution, truth, or
+beneficial impact. Feedback remains proposal-only until a separate governed commit is approved.
 
 ## [0.7.0] — candidate
 

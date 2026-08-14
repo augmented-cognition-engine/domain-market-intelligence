@@ -23,10 +23,10 @@ engine, graph, state store, authority system, detector runtime, or feedback loop
   and [`0.7.0 on PyPI`](https://pypi.org/project/ace-domain-market-intelligence/0.7.0/).
   GI2 and the historical external GC1 consumer journey remain frozen in their original evidence.
 
-The 0.7 release projects Market’s analyst intelligence loop through the
-single governed resource plane with an explicit `no_action` Decision and non-live Feedback. That
-proof is additive and does not change the public 0.6.0 installation contract; see the
-[candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
+The 0.8 candidate closes the bounded Market v1 loop over the current Pack: reviewed recorded
+sources → cited Brief → exact user Decision → content-addressed direction package → separately
+authorized reference delivery → later Outcome → visible proposal-only Feedback. Receipt does not
+prove downstream execution or benefit, and the proposal does not change effective policy.
 
 ## What you install, and what you get
 
@@ -119,6 +119,10 @@ The repository carries the frozen Market P1 packets:
 - P1E: Decision, Outcome, and bounded feedback proposal with no silent policy change; and
 - P1F: the paired LIVE Shift → Signal → route → Brief bridge through unchanged ACE.
 
+The current 0.8 acceptance composes those shared contracts with the trusted Market Builder and
+Core's existing AC5 delivery service. It does not create a second handoff, outcome, or learning
+framework.
+
 ## Connector boundary
 
 The separately packaged public-product connector accepts only an injected reviewed transport. It is
@@ -129,7 +133,9 @@ is not a dependency of the Domain Pack and is not published by the root release.
 The separately packaged Market Builder is also executable host software, but it is not a connector:
 it translates one exact approved onboarding build into existing Core host calls. It consumes only
 the two packaged recorded publications for the bounded v1 proof and does not claim a current network
-response.
+response. Its direction package can be delivered only through a separate exact destination
+authorization; the provider-free reference mailbox acknowledges the digest and claims neither
+downstream execution nor beneficial impact.
 
 ## GI2: cross-domain falsification
 

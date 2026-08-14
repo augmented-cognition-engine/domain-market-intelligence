@@ -90,7 +90,7 @@ jobs:
               )
 
           payload = [name for name in names if not name.startswith(dist_info)]
-          assert len(payload) == 61, payload
+          assert len(payload) == 62, payload
           assert "domain_packs/market_intelligence/onboarding_profile.json" in payload
           assert "domain_packs/market_intelligence/conformance/activation_golden_fixture.json" in payload
           assert "domain_packs/market_intelligence/conformance/openai_terra_price_recorded_sources.json" in payload

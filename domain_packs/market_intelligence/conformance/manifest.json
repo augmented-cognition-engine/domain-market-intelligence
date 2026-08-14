@@ -14,19 +14,19 @@
       "artifact_id": "p1_price_move_golden",
       "artifact_role": "positive_scenario",
       "path": "p1_price_move_golden.json",
-      "digest": "sha256:d8df38acf6b018d132f589388dcb891a3f35ceff5ba80c4b32de5550c9520854"
+      "digest": "sha256:7faed11eba364a4a2a76955b70d0c47eaf329cefa378f1e7d7616775f7f12a19"
     },
     {
       "artifact_id": "p1_price_move_negative_cases",
       "artifact_role": "negative_scenarios",
       "path": "p1_price_move_negative_cases.json",
-      "digest": "sha256:75b80e46d839aae6fa964c406cec66267874231e1a21aca00df15d49814b668b"
+      "digest": "sha256:01fd2471a1460726e45f97a94b6deec6976c577816da1200ac466c4bfb64f13d"
     },
     {
       "artifact_id": "p1c_durable_price_move_expected",
       "artifact_role": "durable_prepared_expected_identities",
       "path": "p1c_durable_price_move_expected.json",
-      "digest": "sha256:3caf0373942a94e805ec6461aea092754ab8b89efc939fefded236f528575331"
+      "digest": "sha256:8191ea7a62d19308121892b13470aa0370f3f69267f88acd62533eb36ac721fb"
     },
     {
       "artifact_id": "activation_golden_fixture",

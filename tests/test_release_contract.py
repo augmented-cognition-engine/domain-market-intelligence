@@ -106,7 +106,7 @@ def test_root_distribution_mapping_is_inert_and_data_only() -> None:
     assert "entry-points" not in project
 
     files = sorted(path for path in PACK_ROOT.rglob("*") if path.is_file())
-    assert len(files) == 61
+    assert len(files) == 62
     assert {path.suffix for path in files} == {".json"}
     assert (PACK_ROOT / "onboarding_profile.json") in files
     assert (PACK_ROOT / "conformance" / "activation_golden_fixture.json") in files
