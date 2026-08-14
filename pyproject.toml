@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ace-domain-market-intelligence"
-version = "0.7.0"
+version = "0.8.0"
 description = "Inert ACE Market Intelligence Domain Pack and conformance fixtures"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
-dependencies = ["ace-core>=0.8.3,<0.9"]
+dependencies = ["ace-core>=0.8.3,<1.1"]
 
 [project.urls]
 Homepage = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
@@ -56,7 +56,7 @@ ace-market-public-product-source = { path = "adapters/public_product_source", ed
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["domain_packs/tests", "tests", "adapters/public_product_source/tests"]
+testpaths = ["domain_packs/tests", "tests", "adapters/public_product_source/tests", "adapters/market_builder/tests"]
 pythonpath = [".", "domain_packs/tests"]
 norecursedirs = [".*", "build", "dist", "*.egg-info"]
 markers = ["unit: hermetic unit test"]

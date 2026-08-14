@@ -59,7 +59,7 @@ wheels = [
 
 [[package]]
 name = "ace-domain-market-intelligence"
-version = "0.7.0"
+version = "0.8.0"
 source = { editable = "." }
 dependencies = [
     { name = "ace-core" },
@@ -79,7 +79,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.8.3,<0.9" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.8.3,<1.1" }]
 
 [package.metadata.requires-dev]
 dev = [

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ace-app-market-intelligence-builder"
+version = "0.1.0"
+description = "Trusted recorded Market Intelligence Builder planner and executor for ACE"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+dependencies = [
+  "ace-core>=0.9,<1.1",
+  "ace-domain-market-intelligence>=0.8,<1",
+]
+
+[project.urls]
+Repository = "https://github.com/augmented-cognition-engine/domain-market-intelligence"
+Issues = "https://github.com/augmented-cognition-engine/domain-market-intelligence/issues"
+
+[project.entry-points."ace.intelligence_builders"]
+market_intelligence_command_center = "ace_market_builder:MarketIntelligenceBuilderExecutor"
+
+[project.entry-points."ace.intelligence_build_planners"]
+market_intelligence_command_center = "ace_market_builder:MarketIntelligenceBuilderPlanner"
+
+[dependency-groups]
+dev = ["build>=1.2", "pytest>=8", "pytest-asyncio>=0.24", "ruff>=0.12", "setuptools>=69", "twine>=5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ace_market_builder*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120

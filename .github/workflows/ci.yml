@@ -14,9 +14,9 @@ concurrency:
 
 env:
   UV_PYTHON: "3.12"
-  ROOT_WHEEL: "ace_domain_market_intelligence-0.7.0-py3-none-any.whl"
-  ROOT_SDIST: "ace_domain_market_intelligence-0.7.0.tar.gz"
-  PYTHONPATH: "${{ github.workspace }}:${{ github.workspace }}/adapters/public_product_source/src"
+  ROOT_WHEEL: "ace_domain_market_intelligence-0.8.0-py3-none-any.whl"
+  ROOT_SDIST: "ace_domain_market_intelligence-0.8.0.tar.gz"
+  PYTHONPATH: "${{ github.workspace }}/ace-core-source:${{ github.workspace }}:${{ github.workspace }}/adapters/public_product_source/src:${{ github.workspace }}/adapters/market_builder/src"
 
 jobs:
   release-readiness:
@@ -24,6 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: augmented-cognition-engine/core
+          path: ace-core-source
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -35,10 +39,10 @@ jobs:
         run: uv sync --frozen --no-install-project
 
       - name: Lint focused release tests
-        run: uv run --no-sync ruff check --no-cache tests scripts/gc1_external_consumer.py
+        run: uv run --no-sync ruff check --no-cache tests scripts/gc1_external_consumer.py adapters/market_builder/src adapters/market_builder/tests
 
       - name: Check focused release-test formatting
-        run: uv run --no-sync ruff format --check --no-cache tests scripts/gc1_external_consumer.py
+        run: uv run --no-sync ruff format --check --no-cache tests scripts/gc1_external_consumer.py adapters/market_builder/src adapters/market_builder/tests
 
       - name: Run all pack, connector, release, and GI2 tests
         run: uv run --no-sync pytest
@@ -78,7 +82,7 @@ jobs:
           from packaging.utils import canonicalize_name
 
           wheel_path = Path("dist") / os.environ["ROOT_WHEEL"]
-          dist_info = "ace_domain_market_intelligence-0.7.0.dist-info/"
+          dist_info = "ace_domain_market_intelligence-0.8.0.dist-info/"
           with zipfile.ZipFile(wheel_path) as wheel:
               names = sorted(wheel.namelist())
               metadata = message_from_string(
@@ -97,13 +101,13 @@ jobs:
           assert not [name for name in names if name.endswith((".py", ".pyc", ".so", ".pyd"))]
           assert not [name for name in names if name.startswith(("scripts/", "adapters/"))]
           assert metadata["Name"] == "ace-domain-market-intelligence"
-          assert metadata["Version"] == "0.7.0"
+          assert metadata["Version"] == "0.8.0"
           assert SpecifierSet(metadata["Requires-Python"]) == SpecifierSet(">=3.12,<3.13")
           requirements = metadata.get_all("Requires-Dist") or []
           assert len(requirements) == 1, requirements
           requirement = Requirement(requirements[0])
           assert canonicalize_name(requirement.name) == "ace-core"
-          assert requirement.specifier == SpecifierSet(">=0.8.3,<0.9")
+          assert requirement.specifier == SpecifierSet(">=0.8.3,<1.1")
           print("inspected", wheel_path.name, "with", len(payload), "JSON resources")
           PY
 
@@ -128,7 +132,7 @@ jobs:
           from importlib.resources import files
 
           assert metadata.version("ace-core") == "0.8.3"
-          assert metadata.version("ace-domain-market-intelligence") == "0.7.0"
+          assert metadata.version("ace-domain-market-intelligence") == "0.8.0"
           assert metadata.version("ace-domain-world-intelligence") == "0.12.0"
           assert json.loads(
               files("domain_packs.market_intelligence").joinpath("manifest.json").read_text()
