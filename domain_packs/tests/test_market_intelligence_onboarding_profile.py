@@ -21,13 +21,16 @@ def test_market_intelligence_onboarding_profile_is_domain_owned_and_non_authoriz
         "marketing_performance",
         "narrative_and_messaging",
     }
-    assert len(profile["source_groups"]) == 5
-    private = next(
-        group
-        for group in profile["source_groups"]
-        if group["evidence_role"] == "private_organizational"
-    )
-    assert private["default_selected"] is False
-    assert private["access_label"] == "Private · permission required"
+    assert [item["source_group_id"] for item in profile["source_groups"]] == [
+        "competitor_public_evidence"
+    ]
+    supported = profile["source_groups"][0]
+    assert supported["source_ids"] == [
+        "openai_gpt_5_6_launch",
+        "openai_gpt_5_6_price_performance",
+    ]
+    assert supported["default_selected"] is True
+    assert supported["access_label"] == "Public · no credentials"
     assert profile["guardrails"]["authorizes_connections"] is False
     assert profile["guardrails"]["authorizes_monitors"] is False
+    assert profile["guardrails"]["proposed_sources_are_not_connected"] is True

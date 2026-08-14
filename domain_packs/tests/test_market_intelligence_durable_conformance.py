@@ -72,8 +72,8 @@ DURABLE_EXPECTED_PATH = (
     PACK_ROOT / "conformance" / "p1c_durable_price_move_expected.json"
 )
 DERIVATION_KEY = "derivation:market-intelligence:p1c:prepared-price-move:v1"
-ATTENTION_EVALUATED_AT = "2026-02-15T12:04:00Z"
-HISTORICAL_CUTOFF = "2026-02-15T12:00:59Z"
+ATTENTION_EVALUATED_AT = "2026-08-13T18:06:00Z"
+HISTORICAL_CUTOFF = "2026-08-13T18:00:59Z"
 EXACT_CORE_WHEEL_SHA256 = (
     "07f5134488f7de16800aae290bb05284fdffe8fb679353b0b3f9771630ad302c"
 )
@@ -214,7 +214,6 @@ def _manual_p1b_brief(
     context: dict[str, Any],
 ) -> BriefV1Alpha1:
     observations = context["observations"]
-    snapshots = context["entity_snapshots"]
     shift = context["shift"]
     signal = context["signal"]
     synthesis_ir = next(
@@ -246,7 +245,7 @@ def _manual_p1b_brief(
         product_id=fixture["scenario"]["product_id"],
         mode=IntelligenceResourceMode.PREPARED,
         activation_revision=binding.reference,
-        as_of=snapshots[1].as_of,
+        as_of=_parse_time(fixture["scenario"]["brief_as_of"]),
         lineage=(
             LineageReferenceV1Alpha1(
                 resource_kind=LineageResourceKind.SHIFT,

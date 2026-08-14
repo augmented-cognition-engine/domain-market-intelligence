@@ -1,0 +1,44 @@
+{
+  "contract": "ace.market-intelligence.recorded-source-inventory/v1alpha1",
+  "inventory_id": "openai_terra_price_progression",
+  "inventory_version": "0.8.0",
+  "source_group_id": "competitor_public_evidence",
+  "mapping_id": "product_price_snapshot",
+  "subject_binding": {
+    "subject_binding_id": "listed_product",
+    "entity_type_id": "product",
+    "entity_ref": "product:gpt-5-6-terra-input-tokens"
+  },
+  "source_definition_ref": "source_definition:openai-gpt-5-6-terra-pricing",
+  "source_type_ref": "public_product_page",
+  "materials": [
+    {
+      "material_key": "openai_gpt_5_6_launch_terra_input_price",
+      "source_uri": "https://openai.com/index/gpt-5-6/",
+      "captured_payload_json": "{\"currency\":\"USD\",\"listed_price\":\"2.50\",\"product_name\":\"GPT-5.6 Terra input tokens per 1M\"}",
+      "captured_payload_digest": "sha256:44caaf4fd6e9483c5dcdc853b8267dbc14f0e64676600354424ad54c1d8ae2c4",
+      "source_published_at": "2026-07-09T00:00:00Z",
+      "event_effective_at": "2026-07-09T00:00:00Z",
+      "observed_at": "2026-08-13T18:00:00Z",
+      "locator": "section:availability-and-pricing#terra",
+      "reviewed_claim": "The GPT-5.6 launch publication states Terra pricing of USD 2.50 input and USD 15 output per 1 million tokens."
+    },
+    {
+      "material_key": "openai_gpt_5_6_price_performance_terra_input_price",
+      "source_uri": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/",
+      "captured_payload_json": "{\"currency\":\"USD\",\"listed_price\":\"2.00\",\"product_name\":\"GPT-5.6 Terra input tokens per 1M\"}",
+      "captured_payload_digest": "sha256:40a75b55a2571fac73afc0aebe90545222183c43d81527184f1909210663b892",
+      "source_published_at": "2026-07-30T00:00:00Z",
+      "event_effective_at": "2026-07-30T00:00:00Z",
+      "observed_at": "2026-08-13T18:01:00Z",
+      "locator": "section:availability-and-pricing#terra",
+      "reviewed_claim": "The July 30 price-performance publication states Terra pricing of USD 2 input and USD 12 output per 1 million tokens starting July 30, and describes Terra as 20% less expensive."
+    }
+  ],
+  "limitations": [
+    "These are reviewed recorded materials for deterministic replay, not proof of a current network response or current pricing.",
+    "The publication dates are normalized day-level semantic coordinates because the pages disclose dates but not exact publication instants.",
+    "The root Domain Pack does not construct runtime activation-bound RecordedSourceMaterial identities or grant source access.",
+    "The separately packaged public-product adapter requires exact application/json and does not capture or extract these official HTML pages without a future reviewed transport/extraction contract."
+  ]
+}

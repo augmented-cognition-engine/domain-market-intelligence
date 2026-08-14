@@ -52,6 +52,15 @@ EXPECTED_PATH = (
     / "p1f_live_bridge_expected.json"
 )
 CONFORMANCE_ROOT = EXPECTED_PATH.parent
+COMPATIBILITY_ROOT = (
+    REPO_ROOT
+    / "domain_packs"
+    / "market_intelligence"
+    / "conformance"
+    / "compatibility"
+    / "core_0_8_3"
+)
+COMPATIBILITY_EXPECTED_PATH = COMPATIBILITY_ROOT / "p1f_live_bridge_expected.json"
 
 
 def _acceptance_module():
@@ -71,7 +80,9 @@ def _acceptance_module():
 
 
 def test_p1f_manifest_pins_its_inert_conformance_packet() -> None:
-    manifest = json.loads((CONFORMANCE_ROOT / "p1f_live_bridge_manifest.json").read_text(encoding="utf-8"))
+    manifest = json.loads(
+        (CONFORMANCE_ROOT / "p1f_live_bridge_manifest.json").read_text(encoding="utf-8")
+    )
     assert manifest["packet"] == "P1F"
     assert manifest["domain_pack_dependency"]["pack_version"] == "0.3.0"
     assert manifest["negative_case_count"] == 4
@@ -92,21 +103,23 @@ def test_p1f_manifest_pins_its_inert_conformance_packet() -> None:
 async def test_live_source_to_governed_brief_matches_exact_expected() -> None:
     acceptance = _acceptance_module()
     projection, result = await acceptance.run_acceptance()
-    expected = json.loads(EXPECTED_PATH.read_text(encoding="utf-8"))["expected"]
+    expected = json.loads(COMPATIBILITY_EXPECTED_PATH.read_text(encoding="utf-8"))["expected"]
 
     assert projection == expected
     assert projection["mode"] == IntelligenceResourceMode.LIVE.value
     assert projection["delivery_authority"] is False
     assert projection["external_actions"] == []
     assert projection["provider_calls"] == 1
-    assert len(result.source_environment.immutable_store.records) > projection["source_record_count"]
+    assert (
+        len(result.source_environment.immutable_store.records) > projection["source_record_count"]
+    )
 
 
 @pytest.mark.asyncio
 async def test_live_bridge_negative_matrix_is_exercised_exactly() -> None:
     acceptance = _acceptance_module()
     exercised = await acceptance.run_negative_cases()
-    negative_path = EXPECTED_PATH.with_name("p1f_live_bridge_negative_cases.json")
+    negative_path = COMPATIBILITY_ROOT / "p1f_live_bridge_negative_cases.json"
     declared = json.loads(negative_path.read_text(encoding="utf-8"))["cases"]
 
     assert exercised == tuple(sorted(item["case_id"] for item in declared))

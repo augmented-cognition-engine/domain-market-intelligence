@@ -1,0 +1,35 @@
+{
+  "contract": "ace.intelligence.domain-pack-golden-fixture/v1",
+  "fixture_id": "market_intelligence_activation",
+  "fixture_version": "0.8.0",
+  "observations": [
+    {
+      "case_id": "terra_input_price_reduction",
+      "entity_type_id": "product",
+      "entity_ref": "product:gpt-5-6-terra-input-tokens",
+      "baseline_attributes_json": "{\"currency\":\"USD\",\"name\":\"GPT-5.6 Terra input tokens per 1M\",\"price\":2.5}",
+      "current_attributes_json": "{\"currency\":\"USD\",\"name\":\"GPT-5.6 Terra input tokens per 1M\",\"price\":2.0}",
+      "baseline_as_of": "2026-07-09T00:00:00Z",
+      "current_as_of": "2026-07-30T00:00:00Z",
+      "confidence": 1.0,
+      "expected": [
+        {
+          "detector_id": "product_price_move",
+          "entity_ref": "product:gpt-5-6-terra-input-tokens",
+          "material": true,
+          "shift_type": "price_move",
+          "signal_type": "competitive_price_move",
+          "routing_rule_ids": [
+            "route_competitive_price_move"
+          ],
+          "persona_ids": [
+            "competitive_intelligence_analyst"
+          ],
+          "template_ids": [
+            "competitive_price_move_brief"
+          ]
+        }
+      ]
+    }
+  ]
+}

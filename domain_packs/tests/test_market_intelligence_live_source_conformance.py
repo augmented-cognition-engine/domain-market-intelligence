@@ -61,6 +61,7 @@ from ace_market_public_product_source import (  # noqa: E402  (guarded by import
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PACK_ROOT = REPO_ROOT / "domain_packs" / "market_intelligence"
 CONFORMANCE_ROOT = PACK_ROOT / "conformance"
+HISTORICAL_CONFORMANCE_ROOT = PACK_ROOT / "releases" / "v0_3_0" / "conformance"
 HARNESS = runpy.run_path(
     str(REPO_ROOT / "scripts" / "p1c2_live_public_source_acceptance.py"),
     run_name="market_p1c2_live_harness",
@@ -99,9 +100,7 @@ def _advanced(head: GovernedStateHeadV1, suffix: str) -> GovernedStateHeadV1:
     )
 
 
-def _new_request(
-    environment, *, actor_ref=None, product_id=None, source_definition_ref=None
-):
+def _new_request(environment, *, actor_ref=None, product_id=None, source_definition_ref=None):
     original = environment.request
     selected_product = product_id or original.product_id
     context = AuthenticatedRuntimeContextV1Alpha1(
@@ -131,12 +130,12 @@ def _assert_no_live_residue(environment) -> None:
 
 
 @pytest.mark.asyncio
-async def test_exact_golden_replay_and_later_state_independent_historical_replay() -> (
-    None
-):
+async def test_exact_golden_replay_and_later_state_independent_historical_replay() -> None:
     projection, (environment, conformance) = await run_acceptance()
 
-    assert projection == load_fixture("p1c2_live_expected.json")["expected"]
+    assert (
+        projection == HARNESS["load_compatibility_fixture"]("p1c2_live_expected.json")["expected"]
+    )
     assert conformance.first.replayed is False
     assert conformance.exact_replay.replayed is True
     assert conformance.restarted_replay.replayed is True
@@ -153,9 +152,7 @@ async def test_exact_golden_replay_and_later_state_independent_historical_replay
     environment.runtime_use.capability_head = _advanced(
         environment.runtime_use.capability_head, "later"
     )
-    environment.runtime_use.grant_head = _advanced(
-        environment.runtime_use.grant_head, "later"
-    )
+    environment.runtime_use.grant_head = _advanced(environment.runtime_use.grant_head, "later")
     environment.activation_store.heads.clear()
     environment.source_definitions.definition = (
         environment.source_definitions.definition.model_copy(
@@ -181,9 +178,7 @@ async def test_exact_golden_replay_and_later_state_independent_historical_replay
     "source_definition_changed_during_capture",
 )
 @pytest.mark.asyncio
-@pytest.mark.parametrize(
-    "changed", ["activation", "capability", "grant", "source_definition"]
-)
+@pytest.mark.parametrize("changed", ["activation", "capability", "grant", "source_definition"])
 async def test_governed_head_change_during_capture_is_atomic(changed: str) -> None:
     environment = await build_environment()
 
@@ -233,9 +228,7 @@ async def test_governed_head_change_during_capture_is_atomic(changed: str) -> No
             environment.immutable_store.set_governed_state_head(new_head)
 
     environment.transport.on_retrieve = mutate
-    with pytest.raises(
-        LiveSourceIngressError, match="governed runtime material changed"
-    ):
+    with pytest.raises(LiveSourceIngressError, match="governed runtime material changed"):
         await environment.service().admit(
             request=environment.request,
             pack=environment.pack,
@@ -257,9 +250,7 @@ async def test_governed_head_change_during_capture_is_atomic(changed: str) -> No
         ("artifact_digest", "sha256:" + "e" * 64),
     ],
 )
-async def test_registry_artifact_mismatch_rejects_before_invocation(
-    field, value
-) -> None:
+async def test_registry_artifact_mismatch_rejects_before_invocation(field, value) -> None:
     environment = await build_environment()
     expected = environment.adapter.artifact_identity
     payload = expected.model_dump(mode="python")
@@ -280,12 +271,8 @@ async def test_registry_artifact_mismatch_rejects_before_invocation(
         adapter=candidate,
         return_unconditionally=True,
     )
-    with pytest.raises(
-        LiveSourceIngressError, match="different source adapter artifact"
-    ):
-        await environment.service().admit(
-            request=environment.request, pack=environment.pack
-        )
+    with pytest.raises(LiveSourceIngressError, match="different source adapter artifact"):
+        await environment.service().admit(request=environment.request, pack=environment.pack)
     assert candidate.calls == 0
     _assert_no_live_residue(environment)
 
@@ -436,17 +423,11 @@ async def test_closed_uri_policy_rejects_before_capture(uri: str) -> None:
         ),
     ],
 )
-async def test_untrusted_transport_result_fails_closed_without_residue(
-    changes, pattern
-) -> None:
+async def test_untrusted_transport_result_fails_closed_without_residue(changes, pattern) -> None:
     environment = await build_environment()
     environment.transport.result = replace(environment.transport.result, **changes)
-    with pytest.raises(
-        LiveSourceIngressError, match="source adapter capture failed closed"
-    ) as exc:
-        await environment.service().admit(
-            request=environment.request, pack=environment.pack
-        )
+    with pytest.raises(LiveSourceIngressError, match="source adapter capture failed closed") as exc:
+        await environment.service().admit(request=environment.request, pack=environment.pack)
     assert isinstance(exc.value.__cause__, PublicProductSourceAdapterError)
     assert pattern in str(exc.value.__cause__)
     _assert_no_live_residue(environment)
@@ -470,18 +451,12 @@ async def test_untrusted_transport_result_fails_closed_without_residue(
         ),
     ],
 )
-async def test_impossible_capture_ordering_fails_closed_without_residue(
-    changes, case_id
-) -> None:
+async def test_impossible_capture_ordering_fails_closed_without_residue(changes, case_id) -> None:
     del case_id
     environment = await build_environment()
     environment.transport.result = replace(environment.transport.result, **changes)
-    with pytest.raises(
-        LiveSourceIngressError, match="source adapter capture failed closed"
-    ) as exc:
-        await environment.service().admit(
-            request=environment.request, pack=environment.pack
-        )
+    with pytest.raises(LiveSourceIngressError, match="source adapter capture failed closed") as exc:
+        await environment.service().admit(request=environment.request, pack=environment.pack)
     assert isinstance(exc.value.__cause__, PublicProductSourceAdapterError)
     assert "observation/capture times" in str(exc.value.__cause__)
     _assert_no_live_residue(environment)
@@ -489,9 +464,7 @@ async def test_impossible_capture_ordering_fails_closed_without_residue(
 
 @exercises_negative_cases("grant_expires_during_capture")
 @pytest.mark.asyncio
-async def test_grant_expiring_during_capture_fails_before_recheck_without_residue() -> (
-    None
-):
+async def test_grant_expiring_during_capture_fails_before_recheck_without_residue() -> None:
     environment = await build_environment()
     environment.runtime_use.grant_expires_at = _time(
         environment.fixture["scenario"]["rechecked_at"]
@@ -500,9 +473,7 @@ async def test_grant_expiring_during_capture_fails_before_recheck_without_residu
         LiveSourceIngressError,
         match="authority grant expired before source admission recheck",
     ):
-        await environment.service().admit(
-            request=environment.request, pack=environment.pack
-        )
+        await environment.service().admit(request=environment.request, pack=environment.pack)
     assert environment.adapter.capture_calls == environment.transport.calls == 1
     _assert_no_live_residue(environment)
 
@@ -514,16 +485,13 @@ async def test_unfaithful_decimal_text_fails_in_live_mapping_without_residue() -
     environment.transport.result = replace(
         environment.transport.result,
         response_body=(
-            '{"product_name":"Edge X1","listed_price":"9007199254740993",'
-            '"currency":"USD"}'
+            '{"product_name":"Edge X1","listed_price":"9007199254740993","currency":"USD"}'
         ),
     )
     with pytest.raises(
         LiveSourceMappingError, match="LIVE source mapping validation failed closed"
     ) as exc:
-        await environment.service().admit(
-            request=environment.request, pack=environment.pack
-        )
+        await environment.service().admit(request=environment.request, pack=environment.pack)
     assert "not faithfully representable as a JSON number" in str(exc.value.__cause__)
     assert environment.adapter.capture_calls == environment.transport.calls == 1
     _assert_no_live_residue(environment)
@@ -533,9 +501,7 @@ async def test_unfaithful_decimal_text_fails_in_live_mapping_without_residue() -
 @pytest.mark.asyncio
 async def test_forged_request_and_forged_result_fail_closed() -> None:
     environment = await build_environment()
-    forged_request = environment.request.model_copy(
-        update={"request_digest": "sha256:" + "e" * 64}
-    )
+    forged_request = environment.request.model_copy(update={"request_digest": "sha256:" + "e" * 64})
     with pytest.raises(LiveSourceIngressError, match="revalidation"):
         await environment.service().admit(request=forged_request, pack=environment.pack)
     assert environment.adapter.capture_calls == 0
@@ -548,17 +514,11 @@ async def test_forged_request_and_forged_result_fail_closed() -> None:
 
         async def capture(self, request):
             captured = await real_adapter.capture(request)
-            return captured.model_copy(
-                update={"capture_request_digest": "sha256:" + "f" * 64}
-            )
+            return captured.model_copy(update={"capture_request_digest": "sha256:" + "f" * 64})
 
     environment.registry.adapter = ForgedResultAdapter()
-    with pytest.raises(
-        LiveSourceIngressError, match="result failed exact revalidation"
-    ):
-        await environment.service().admit(
-            request=environment.request, pack=environment.pack
-        )
+    with pytest.raises(LiveSourceIngressError, match="result failed exact revalidation"):
+        await environment.service().admit(request=environment.request, pack=environment.pack)
     _assert_no_live_residue(environment)
 
 
@@ -599,8 +559,7 @@ async def test_prepared_snapshot_is_rejected_by_live_mapper() -> None:
         source_type_ref=fixture["scenario"]["source_type_ref"],
         source_uri=fixture["transport_fixture"]["requested_uri"],
         captured_payload_json=payload_json,
-        captured_payload_digest="sha256:"
-        + hashlib.sha256(payload_json.encode()).hexdigest(),
+        captured_payload_digest="sha256:" + hashlib.sha256(payload_json.encode()).hexdigest(),
         observed_at=_time(fixture["scenario"]["observed_at"]),
         ingested_at=_time(fixture["scenario"]["rechecked_at"]),
         acquisition_mode=SourceAcquisitionMode.PREPARED_FIXTURE,
@@ -663,9 +622,7 @@ async def test_changed_intent_conflicts_and_cross_product_replay_is_denied() -> 
 async def test_persistence_interruption_leaves_no_records_or_receipt() -> None:
     environment = await build_environment(fail_after_records=3)
     with pytest.raises(ImmutableRecordPersistenceError, match="simulated interruption"):
-        await environment.service().admit(
-            request=environment.request, pack=environment.pack
-        )
+        await environment.service().admit(request=environment.request, pack=environment.pack)
     _assert_no_live_residue(environment)
 
 
@@ -673,19 +630,14 @@ async def test_persistence_interruption_leaves_no_records_or_receipt() -> None:
 async def test_prepared_and_live_record_spaces_and_counts_remain_isolated() -> None:
     p1c1 = runpy.run_path(
         str(
-            REPO_ROOT
-            / "domain_packs"
-            / "tests"
-            / "test_market_intelligence_durable_conformance.py"
+            REPO_ROOT / "domain_packs" / "tests" / "test_market_intelligence_durable_conformance.py"
         ),
         run_name="market_p1c1_durable_harness",
     )
     compiled = p1c1["_compiled_pack"]()
     prepared_fixture = p1c1["_load_json"](p1c1["PRICE_MOVE_FIXTURE_PATH"])
     boundary = p1c1["_load_json"](p1c1["PUBLIC_SOURCE_BOUNDARY_PATH"])
-    prepared, binding, _ = await p1c1["_committed_binding"](
-        compiled, prepared_fixture, boundary
-    )
+    prepared, binding, _ = await p1c1["_committed_binding"](compiled, prepared_fixture, boundary)
     derivation = p1c1["_prepared_derivation"](
         binding=prepared,
         compiled=compiled,
@@ -695,13 +647,9 @@ async def test_prepared_and_live_record_spaces_and_counts_remain_isolated() -> N
     shared = InMemoryImmutableRecordStore()
     await PreparedIntelligenceLedgerService(binding=binding, store=shared).admit(batch)
     environment = await build_environment(immutable_store=shared)
-    await environment.service().admit(
-        request=environment.request, pack=environment.pack
-    )
+    await environment.service().admit(request=environment.request, pack=environment.pack)
 
-    prepared_records = [
-        r for r in shared.records.values() if r.record_space == "prepared"
-    ]
+    prepared_records = [r for r in shared.records.values() if r.record_space == "prepared"]
     live_records = [r for r in shared.records.values() if r.record_space == "live"]
     assert len(prepared_records) == 8
     assert len(live_records) == 5
@@ -729,9 +677,7 @@ def test_artifact_bound_cli_verifies_clean_install_and_rejects_tampered_record_m
         any(value is None for value in configured.values())
         or os.environ.get("ACE_P1C2_DISPOSABLE_INSTALL") != "1"
     ):
-        pytest.skip(
-            "exact-wheel test requires the disposable installed-wheel bootstrap"
-        )
+        pytest.skip("exact-wheel test requires the disposable installed-wheel bootstrap")
 
     command = [
         sys.executable,
@@ -757,9 +703,7 @@ def test_artifact_bound_cli_verifies_clean_install_and_rejects_tampered_record_m
     assert accepted.returncode == 0, accepted.stderr
     verification = json.loads(accepted.stdout)["artifact_verification"]
     assert verification["core"]["wheel_sha256"] == HARNESS["EXACT_CORE_WHEEL_SHA256"]
-    assert (
-        verification["adapter"]["wheel_sha256"] == HARNESS["EXACT_ADAPTER_WHEEL_SHA256"]
-    )
+    assert verification["adapter"]["wheel_sha256"] == HARNESS["EXACT_ADAPTER_WHEEL_SHA256"]
     for artifact in verification.values():
         assert artifact["installed_archive_sha256"] == artifact["wheel_sha256"]
 
@@ -772,9 +716,7 @@ def test_artifact_bound_cli_verifies_clean_install_and_rejects_tampered_record_m
     installed_member = Path(distribution.locate_file(owned)).resolve()
     original = installed_member.read_bytes()
     try:
-        installed_member.write_bytes(
-            original + b"\n# deliberate installed-byte tamper\n"
-        )
+        installed_member.write_bytes(original + b"\n# deliberate installed-byte tamper\n")
         rejected = subprocess.run(
             command,
             cwd=tmp_path,
@@ -789,20 +731,18 @@ def test_artifact_bound_cli_verifies_clean_install_and_rejects_tampered_record_m
     assert "installed bytes do not match the RECORD hash" in rejected.stderr
 
 
-def test_frozen_p1c1_bytes_and_live_conformance_inventory_are_exact() -> None:
-    frozen = {
-        "manifest.json": "82719602adf0ddd47ab1d7e80e9806c94c9c329705acc61c283796d79bcbd46d",
-        "modules/source_mapping.json": "acebb1a048ca284c9d7d902e4c1a3af9ea02567f13836685382a02047e7ee293",
-        "conformance/manifest.json": "bf65b0d44622c33411bc2911bd765095e20c38db3aa3564652391aedf0889ced",
-        "conformance/public_product_price_boundary.json": "dfc0a63eaaebca857c46da62080ae14f5d46793d808fe0296d66c951c55bdff5",
-        "conformance/p1_price_move_golden.json": "5d04afed27b785f35cbd29083d566bb84770a2fbdf4a44837ea196e432dd1cdf",
-        "conformance/p1_price_move_negative_cases.json": "39003bb393dc94bf2737b7568993577a0e9b55a4efc7981922270350a2e8095c",
-        "conformance/p1c_durable_price_move_expected.json": "735fe7aa0dc1678daa3dec3d052317452314b075c45ef24b88d8d409d131b6b7",
+def test_current_pack_bytes_and_historical_live_inventory_are_exact() -> None:
+    current = {
+        "manifest.json": "e03e539b3bcc1035c63cd18caee2ac5f4af171d4d3815e1d967a7c8b81444eb0",
+        "modules/source_mapping.json": "da3f720be7e351a3b3f2ad373c00f74a757bcf1bd83b51e0c6c2157d4575c163",
+        "conformance/manifest.json": "c20efd4aade4872690e9ad8852cefa3295015c90918dcd8cbc54a2bda3e3d1e9",
+        "conformance/public_product_price_boundary.json": "83f21b052092ee1673d52726a4f94fd710edfbac1d2c4aa68e20bbcdad241bc2",
+        "conformance/p1_price_move_golden.json": "d8df38acf6b018d132f589388dcb891a3f35ceff5ba80c4b32de5550c9520854",
+        "conformance/p1_price_move_negative_cases.json": "75b80e46d839aae6fa964c406cec66267874231e1a21aca00df15d49814b668b",
+        "conformance/p1c_durable_price_move_expected.json": "3caf0373942a94e805ec6461aea092754ab8b89efc939fefded236f528575331",
     }
-    for relative, expected in frozen.items():
-        assert (
-            hashlib.sha256((PACK_ROOT / relative).read_bytes()).hexdigest() == expected
-        )
+    for relative, expected in current.items():
+        assert hashlib.sha256((PACK_ROOT / relative).read_bytes()).hexdigest() == expected
 
     live_manifest = load_fixture("p1c2_live_manifest.json")
     expected_live_files = {
@@ -812,14 +752,14 @@ def test_frozen_p1c1_bytes_and_live_conformance_inventory_are_exact() -> None:
         "p1c2_live_expected.json",
     }
     assert {
-        path.name for path in CONFORMANCE_ROOT.glob("p1c2_live_*.json")
+        path.name for path in HISTORICAL_CONFORMANCE_ROOT.glob("p1c2_live_*.json")
     } == expected_live_files
     assert {item["path"] for item in live_manifest["artifacts"]} == {
         path for path in expected_live_files if path != "p1c2_live_manifest.json"
     }
     for item in live_manifest["artifacts"]:
         actual = hashlib.sha256(
-            (CONFORMANCE_ROOT / item["path"]).read_bytes()
+            (HISTORICAL_CONFORMANCE_ROOT / item["path"]).read_bytes()
         ).hexdigest()
         assert item["digest"] == f"sha256:{actual}"
     negative = load_fixture("p1c2_live_source_negative_cases.json")

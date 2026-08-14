@@ -1,0 +1,132 @@
+{
+  "contract": "ace.market-intelligence.p1e-governed-feedback-expected/v1",
+  "expected": {
+    "activation_revision_4": {
+      "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
+      "commit_receipt_hash": "058a5f0ae41b788ed18ece52edac6cb6617c9e7d3f63fa0269317007d4b545e0",
+      "commit_receipt_id": "governed_state_commit:058a5f0ae41b788ed18ece52edac6cb6",
+      "prior_revision_id": "activation_revision:7cc5b971eaa98e5effcb32bb6eb54382",
+      "revision_hash": "a1b0d2c58860bbeb12c655c0e29fba112e9d6e25365692e14aa628abed80e662",
+      "revision_id": "activation_revision:a1b0d2c58860bbeb12c655c0e29fba11"
+    },
+    "decision": {
+      "authorization_receipt_id": "governed_action_authorization:cd447dff2b3c6f35aa451c52807f923c",
+      "decision_digest": "sha256:b6fbe9017e7c663f44d44dba8e42a994e2b9d457bb5e0de5243f58417fb589c4",
+      "decision_id": "decision:b6fbe9017e7c663f44d44dba8e42a994",
+      "exact_replay": true,
+      "explicit_no_action": true,
+      "intent_id": "decision_intent:f471e281a41428d2e07d990644ae8440",
+      "record_material_hash": "sha256:ab834d53426ee40a1f48ef24025ce049f014a2f6966536bdac542b34ee9dcbaa",
+      "record_storage_id": "immutable_record:69bdcab6570ba2c83277182064d9714f",
+      "transaction_id": "append_only_transaction:1dbc048187cb99cbb2f9e934999ccc79",
+      "transaction_receipt_id": "append_only_receipt:1dbc048187cb99cbb2f9e934999ccc79"
+    },
+    "feedback_proposal": {
+      "adjustment": 0.05,
+      "authorization_receipt_id": "governed_action_authorization:0e8e6629973f3a3e26820a6448c6f4ea",
+      "exact_replay": true,
+      "intent_id": "feedback_proposal_intent:d2f882bc77ffd997b6fe63884b28fda6",
+      "policy_digest": "sha256:fd7cbda46f4c380de1f08e6b4bae9525b395eb46f01520b7786760166d1be57b",
+      "policy_id": "competitive_price_move_usefulness",
+      "prior_value": 0.5,
+      "proposal_digest": "sha256:ef647017c9064d85db4ef41f91f50ec0d8ebd9733cf37200b7420e19130a2ec7",
+      "proposal_id": "feedback_proposal:ef647017c9064d85db4ef41f91f50ec0",
+      "proposed_value": 0.55,
+      "record_material_hash": "sha256:fb0b3f9955da9a2bbaa5236089c3f110383ca47505bf86d004026924555cd2ae",
+      "record_storage_id": "immutable_record:5b1db4aba601b621647d5588ee3655d5",
+      "transaction_id": "append_only_transaction:ce75d93db840e36d12fb82485763b8ea",
+      "transaction_receipt_id": "append_only_receipt:ce75d93db840e36d12fb82485763b8ea"
+    },
+    "governed_feedback": {
+      "approval_subject_ref": "feedback_proposal:ef647017c9064d85db4ef41f91f50ec0",
+      "commit_receipt_hash": "f18bacf3d84b456cc210a9e4d4b1199908e22efe5e3203428b05c523ab4c0939",
+      "commit_receipt_id": "governed_state_commit:f18bacf3d84b456cc210a9e4d4b11999",
+      "exact_replay": true,
+      "fresh_service_live_effect": false,
+      "fresh_service_revision_id": "feedback_policy_revision:db6251d050f12ecf9f330057338e3f81",
+      "fresh_service_value": 0.55,
+      "revision_digest": "sha256:db6251d050f12ecf9f330057338e3f81261d7a270b096102b264d1df6df41b64",
+      "revision_id": "feedback_policy_revision:db6251d050f12ecf9f330057338e3f81",
+      "sequence": 1,
+      "source_proposal_storage_id": "immutable_record:5b1db4aba601b621647d5588ee3655d5",
+      "state_id": "feedback_policy:95d871b225970e45a0954f18e21f3c3c",
+      "value": 0.55
+    },
+    "invariants": {
+      "delivery_authority": false,
+      "external_action_executed": false,
+      "live_counts": {
+        "decision": 0,
+        "feedback_proposal": 0,
+        "outcome": 0
+      },
+      "p1d1_compatibility_brief_exact": true,
+      "prepared_feedback_only": true,
+      "prepared_record_kind_counts": {
+        "action_authorization": 4,
+        "attention_disposition": 2,
+        "authority_use": 5,
+        "brief": 2,
+        "brief_synthesis_receipt": 1,
+        "capability_use": 5,
+        "context_use": 6,
+        "decision": 1,
+        "entity_snapshot": 4,
+        "feedback_proposal": 1,
+        "observation": 4,
+        "outcome": 1,
+        "request_acceptance": 1,
+        "shift": 2,
+        "signal": 2,
+        "structured_result": 1,
+        "terminal_receipt": 1
+      },
+      "provider_calls": 0
+    },
+    "outcome": {
+      "authorization_receipt_id": "governed_action_authorization:50b77f71295b7a02d764a6ca1e6c833d",
+      "exact_replay": true,
+      "intent_id": "outcome_intent:c6ce7b0d0d8af30fda1a6814826aa793",
+      "outcome_digest": "sha256:cc30f65bb935737db9ace67615a09484158d5863ddb854ca3067bc3b321a0b40",
+      "outcome_id": "outcome:cc30f65bb935737db9ace67615a09484",
+      "record_material_hash": "sha256:e06aede9a6ae0ab20b362f7cb8e09c1e5a9c404f722dd06a036cffbac7e655ad",
+      "record_storage_id": "immutable_record:4c83a76480e3478b9da305f08bf0afa5",
+      "transaction_id": "append_only_transaction:3ec56f5a4517daf5968e481578f764bb",
+      "transaction_receipt_id": "append_only_receipt:3ec56f5a4517daf5968e481578f764bb"
+    },
+    "pack": {
+      "compiled_pack_id": "pack_ir:0d967de698cd10fc06b91d2a4559ec9f",
+      "decision_outcomes_module_digest": "sha256:02653650c8cface55656a16bdec94788ffab5d8cbf33f661273256bcf55e7918",
+      "pack_digest": "sha256:0d967de698cd10fc06b91d2a4559ec9fea80bb421d6a8e79c9766635ccbd8b05",
+      "shared_v0_4_0_modules": {
+        "detection": {
+          "byte_identical": true,
+          "sha256": "a2a3a25b39d8bce53d6b5d22439d319912d445c7a51921e0c2c83417bc39cb47"
+        },
+        "ontology": {
+          "byte_identical": true,
+          "sha256": "c99ad5b44b5ddb2077fc292e44adc51eea90425ae4de37ada81bf8c363a721f6"
+        },
+        "personas": {
+          "byte_identical": true,
+          "sha256": "ed1c0da8c45867504c5894085d10944389f954890d62cfb33d10ca7caff8a83d"
+        },
+        "source_mapping": {
+          "byte_identical": true,
+          "sha256": "acebb1a048ca284c9d7d902e4c1a3af9ea02567f13836685382a02047e7ee293"
+        },
+        "synthesis": {
+          "byte_identical": true,
+          "sha256": "2a18ca17378d509a73fe748fd4c9441f3e668ffb85d7daa710c033bd7dbbfa4a"
+        }
+      }
+    },
+    "source_brief": {
+      "record_material_hash": "sha256:73b8f6f55624de60ec5bc60d393278cee1423b5b75f4490104ccc21f65a4512d",
+      "record_storage_id": "immutable_record:289a7d01478a039a1aa636f62eeb7c7f",
+      "resource_digest": "sha256:5ed451cc6b6a436edabc5471b7d38bee828dcf9d620c0e0da65792c7ecc0a718",
+      "resource_id": "brief:5ed451cc6b6a436edabc5471b7d38bee"
+    }
+  },
+  "fixture_version": "0.5.0"
+}

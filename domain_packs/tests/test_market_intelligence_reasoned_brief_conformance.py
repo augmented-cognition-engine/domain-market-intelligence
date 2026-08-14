@@ -24,10 +24,13 @@ pytestmark = pytest.mark.unit
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PACK_ROOT = REPO_ROOT / "domain_packs" / "market_intelligence"
+HISTORICAL_ROOT = PACK_ROOT / "releases" / "v0_3_0"
 RELEASE_ROOT = PACK_ROOT / "releases" / "v0_4_0"
 CONFORMANCE_ROOT = RELEASE_ROOT / "conformance"
+COMPATIBILITY_ROOT = PACK_ROOT / "conformance" / "compatibility" / "core_0_8_3"
 ACCEPTANCE_PATH = REPO_ROOT / "scripts" / "p1d1_prepared_brief_acceptance.py"
-CORE_WHEEL_SHA256 = "267cfed8ec3057439abf2a55e4f595e34c92f3b10f4e37c21a2e253a80b9dc4d"
+CORE_WHEEL_SHA256 = "a7c5be2f8025937fb6e3b7b06ac2f7c67a806110034e610adcd4a88e1b1d1cab"
+LEGACY_CORE_WHEEL_SHA256 = "267cfed8ec3057439abf2a55e4f595e34c92f3b10f4e37c21a2e253a80b9dc4d"
 
 FROZEN_0_3_0_SHA256 = {
     "manifest.json": "82719602adf0ddd47ab1d7e80e9806c94c9c329705acc61c283796d79bcbd46d",
@@ -46,7 +49,6 @@ FROZEN_0_3_0_SHA256 = {
     "conformance/p1c2_live_source_negative_cases.json": "bbd89f833094605821a164b56da0cf1a97663d9ea26e4b09a9c73d91bd5e820f",
     "conformance/p1c2_live_manifest.json": "b3ab83ab4d32df2c1211802a126d39e3165fc2545e0c4e7e7112adf95ce94722",
 }
-ADDITIVE_PRODUCT_METADATA = {"onboarding_profile.json"}
 
 
 def _load(path: Path) -> dict:
@@ -78,17 +80,15 @@ def _compile(root: Path):
 
 def test_historical_0_3_0_archive_is_byte_frozen() -> None:
     historical_inventory = {
-        path.relative_to(PACK_ROOT).as_posix()
-        for path in PACK_ROOT.rglob("*")
-        if path.is_file()
-        and "releases" not in path.relative_to(PACK_ROOT).parts
-        and "__pycache__" not in path.relative_to(PACK_ROOT).parts
+        path.relative_to(HISTORICAL_ROOT).as_posix()
+        for path in HISTORICAL_ROOT.rglob("*")
+        if path.is_file() and "__pycache__" not in path.relative_to(HISTORICAL_ROOT).parts
     }
-    assert historical_inventory == set(FROZEN_0_3_0_SHA256) | ADDITIVE_PRODUCT_METADATA
+    assert historical_inventory == set(FROZEN_0_3_0_SHA256)
     assert {
-        relative: _sha256(PACK_ROOT / relative) for relative in FROZEN_0_3_0_SHA256
+        relative: _sha256(HISTORICAL_ROOT / relative) for relative in FROZEN_0_3_0_SHA256
     } == FROZEN_0_3_0_SHA256
-    compiled = _compile(PACK_ROOT)
+    compiled = _compile(HISTORICAL_ROOT)
     assert compiled.compiled_pack_id == "pack_ir:19de6d59b28095f7bd7600364c3b4de7"
     assert compiled.pack_digest == (
         "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd"
@@ -107,10 +107,10 @@ def test_0_4_0_is_an_additive_ordered_synthesis_release() -> None:
         "personas.json",
     ):
         assert (RELEASE_ROOT / "modules" / name).read_bytes() == (
-            PACK_ROOT / "modules" / name
+            HISTORICAL_ROOT / "modules" / name
         ).read_bytes()
 
-    old_synthesis = _load(PACK_ROOT / "modules" / "synthesis.json")
+    old_synthesis = _load(HISTORICAL_ROOT / "modules" / "synthesis.json")
     expected_synthesis = dict(old_synthesis)
     expected_synthesis["contract"] = "ace.intelligence.synthesis/v1alpha2"
     assert _load(RELEASE_ROOT / "modules" / "synthesis.json") == expected_synthesis
@@ -140,7 +140,7 @@ def test_0_4_0_is_an_additive_ordered_synthesis_release() -> None:
 
 def test_p1d1_manifest_pins_its_separate_inert_packet() -> None:
     manifest = _load(CONFORMANCE_ROOT / "p1d1_prepared_brief_manifest.json")
-    assert manifest["platform_dependency"]["sha256"] == CORE_WHEEL_SHA256
+    assert manifest["platform_dependency"]["sha256"] == LEGACY_CORE_WHEEL_SHA256
     assert manifest["negative_case_count"] == 18
     assert manifest["scope"] == {
         "mode": "prepared",
@@ -170,7 +170,7 @@ async def test_governed_routed_reasoned_brief_matches_exact_expected() -> None:
     result = await acceptance.run_positive()
     projection = await acceptance.positive_projection(result)
     acceptance.assert_positive(result, projection)
-    expected = _load(CONFORMANCE_ROOT / "p1d1_prepared_brief_expected.json")
+    expected = _load(COMPATIBILITY_ROOT / "p1d1_prepared_brief_expected.json")
     assert projection == expected["expected"]
 
     brief = projection["brief"]
@@ -225,15 +225,15 @@ async def test_governed_routed_reasoned_brief_matches_exact_expected() -> None:
         "forbidden_replay_provider_calls": 0,
     }
     assert projection["historical_manual_p1b"]["brief"] == {
-        "as_of": "2026-02-15T12:01:00Z",
+        "as_of": "2026-02-15T12:02:30Z",
         "available_at": "2026-02-15T12:03:00Z",
         "contract": "ace.intelligence.intelligence-record-reference/v1alpha1",
         "mode": "prepared",
         "product_id": "product:market-intelligence-conformance",
         "resource_contract": "ace.intelligence.brief/v1alpha1",
-        "resource_id": "brief:1bf59d3e6c5a47634c345a9366b555be",
+        "resource_id": "brief:407d8ba23fe08b3adcd6deb6216ccf19",
         "resource_digest": (
-            "sha256:1bf59d3e6c5a47634c345a9366b555be04e45f3ab2f8099d54b998cef4c6d5b8"
+            "sha256:407d8ba23fe08b3adcd6deb6216ccf19b54350a95882ca9f888a78d0e9685b00"
         ),
         "resource_kind": "brief",
     }
@@ -245,7 +245,7 @@ async def test_governed_routed_reasoned_brief_matches_exact_expected() -> None:
 async def test_negative_inventory_is_exact_and_leaves_no_downstream_residue() -> None:
     acceptance = _acceptance_module()
     observed = await acceptance.run_negative_inventory()
-    expected = _load(CONFORMANCE_ROOT / "p1d1_prepared_brief_negative_cases.json")
+    expected = _load(COMPATIBILITY_ROOT / "p1d1_prepared_brief_negative_cases.json")
     assert observed == expected["cases"]
     assert len(observed) == 18
     assert len({item["case_id"] for item in observed}) == 18
@@ -269,7 +269,7 @@ def test_harness_uses_only_public_ace_surfaces_and_golden_is_path_portable() -> 
         for name in imported
     )
     assert imported >= {"ace.application", "ace.core", "ace.intelligence"}
-    expected = _load(CONFORMANCE_ROOT / "p1d1_prepared_brief_expected.json")
+    expected = _load(COMPATIBILITY_ROOT / "p1d1_prepared_brief_expected.json")
     assert "ace_origin" not in expected["expected"]["platform_dependency"]
     assert expected["expected"]["platform_dependency"] == {
         "ace_core_wheel_sha256": CORE_WHEEL_SHA256
@@ -277,9 +277,9 @@ def test_harness_uses_only_public_ace_surfaces_and_golden_is_path_portable() -> 
 
 
 def test_semantic_claim_is_narrow_and_honest() -> None:
-    manifest = _load(CONFORMANCE_ROOT / "p1d1_prepared_brief_manifest.json")
+    manifest = _load(COMPATIBILITY_ROOT / "manifest.json")
     assert manifest["scope"]["semantic_entailment_validation_claimed"] is False
-    expected = _load(CONFORMANCE_ROOT / "p1d1_prepared_brief_expected.json")["expected"]
+    expected = _load(COMPATIBILITY_ROOT / "p1d1_prepared_brief_expected.json")["expected"]
     assert "Ownership, motive, and market effect are not established." in {
         item["statement"] for item in expected["brief"]["claims"]
     }

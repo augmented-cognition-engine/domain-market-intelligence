@@ -12,9 +12,7 @@ import pytest
 try:
     from ace.intelligence.packs import compile_pack_document
 except ModuleNotFoundError as exc:
-    if exc.name is not None and (
-        exc.name == "ace" or exc.name.startswith(("ace.", "pydantic"))
-    ):
+    if exc.name is not None and (exc.name == "ace" or exc.name.startswith(("ace.", "pydantic"))):
         pytest.skip(
             "the exact ACE Core P1E wheel is required for Market conformance",
             allow_module_level=True,
@@ -29,6 +27,7 @@ PACK_ROOT = REPO_ROOT / "domain_packs" / "market_intelligence"
 PREVIOUS_ROOT = PACK_ROOT / "releases" / "v0_4_0"
 RELEASE_ROOT = PACK_ROOT / "releases" / "v0_5_0"
 CONFORMANCE_ROOT = RELEASE_ROOT / "conformance"
+COMPATIBILITY_ROOT = PACK_ROOT / "conformance" / "compatibility" / "core_0_8_3"
 ACCEPTANCE_PATH = REPO_ROOT / "scripts" / "p1e_governed_feedback_acceptance.py"
 
 
@@ -45,10 +44,7 @@ def _compile(root: Path):
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
-        {
-            item["path"]: (root / item["path"]).read_bytes()
-            for item in manifest["resources"]
-        },
+        {item["path"]: (root / item["path"]).read_bytes() for item in manifest["resources"]},
     )
 
 
@@ -98,9 +94,7 @@ def test_0_5_0_is_additive_and_compiles_to_exact_ir() -> None:
         "sha256:0d967de698cd10fc06b91d2a4559ec9fea80bb421d6a8e79c9766635ccbd8b05"
     )
     feedback = next(
-        item
-        for item in compiled.modules
-        if item.module_id == "market_decision_outcomes"
+        item for item in compiled.modules if item.module_id == "market_decision_outcomes"
     )
     assert feedback.module_digest == (
         "sha256:02653650c8cface55656a16bdec94788ffab5d8cbf33f661273256bcf55e7918"
@@ -139,9 +133,7 @@ def test_feedback_module_is_inert_declarative_policy() -> None:
         "script",
     }
     assert not (_keys(module) & forbidden)
-    assert all(
-        path.suffix == ".json" for path in RELEASE_ROOT.rglob("*") if path.is_file()
-    )
+    assert all(path.suffix == ".json" for path in RELEASE_ROOT.rglob("*") if path.is_file())
 
 
 def test_p1e_manifest_pins_the_reproducible_prepared_packet() -> None:
@@ -161,7 +153,11 @@ def test_p1e_manifest_pins_the_reproducible_prepared_packet() -> None:
     }
     for artifact in manifest["artifacts"]:
         assert _sha256(CONFORMANCE_ROOT / artifact["path"]) == artifact["sha256"]
-    assert _sha256(ACCEPTANCE_PATH) == manifest["acceptance_script"]["sha256"]
+    assert manifest["acceptance_script"]["sha256"] == (
+        "ba816424bb3705464a94cd8f58e0f4fb05efce83b3d8761a0a8d81cfcfcc045b"
+    )
+    compatibility = _load(COMPATIBILITY_ROOT / "manifest.json")
+    assert _sha256(ACCEPTANCE_PATH) == compatibility["acceptance_scripts"]["p1e"]
 
 
 @pytest.mark.asyncio
@@ -170,7 +166,7 @@ async def test_governed_decision_outcome_feedback_matches_exact_expected() -> No
     result = await acceptance.run_positive()
     projection = await acceptance.positive_projection(result)
     acceptance.assert_positive(result, projection)
-    expected = _load(CONFORMANCE_ROOT / "p1e_governed_feedback_expected.json")
+    expected = _load(COMPATIBILITY_ROOT / "p1e_governed_feedback_expected.json")
     assert projection == expected["expected"]
 
     assert projection["decision"]["explicit_no_action"] is True
@@ -187,7 +183,7 @@ async def test_governed_decision_outcome_feedback_matches_exact_expected() -> No
 async def test_negative_inventory_is_exact_and_leaves_no_residue() -> None:
     acceptance = _acceptance_module()
     observed = await acceptance.run_negative_inventory()
-    expected = _load(CONFORMANCE_ROOT / "p1e_governed_feedback_negative_cases.json")
+    expected = _load(COMPATIBILITY_ROOT / "p1e_governed_feedback_negative_cases.json")
     assert observed == expected["cases"]
     assert len(observed) == 9
     assert len({item["case_id"] for item in observed}) == 9

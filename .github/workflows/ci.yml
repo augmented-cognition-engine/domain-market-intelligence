@@ -86,8 +86,12 @@ jobs:
               )
 
           payload = [name for name in names if not name.startswith(dist_info)]
-          assert len(payload) == 40, payload
+          assert len(payload) == 61, payload
           assert "domain_packs/market_intelligence/onboarding_profile.json" in payload
+          assert "domain_packs/market_intelligence/conformance/activation_golden_fixture.json" in payload
+          assert "domain_packs/market_intelligence/conformance/openai_terra_price_recorded_sources.json" in payload
+          assert "domain_packs/market_intelligence/conformance/compatibility/core_0_8_3/manifest.json" in payload
+          assert "domain_packs/market_intelligence/releases/v0_3_0/manifest.json" in payload
           assert all(name.startswith("domain_packs/market_intelligence/") for name in payload)
           assert all(name.endswith(".json") for name in payload)
           assert not [name for name in names if name.endswith((".py", ".pyc", ".so", ".pyd"))]
@@ -99,7 +103,7 @@ jobs:
           assert len(requirements) == 1, requirements
           requirement = Requirement(requirements[0])
           assert canonicalize_name(requirement.name) == "ace-core"
-          assert requirement.specifier == SpecifierSet(">=0.8.2,<0.9")
+          assert requirement.specifier == SpecifierSet(">=0.8.3,<0.9")
           print("inspected", wheel_path.name, "with", len(payload), "JSON resources")
           PY
 
@@ -115,7 +119,7 @@ jobs:
             --refresh-package ace-domain-world-intelligence \
             --python isolated-venv/bin/python \
             "./${ROOT_WHEEL}" \
-            "ace-core==0.8.2" \
+            "ace-core==0.8.3" \
             "ace-domain-world-intelligence==0.12.0"
           isolated-venv/bin/python -I - <<'PY'
           import importlib.metadata as metadata
@@ -123,7 +127,7 @@ jobs:
           import json
           from importlib.resources import files
 
-          assert metadata.version("ace-core") == "0.8.2"
+          assert metadata.version("ace-core") == "0.8.3"
           assert metadata.version("ace-domain-market-intelligence") == "0.7.0"
           assert metadata.version("ace-domain-world-intelligence") == "0.12.0"
           assert json.loads(

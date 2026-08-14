@@ -4,7 +4,7 @@
   "mappings": [
     {
       "mapping_id": "product_price_snapshot",
-      "source_definition_ref": "source_definition:openai-gpt-5-6-terra-pricing",
+      "source_definition_ref": "source_definition:public-northstar-edge-x1",
       "source_type_ref": "public_product_page",
       "capability_requirement_id": "public_product_snapshot",
       "authority_request_id": "read_public_product_source",

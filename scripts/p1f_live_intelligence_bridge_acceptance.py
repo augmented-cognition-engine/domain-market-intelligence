@@ -66,7 +66,11 @@ def _ingress_request(environment, *, key: str, requested_at):
 
 def _admitted_reference(admission):
     intrinsic = resource_reference(admission.entity_snapshot)
-    envelope = next(item for item in admission.transaction_receipt.records if item.record_kind == "entity_snapshot")
+    envelope = next(
+        item
+        for item in admission.transaction_receipt.records
+        if item.record_kind == "entity_snapshot"
+    )
     return intrinsic.model_copy(update={"available_at": envelope.available_at})
 
 
@@ -133,8 +137,12 @@ async def run_acceptance() -> tuple[dict, P1FRun]:
     product_id = scenario["product_id"]
     reasoning_fixture = copy.deepcopy(load_brief_fixture("p1d1_prepared_brief_input.json"))
     reasoning_fixture["provider_draft"]["sections"].sort(key=lambda item: item["section_id"])
-    reasoning_artifact = CapabilityArtifactIdentityV1Alpha1(**reasoning_fixture["reasoning"]["reasoning_artifact"])
-    append_artifact = CapabilityArtifactIdentityV1Alpha1(**reasoning_fixture["reasoning"]["append_artifact"])
+    reasoning_artifact = CapabilityArtifactIdentityV1Alpha1(
+        **reasoning_fixture["reasoning"]["reasoning_artifact"]
+    )
+    append_artifact = CapabilityArtifactIdentityV1Alpha1(
+        **reasoning_fixture["reasoning"]["append_artifact"]
+    )
     updated_at = _time("2026-08-06T11:59:00Z")
     execution_head = _head(
         product_id,
@@ -244,7 +252,7 @@ async def run_acceptance() -> tuple[dict, P1FRun]:
         pack=binding.prepared_binding.revision.spec.pack,
         attention_receipt_id=str(derivation.attention_receipt.receipt_id),
         attention_receipt_digest=str(derivation.attention_receipt.receipt_digest),
-        brief_as_of=derivation.signal.as_of,
+        brief_as_of=derivation.attention_receipt.evaluated_at,
         context_cutoff_at=derivation.attention_receipt.evaluated_at,
         requested_at=_time("2026-08-06T12:06:00Z"),
     )
@@ -298,7 +306,9 @@ async def run_acceptance() -> tuple[dict, P1FRun]:
         "contract": "ace.market-intelligence.p1f-live-bridge-evidence/v1alpha1",
         "mode": brief.brief.mode.value,
         "source_record_count": 10,
-        "derivation_record_kinds": [item.record_kind for item in derivation.transaction_receipt.records],
+        "derivation_record_kinds": [
+            item.record_kind for item in derivation.transaction_receipt.records
+        ],
         "brief_record_kinds": [item.record_kind for item in brief.transaction_receipt.records],
         "shift_id": derivation.shift.resource_id,
         "signal_id": derivation.signal.resource_id,
@@ -376,7 +386,9 @@ async def run_negative_cases() -> tuple[str, ...]:
         raise AssertionError("PREPARED request entered the LIVE Brief service")
 
     forged_current = result.derivation_request.current.model_copy(
-        update={"available_at": result.derivation_request.current.available_at + timedelta(seconds=1)}
+        update={
+            "available_at": result.derivation_request.current.available_at + timedelta(seconds=1)
+        }
     )
     unadmitted = _rebuild(
         result.derivation_request,

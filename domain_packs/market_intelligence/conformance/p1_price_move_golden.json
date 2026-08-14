@@ -1,30 +1,31 @@
 {
   "contract": "ace.market-intelligence.conformance-scenario/v1alpha1",
   "fixture_id": "p1_price_move_golden",
-  "fixture_version": "0.3.0",
+  "fixture_version": "0.8.0",
   "fixture_scope": "prepared_conformance_input",
   "scenario": {
     "product_id": "product:market-intelligence-conformance",
     "resource_mode": "prepared",
     "live_admission": "forbidden",
     "activation_key": "market_intelligence",
-    "activation_occurred_at": "2026-01-01T00:00:00Z",
+    "activation_occurred_at": "2026-07-01T00:00:00Z",
     "compilation_receipt_ref": "receipt:prepared-market-pack-compilation",
     "conformance_receipt_ref": "receipt:prepared-price-move-conformance",
     "approval_receipt_ref": "receipt:prepared-market-pack-approval",
     "actor_ref": "principal:market-pack-test-author",
-    "shift_detected_at": "2026-02-15T12:02:00Z",
-    "signal_detected_at": "2026-02-15T12:02:30Z",
-    "brief_generated_at": "2026-02-15T12:03:00Z"
+    "shift_detected_at": "2026-08-13T18:03:00Z",
+    "signal_detected_at": "2026-08-13T18:03:30Z",
+    "brief_as_of": "2026-08-13T18:04:00Z",
+    "brief_generated_at": "2026-08-13T18:05:00Z"
   },
   "public_source_boundary": {
     "path": "public_product_price_boundary.json",
     "boundary_id": "public_product_price_snapshot",
-    "boundary_version": "0.2.0"
+    "boundary_version": "0.8.0"
   },
   "pack": {
     "pack_id": "market_intelligence",
-    "pack_version": "0.3.0",
+    "pack_version": "0.8.0",
     "ontology_module_id": "market_ontology",
     "source_mapping_module_id": "market_source_mapping",
     "source_mapping_id": "product_price_snapshot",
@@ -38,164 +39,164 @@
   },
   "comparison_context": {
     "competitor": {
-      "entity_key": "competitor:northstar_systems",
+      "entity_key": "competitor:openai",
       "entity_type": "competitor",
       "attributes": {
-        "name": "Northstar Systems"
+        "name": "OpenAI"
       }
     },
     "relation": {
       "relation_type": "makes",
-      "source_entity_key": "competitor:northstar_systems",
-      "target_entity_key": "product:northstar_edge_x1"
+      "source_entity_key": "competitor:openai",
+      "target_entity_key": "product:gpt-5-6-terra-input-tokens"
     },
     "mapping_boundary": "This context is fixture setup for downstream comparison and is not produced by source mapping."
   },
   "snapshots": [
     {
-      "snapshot_id": "northstar_edge_x1_2026_01_15",
+      "snapshot_id": "openai_gpt_5_6_terra_launch_2026_07_09",
       "source": {
         "boundary_id": "public_product_price_snapshot",
-        "source_definition_ref": "source_definition:public-northstar-edge-x1",
-        "source_uri": "https://example.com/public/northstar/edge-x1",
+        "source_definition_ref": "source_definition:openai-gpt-5-6-terra-pricing",
+        "source_uri": "https://openai.com/index/gpt-5-6/",
         "source_type_ref": "public_product_page",
         "captured_payload": {
-          "product_name": "Edge X1",
-          "listed_price": "1200.00",
+          "product_name": "GPT-5.6 Terra input tokens per 1M",
+          "listed_price": "2.50",
           "currency": "USD"
         },
-        "captured_payload_digest": "sha256:e74784170d9f36931bdf4b64488aa456fc7ea15f600b30554a5dd6cb33961a0a",
+        "captured_payload_digest": "sha256:44caaf4fd6e9483c5dcdc853b8267dbc14f0e64676600354424ad54c1d8ae2c4",
         "acquisition_mode": "prepared_fixture",
-        "acquisition_receipt_ref": "receipt:prepared-acquisition:northstar_edge_x1_2026_01_15",
-        "acquisition_receipt_digest": "sha256:38fb47cfa665be145a40e06b0a1742ff6e790505f80487815483a93da5e1c8bd",
-        "source_published_at": null,
-        "event_effective_at": null,
-        "observed_at": "2026-01-15T12:00:00Z",
-        "ingested_at": "2026-01-15T12:00:30Z",
-        "locator": "json-pointer:/listed_price"
+        "acquisition_receipt_ref": "receipt:recorded-replay:openai-gpt-5-6-launch-terra-pricing",
+        "acquisition_receipt_digest": "sha256:3142315bdbbfff47e8b3fe3097287d12370f9c01e7b75428ae7e49a8864c8588",
+        "source_published_at": "2026-07-09T00:00:00Z",
+        "event_effective_at": "2026-07-09T00:00:00Z",
+        "observed_at": "2026-08-13T18:00:00Z",
+        "ingested_at": "2026-08-13T18:00:30Z",
+        "locator": "section:availability-and-pricing#terra"
       },
       "resolved_subject": {
         "subject_binding_id": "listed_product",
         "entity_type_id": "product",
-        "entity_ref": "product:northstar_edge_x1"
+        "entity_ref": "product:gpt-5-6-terra-input-tokens"
       },
       "expected_mapped_product_attributes": {
-        "name": "Edge X1",
-        "price": 1200.0,
+        "name": "GPT-5.6 Terra input tokens per 1M",
+        "price": 2.5,
         "currency": "USD"
       }
     },
     {
-      "snapshot_id": "northstar_edge_x1_2026_02_15",
+      "snapshot_id": "openai_gpt_5_6_terra_price_update_2026_07_30",
       "source": {
         "boundary_id": "public_product_price_snapshot",
-        "source_definition_ref": "source_definition:public-northstar-edge-x1",
-        "source_uri": "https://example.com/public/northstar/edge-x1",
+        "source_definition_ref": "source_definition:openai-gpt-5-6-terra-pricing",
+        "source_uri": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/",
         "source_type_ref": "public_product_page",
         "captured_payload": {
-          "product_name": "Edge X1",
-          "listed_price": "1080.00",
+          "product_name": "GPT-5.6 Terra input tokens per 1M",
+          "listed_price": "2.00",
           "currency": "USD"
         },
-        "captured_payload_digest": "sha256:b6cec89416e2f0112843583c9bb1cb66104d3b96ee38c35e8383e9552822670b",
+        "captured_payload_digest": "sha256:40a75b55a2571fac73afc0aebe90545222183c43d81527184f1909210663b892",
         "acquisition_mode": "prepared_fixture",
-        "acquisition_receipt_ref": "receipt:prepared-acquisition:northstar_edge_x1_2026_02_15",
-        "acquisition_receipt_digest": "sha256:c3019bd996db01cfff8f309417356e3ad9ebfc74fdf2cbab7a5faaf4c76bbf2a",
-        "source_published_at": null,
-        "event_effective_at": null,
-        "observed_at": "2026-02-15T12:00:00Z",
-        "ingested_at": "2026-02-15T12:01:00Z",
-        "locator": "json-pointer:/listed_price"
+        "acquisition_receipt_ref": "receipt:recorded-replay:openai-gpt-5-6-price-performance-terra-pricing",
+        "acquisition_receipt_digest": "sha256:f29108fe373d50d33457967fc35f26ade80906b660bb2b7e9f162933578e1425",
+        "source_published_at": "2026-07-30T00:00:00Z",
+        "event_effective_at": "2026-07-30T00:00:00Z",
+        "observed_at": "2026-08-13T18:01:00Z",
+        "ingested_at": "2026-08-13T18:01:30Z",
+        "locator": "section:availability-and-pricing#terra"
       },
       "resolved_subject": {
         "subject_binding_id": "listed_product",
         "entity_type_id": "product",
-        "entity_ref": "product:northstar_edge_x1"
+        "entity_ref": "product:gpt-5-6-terra-input-tokens"
       },
       "expected_mapped_product_attributes": {
-        "name": "Edge X1",
-        "price": 1080.0,
+        "name": "GPT-5.6 Terra input tokens per 1M",
+        "price": 2.0,
         "currency": "USD"
       }
     }
   ],
   "expected_price_delta": {
     "watched_attribute": "product.price",
-    "baseline_snapshot_id": "northstar_edge_x1_2026_01_15",
-    "current_snapshot_id": "northstar_edge_x1_2026_02_15",
-    "baseline_value": 1200.0,
-    "current_value": 1080.0,
-    "absolute_change": -120.0,
-    "percent_change": -10.0,
+    "baseline_snapshot_id": "openai_gpt_5_6_terra_launch_2026_07_09",
+    "current_snapshot_id": "openai_gpt_5_6_terra_price_update_2026_07_30",
+    "baseline_value": 2.5,
+    "current_value": 2.0,
+    "absolute_change": -0.5,
+    "percent_change": -20.0,
     "direction": "decrease",
     "materiality_threshold_percent": 5.0,
     "is_material": true
   },
   "expected_prepared_brief": {
     "brief_type": "competitive_intelligence",
-    "title": "Northstar Edge X1 price move",
-    "executive_summary": "Northstar Systems reduced the listed Edge X1 price from USD 1,200 to USD 1,080, a 10% decrease.",
-    "body_markdown": "## What changed\nThe prepared snapshots show a USD 120 decrease.\n\n## Why it matters\nThe move may affect relative price positioning; no motive or market impact is established by these snapshots alone.\n\n## Recommendation\nReview current competitive positioning before deciding whether any response is warranted.\n\n## Limitations\nThis is a prepared conformance fixture, not live market evidence.",
-    "claim": "The prepared snapshots show that the listed Edge X1 price decreased from USD 1,200 to USD 1,080.",
+    "title": "GPT-5.6 Terra input-token price move",
+    "executive_summary": "OpenAI's official publications show that the standard GPT-5.6 Terra API input price moved from USD 2.50 to USD 2.00 per 1 million tokens, a 20% decrease.",
+    "body_markdown": "## What changed\nThe July 9 launch publication listed Terra at USD 2.50 per 1 million input tokens; the July 30 price-performance publication states USD 2.00 starting July 30.\n\n## Why it matters\nThe 20% reduction changes the public cost baseline for teams comparing high-volume AI workloads.\n\n## Recommendation\nRe-evaluate cost models and competitor price positioning that still assume the launch price.\n\n## Limitations\nThis is recorded replay of two official OpenAI publications. It does not prove current pricing, realized workload cost, motive, adoption, or market impact.",
+    "claim": "The reviewed official OpenAI publications show that the standard GPT-5.6 Terra API input price decreased from USD 2.50 to USD 2.00 per 1 million tokens.",
     "confidence": 1.0
   },
   "expected_compilation": {
-    "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
-    "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
-    "source_mapping_module_digest": "sha256:74b631b62884f99301b60325e2ee1ada7a130f57b9c55a3397a0dd9252bc7226",
-    "source_mapping_digest": "sha256:ed421cef871bc9467fee82bd1168bbd66bab9b7c05c3477d8ba795e18d913c96"
+    "compiled_pack_id": "pack_ir:47304b9a62a147de39d38ece0290b12a",
+    "pack_digest": "sha256:47304b9a62a147de39d38ece0290b12a2078dcdf032236f3dbceebcb23758e71",
+    "source_mapping_module_digest": "sha256:1cc99ea9229b2a912d9a83f8018a946da87ca7e96c731018a491a99e1985cccd",
+    "source_mapping_digest": "sha256:d5e3158e95f8d1089d6cf15b7f86effb61af655ef60494b5480258bd49dd771d"
   },
   "expected_binding": {
-    "compiled_overlay_id": "overlay_ir:0cb0ba28f522efd70a811d154aad0e2d",
-    "overlay_digest": "sha256:0cb0ba28f522efd70a811d154aad0e2da7a496daa8019ebb7ac22b6129ea3219",
+    "compiled_overlay_id": "overlay_ir:f496bac5f0b3717df81870e1a21ac692",
+    "overlay_digest": "sha256:f496bac5f0b3717df81870e1a21ac69220927ddd0ce1566d3d054d46226401a0",
     "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
-    "spec_id": "activation_spec:66c79014c7a04dd082b949d1e49cfb42",
-    "spec_hash": "66c79014c7a04dd082b949d1e49cfb42a2d2d9b5e51448c57781bc482ea4f9f5",
-    "revision_id": "activation_revision:a6ee050fb15d6bb1c4d2cbade4111a40",
-    "revision_digest": "sha256:a6ee050fb15d6bb1c4d2cbade4111a40b60e1e3b2a235f89b421cfccf45de0a1"
+    "spec_id": "activation_spec:bff0ba89ece3b12f0b34c6225a415b02",
+    "spec_hash": "bff0ba89ece3b12f0b34c6225a415b02cc30c1f418ee49a237737db8efc1c0ca",
+    "revision_id": "activation_revision:e812d276d8c57f1f4c9c8c61f025ec8a",
+    "revision_digest": "sha256:e812d276d8c57f1f4c9c8c61f025ec8a4f048cf82145c3f09e594734a7bb9c85"
   },
   "expected_resource_ids": {
     "source_snapshots": [
       {
-        "source_ref": "source_snapshot:79e9d6d28cb58b3477d91fa176f172ff",
-        "source_digest": "sha256:79e9d6d28cb58b3477d91fa176f172ffcb9a356e543b4dd1e26af50690b2bc4c"
+        "source_ref": "source_snapshot:02a5278063aa2634592c0a2bf0f2a6ea",
+        "source_digest": "sha256:02a5278063aa2634592c0a2bf0f2a6eae057583e5b1f4df74673da01668e086a"
       },
       {
-        "source_ref": "source_snapshot:1293d090b0a2907907d1bb32bf0ac825",
-        "source_digest": "sha256:1293d090b0a2907907d1bb32bf0ac825580e48031a4cfe8c8a9fd25a7d22d72d"
+        "source_ref": "source_snapshot:e38899ef38aaf94bf13ae26ac4fda04b",
+        "source_digest": "sha256:e38899ef38aaf94bf13ae26ac4fda04b7dcb8003195b94c0f4ca04d7bdfd1e99"
       }
     ],
     "observations": [
       {
-        "resource_id": "observation:1a94c2ec8cd09ca430c3bad2f5ae4dc5",
-        "resource_digest": "sha256:1a94c2ec8cd09ca430c3bad2f5ae4dc54237332ebce28b51758e28d1feb6dde2"
+        "resource_id": "observation:3abb3c472e256694f442c3257dca2ab5",
+        "resource_digest": "sha256:3abb3c472e256694f442c3257dca2ab5e20b9a03623a48e6d47f6b9f8dff048b"
       },
       {
-        "resource_id": "observation:d489523455c199ca3fc6b9dadc479dcb",
-        "resource_digest": "sha256:d489523455c199ca3fc6b9dadc479dcb90be178dffddd07a946d4cc581ccc61f"
+        "resource_id": "observation:f59d19b3b38818b6438dacf6173be51d",
+        "resource_digest": "sha256:f59d19b3b38818b6438dacf6173be51d9ff2e5b3636a705e302a46e344aeb26d"
       }
     ],
     "entity_snapshots": [
       {
-        "resource_id": "entity_snapshot:0707caf19410b77f57b695ddc839101a",
-        "resource_digest": "sha256:0707caf19410b77f57b695ddc839101a1ec58dcbcd2e82b330e88e57dd4e109e"
+        "resource_id": "entity_snapshot:a35f922ce8de378a0121fc913a56185c",
+        "resource_digest": "sha256:a35f922ce8de378a0121fc913a56185c84b5ed7edd5351fb8d19202168ccd9c6"
       },
       {
-        "resource_id": "entity_snapshot:84f46bc741de75c4b12367f09cc31e3f",
-        "resource_digest": "sha256:84f46bc741de75c4b12367f09cc31e3f61aeb8441eaca30c965d16cecd73354b"
+        "resource_id": "entity_snapshot:9d408e80c33acef045339e70b121e8ba",
+        "resource_digest": "sha256:9d408e80c33acef045339e70b121e8ba0d98ad938a17170d983964cabf34835a"
       }
     ],
     "shift": {
-      "resource_id": "shift:08105b9811c0a990fcc7fbd4f4c96cce",
-      "resource_digest": "sha256:08105b9811c0a990fcc7fbd4f4c96cce307a0bea79f2450bd9cb7b8565e01e86"
+      "resource_id": "shift:a269b98b2335f5d334adac9e270997c3",
+      "resource_digest": "sha256:a269b98b2335f5d334adac9e270997c3767da921a77aab4f8f9bae3312f63c85"
     },
     "signal": {
-      "resource_id": "signal:7c494d503e72fa73c070c8b9b5e3510e",
-      "resource_digest": "sha256:7c494d503e72fa73c070c8b9b5e3510ef3a79ca61c3e39ebddfdae89d39ed9b6"
+      "resource_id": "signal:60a646449850e7baa95dc97a28474282",
+      "resource_digest": "sha256:60a646449850e7baa95dc97a28474282c9fbc29626d9f665f6e5c048756598e7"
     },
     "brief": {
-      "resource_id": "brief:1bf59d3e6c5a47634c345a9366b555be",
-      "resource_digest": "sha256:1bf59d3e6c5a47634c345a9366b555be04e45f3ab2f8099d54b998cef4c6d5b8"
+      "resource_id": "brief:1c791d916f81db82d0ac06a5c3f79862",
+      "resource_digest": "sha256:1c791d916f81db82d0ac06a5c3f79862ee7c4615e71ba9e186fb72b7041dd3e2"
     }
   },
   "verified_prepared_expectations": [
@@ -217,9 +218,9 @@
     "Record a named Decision or explicit no-action and attach a later Outcome without mutating earlier records."
   ],
   "limitations": [
-    "This fixture is deterministic prepared data, not captured public evidence.",
+    "This fixture is deterministic recorded replay of two reviewed official OpenAI publications, not live network capture or a freshness claim.",
     "The packaged source mapping is inert JSON and runs only through the public PREPARED interpreter; no executable adapter is shipped.",
-    "The mode-neutral source-definition identity describes the source while acquisition and admission remain strictly PREPARED in P1C1.",
+    "The mode-neutral source-definition identity groups two distinct official OpenAI publication URLs while acquisition and admission remain strictly PREPARED in P1C1.",
     "Acquisition receipt references and digests are PREPARED provenance only and do not assert live acquisition success.",
     "The detector executes only through a locally prepared pack/revision/capability/authority binding; no Core-committed, live, or persisted activation or authority is claimed.",
     "The persona route and Brief structure are declared; live subscription and Core reasoning are not wired.",

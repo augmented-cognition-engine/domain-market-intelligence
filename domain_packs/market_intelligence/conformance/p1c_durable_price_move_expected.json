@@ -1,7 +1,7 @@
 {
   "contract": "ace.market-intelligence.durable-conformance-expected/v1alpha1",
   "artifact_id": "p1c_durable_price_move_expected",
-  "artifact_version": "0.2.0",
+  "artifact_version": "0.8.0",
   "artifact_scope": "durable_prepared_conformance_expected",
   "platform_dependency": {
     "ace_core_wheel": "ace_core-0.3.0-py3-none-any.whl",
@@ -16,145 +16,145 @@
   },
   "expected": {
     "pack": {
-      "compiled_pack_id": "pack_ir:19de6d59b28095f7bd7600364c3b4de7",
-      "pack_digest": "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd",
+      "compiled_pack_id": "pack_ir:47304b9a62a147de39d38ece0290b12a",
+      "pack_digest": "sha256:47304b9a62a147de39d38ece0290b12a2078dcdf032236f3dbceebcb23758e71",
       "source_mapping_module_id": "market_source_mapping",
-      "source_mapping_module_digest": "sha256:74b631b62884f99301b60325e2ee1ada7a130f57b9c55a3397a0dd9252bc7226",
+      "source_mapping_module_digest": "sha256:1cc99ea9229b2a912d9a83f8018a946da87ca7e96c731018a491a99e1985cccd",
       "source_mapping_id": "product_price_snapshot",
-      "source_mapping_digest": "sha256:ed421cef871bc9467fee82bd1168bbd66bab9b7c05c3477d8ba795e18d913c96"
+      "source_mapping_digest": "sha256:d5e3158e95f8d1089d6cf15b7f86effb61af655ef60494b5480258bd49dd771d"
     },
     "overlay": {
-      "compiled_overlay_id": "overlay_ir:0cb0ba28f522efd70a811d154aad0e2d",
-      "overlay_digest": "sha256:0cb0ba28f522efd70a811d154aad0e2da7a496daa8019ebb7ac22b6129ea3219"
+      "compiled_overlay_id": "overlay_ir:f496bac5f0b3717df81870e1a21ac692",
+      "overlay_digest": "sha256:f496bac5f0b3717df81870e1a21ac69220927ddd0ce1566d3d054d46226401a0"
     },
     "activation": {
       "activation_id": "domain_activation:fc68e4ee0ce4b6b35829fd584452487f",
-      "spec_id": "activation_spec:66c79014c7a04dd082b949d1e49cfb42",
-      "spec_hash": "66c79014c7a04dd082b949d1e49cfb42a2d2d9b5e51448c57781bc482ea4f9f5",
-      "revision_id": "activation_revision:a6ee050fb15d6bb1c4d2cbade4111a40",
-      "revision_digest": "sha256:a6ee050fb15d6bb1c4d2cbade4111a40b60e1e3b2a235f89b421cfccf45de0a1",
-      "core_commit_receipt_id": "governed_state_commit:e47badabd5229721630c514be7a2b888",
-      "core_commit_receipt_hash": "e47badabd5229721630c514be7a2b8886e90d706bc58c519880f5dd57b62771c",
+      "spec_id": "activation_spec:bff0ba89ece3b12f0b34c6225a415b02",
+      "spec_hash": "bff0ba89ece3b12f0b34c6225a415b02cc30c1f418ee49a237737db8efc1c0ca",
+      "revision_id": "activation_revision:e812d276d8c57f1f4c9c8c61f025ec8a",
+      "revision_digest": "sha256:e812d276d8c57f1f4c9c8c61f025ec8a4f048cf82145c3f09e594734a7bb9c85",
+      "core_commit_receipt_id": "governed_state_commit:f4e2cb65f3a4f794e76b1e55872066a7",
+      "core_commit_receipt_hash": "f4e2cb65f3a4f794e76b1e55872066a754b91297e56501749ad8630e64d23104",
       "authority_stage": "committed",
       "live_authority": false
     },
     "batch": {
       "derivation_key": "derivation:market-intelligence:p1c:prepared-price-move:v1",
       "batch_id": "resource_admission:760643dcee0649ab646639e9dfcfbb74",
-      "batch_digest": "sha256:caf1c969dfb3b205c1d02ee85b76df3f88a578af73c1fca36aebd5f0f0f371f9",
-      "attention_evaluated_at": "2026-02-15T12:04:00Z",
+      "batch_digest": "sha256:8ee78f102cae7fb0018095e27446fecf1c5817795f8fc66e5f15cb7d8328d1a0",
+      "attention_evaluated_at": "2026-08-13T18:06:00Z",
       "processing_order": [
-        "observation:1a94c2ec8cd09ca430c3bad2f5ae4dc5",
-        "observation:d489523455c199ca3fc6b9dadc479dcb",
-        "entity_snapshot:0707caf19410b77f57b695ddc839101a",
-        "entity_snapshot:84f46bc741de75c4b12367f09cc31e3f",
-        "shift:08105b9811c0a990fcc7fbd4f4c96cce",
-        "signal:7c494d503e72fa73c070c8b9b5e3510e",
-        "brief:1bf59d3e6c5a47634c345a9366b555be"
+        "observation:3abb3c472e256694f442c3257dca2ab5",
+        "observation:f59d19b3b38818b6438dacf6173be51d",
+        "entity_snapshot:a35f922ce8de378a0121fc913a56185c",
+        "entity_snapshot:9d408e80c33acef045339e70b121e8ba",
+        "shift:a269b98b2335f5d334adac9e270997c3",
+        "signal:60a646449850e7baa95dc97a28474282",
+        "brief:1c791d916f81db82d0ac06a5c3f79862"
       ]
     },
     "transaction": {
       "transaction_id": "append_only_transaction:f2bf4033973370e4fd951db078757aae",
-      "request_hash": "sha256:e610d2776fbad70927e496cc7ec70b3c077597f36859e590dd5ae25fe20100e8",
+      "request_hash": "sha256:07f4058dbc12806b5c0687f988acc80588cbaa455f9ba675887383d73b9ef767",
       "receipt_id": "append_only_receipt:f2bf4033973370e4fd951db078757aae",
-      "receipt_hash": "sha256:7ae74dec7b0d88c7f21c3d5279a538ad86b0d09b26816edd7eb69a6eaf2e12c8",
+      "receipt_hash": "sha256:3fb1cb7056f9653fcf767b7ae750d0652795e9207ae3491728385c2f14095992",
       "record_count": 8,
-      "committed_at": "2026-02-15T12:04:00Z"
+      "committed_at": "2026-08-13T18:06:00Z"
     },
     "resources": [
       {
         "processing_order": 0,
         "resource_kind": "observation",
-        "resource_id": "observation:1a94c2ec8cd09ca430c3bad2f5ae4dc5",
-        "resource_digest": "sha256:1a94c2ec8cd09ca430c3bad2f5ae4dc54237332ebce28b51758e28d1feb6dde2",
-        "storage_id": "immutable_record:9cefc0e5c0370e1febcb277a89b6c3f2",
-        "material_hash": "sha256:48c59fc69c025914dfa188391912e0927383b5b7f88a7f3ddbb672ba4dcce0a6",
-        "as_of": "2026-01-15T12:00:30Z",
-        "available_at": "2026-01-15T12:00:30Z"
+        "resource_id": "observation:3abb3c472e256694f442c3257dca2ab5",
+        "resource_digest": "sha256:3abb3c472e256694f442c3257dca2ab5e20b9a03623a48e6d47f6b9f8dff048b",
+        "storage_id": "immutable_record:0cd619437ab174e47dff8e08b6d1f22e",
+        "material_hash": "sha256:75ab2c382d501a6dde2b03e6ef1bf46f0d0ec13668f58e91c5f28c463056e68c",
+        "as_of": "2026-07-09T00:00:00Z",
+        "available_at": "2026-08-13T18:00:30Z"
       },
       {
         "processing_order": 1,
         "resource_kind": "observation",
-        "resource_id": "observation:d489523455c199ca3fc6b9dadc479dcb",
-        "resource_digest": "sha256:d489523455c199ca3fc6b9dadc479dcb90be178dffddd07a946d4cc581ccc61f",
-        "storage_id": "immutable_record:d9bb0d29ff2f0b75b3c6c31822ae8c69",
-        "material_hash": "sha256:7f696a359b1a5981f689d568c608e6944f8d99d3776a285eee565d62a59ad92d",
-        "as_of": "2026-02-15T12:01:00Z",
-        "available_at": "2026-02-15T12:01:00Z"
+        "resource_id": "observation:f59d19b3b38818b6438dacf6173be51d",
+        "resource_digest": "sha256:f59d19b3b38818b6438dacf6173be51d9ff2e5b3636a705e302a46e344aeb26d",
+        "storage_id": "immutable_record:e1c8c2b469d2f8d3fddcb9e06622e723",
+        "material_hash": "sha256:a6165466abcef59aad4151a45c6e69df100eb22d9a38c9a5cc14faeda9ca0b35",
+        "as_of": "2026-07-30T00:00:00Z",
+        "available_at": "2026-08-13T18:01:30Z"
       },
       {
         "processing_order": 2,
         "resource_kind": "entity_snapshot",
-        "resource_id": "entity_snapshot:0707caf19410b77f57b695ddc839101a",
-        "resource_digest": "sha256:0707caf19410b77f57b695ddc839101a1ec58dcbcd2e82b330e88e57dd4e109e",
-        "storage_id": "immutable_record:4deca54eef7bda3f241382636df64ee4",
-        "material_hash": "sha256:6a4f97a5e0fc45f2b7adfb9d23f4c4abc7e75bbda9b9b179049f68301c1d9745",
-        "as_of": "2026-01-15T12:00:30Z",
-        "available_at": "2026-01-15T12:00:30Z"
+        "resource_id": "entity_snapshot:a35f922ce8de378a0121fc913a56185c",
+        "resource_digest": "sha256:a35f922ce8de378a0121fc913a56185c84b5ed7edd5351fb8d19202168ccd9c6",
+        "storage_id": "immutable_record:119b319628b29653bf5d89e264c83f40",
+        "material_hash": "sha256:c9b8bb9a9614f24b4c6b36e330c762bf000a5f2a73bb31743d23cd5a67c34045",
+        "as_of": "2026-07-09T00:00:00Z",
+        "available_at": "2026-08-13T18:00:30Z"
       },
       {
         "processing_order": 3,
         "resource_kind": "entity_snapshot",
-        "resource_id": "entity_snapshot:84f46bc741de75c4b12367f09cc31e3f",
-        "resource_digest": "sha256:84f46bc741de75c4b12367f09cc31e3f61aeb8441eaca30c965d16cecd73354b",
-        "storage_id": "immutable_record:e19a8260a288cae00c09e7e3572615aa",
-        "material_hash": "sha256:7f7fe0aab8cce1016d541bbd2ea846963cceb6ecf423d1718a2513adef603fdf",
-        "as_of": "2026-02-15T12:01:00Z",
-        "available_at": "2026-02-15T12:01:00Z"
+        "resource_id": "entity_snapshot:9d408e80c33acef045339e70b121e8ba",
+        "resource_digest": "sha256:9d408e80c33acef045339e70b121e8ba0d98ad938a17170d983964cabf34835a",
+        "storage_id": "immutable_record:e0a36a3d745dac7afe0c2c4c67897779",
+        "material_hash": "sha256:e932a9101bbc713f0c53a80619eacf1d46b611ad60bf9886afdcc6fbf1b2a2fd",
+        "as_of": "2026-07-30T00:00:00Z",
+        "available_at": "2026-08-13T18:01:30Z"
       },
       {
         "processing_order": 4,
         "resource_kind": "shift",
-        "resource_id": "shift:08105b9811c0a990fcc7fbd4f4c96cce",
-        "resource_digest": "sha256:08105b9811c0a990fcc7fbd4f4c96cce307a0bea79f2450bd9cb7b8565e01e86",
-        "storage_id": "immutable_record:dcaa71ecbe8c550714fa24f678672b31",
-        "material_hash": "sha256:18035f1be46e54fa70ec154931004c08c28fbe886535d228561ae1b457b75f86",
-        "as_of": "2026-02-15T12:01:00Z",
-        "available_at": "2026-02-15T12:02:00Z"
+        "resource_id": "shift:a269b98b2335f5d334adac9e270997c3",
+        "resource_digest": "sha256:a269b98b2335f5d334adac9e270997c3767da921a77aab4f8f9bae3312f63c85",
+        "storage_id": "immutable_record:89fe4cfe8be600213e13b3bbf8bd7b2e",
+        "material_hash": "sha256:4f28697bd56aaccb2ef69d9e28726c15c6abb1083d55fd48f2cedb7bd2b563a2",
+        "as_of": "2026-07-30T00:00:00Z",
+        "available_at": "2026-08-13T18:03:00Z"
       },
       {
         "processing_order": 5,
         "resource_kind": "signal",
-        "resource_id": "signal:7c494d503e72fa73c070c8b9b5e3510e",
-        "resource_digest": "sha256:7c494d503e72fa73c070c8b9b5e3510ef3a79ca61c3e39ebddfdae89d39ed9b6",
-        "storage_id": "immutable_record:cbeb18e367f14093f74aebb8f27e6f97",
-        "material_hash": "sha256:a31aadef1eb390ebc3a824f2cf75bba923326f39f5c1ee37fd0783ad71b09301",
-        "as_of": "2026-02-15T12:01:00Z",
-        "available_at": "2026-02-15T12:02:30Z"
+        "resource_id": "signal:60a646449850e7baa95dc97a28474282",
+        "resource_digest": "sha256:60a646449850e7baa95dc97a28474282c9fbc29626d9f665f6e5c048756598e7",
+        "storage_id": "immutable_record:e6b4f51bef8279770198177d28e7fb43",
+        "material_hash": "sha256:10a2231164bad1f293dc12f5e2931e443af886cfef18445259d0e852bac8b2fe",
+        "as_of": "2026-07-30T00:00:00Z",
+        "available_at": "2026-08-13T18:03:30Z"
       },
       {
         "processing_order": 6,
         "resource_kind": "brief",
-        "resource_id": "brief:1bf59d3e6c5a47634c345a9366b555be",
-        "resource_digest": "sha256:1bf59d3e6c5a47634c345a9366b555be04e45f3ab2f8099d54b998cef4c6d5b8",
-        "storage_id": "immutable_record:19a97d5d4f84f6c7fb261134010589e3",
-        "material_hash": "sha256:23194954db3c3a22e72ca36420635cadd7702f3928082f1b3451121cb4e33c90",
-        "as_of": "2026-02-15T12:01:00Z",
-        "available_at": "2026-02-15T12:03:00Z"
+        "resource_id": "brief:1c791d916f81db82d0ac06a5c3f79862",
+        "resource_digest": "sha256:1c791d916f81db82d0ac06a5c3f79862ee7c4615e71ba9e186fb72b7041dd3e2",
+        "storage_id": "immutable_record:7f8c19e229510e58b7f73f29130a7db3",
+        "material_hash": "sha256:c9573415137c493edae3cb1a7e87f3f7fe5de1164f2ce33d8849c7f0c1b7632d",
+        "as_of": "2026-08-13T18:04:00Z",
+        "available_at": "2026-08-13T18:05:00Z"
       }
     ],
     "attention": {
-      "receipt_id": "attention_disposition:9e84c24f2742325d5496a98b43c7545a",
-      "receipt_digest": "sha256:9e84c24f2742325d5496a98b43c7545a42e5ad6fd728671a9f32a98c36c189ae",
-      "storage_id": "immutable_record:af83711dc221a9599f0c954d16e0ecd6",
-      "material_hash": "sha256:e7b1595e5cbda183bd2843a19d52ca6861e816b2debe5378c9117105da445b3e",
+      "receipt_id": "attention_disposition:70c8ebe733fc4e4010e3f205c569ab22",
+      "receipt_digest": "sha256:70c8ebe733fc4e4010e3f205c569ab2204b2ea2da57b9d60fe8931e7a911d4e1",
+      "storage_id": "immutable_record:8c7830d458ea81085014826c56c00fe6",
+      "material_hash": "sha256:7721105d3066d12d9bf876e36a1253a94659894a0bfa92ccbe703f909e3ee5d2",
       "disposition": "route",
       "routing_rule_id": "route_competitive_price_move",
       "persona_ids": [
         "competitive_intelligence_analyst"
       ],
       "brief_template_id": "competitive_price_move_brief",
-      "evaluated_at": "2026-02-15T12:04:00Z",
+      "evaluated_at": "2026-08-13T18:06:00Z",
       "delivery_authority": false
     },
     "historical_isolation": {
-      "available_at_cutoff": "2026-02-15T12:00:59Z",
+      "available_at_cutoff": "2026-08-13T18:00:59Z",
       "record_ids": {
         "observation": [
-          "observation:1a94c2ec8cd09ca430c3bad2f5ae4dc5"
+          "observation:3abb3c472e256694f442c3257dca2ab5"
         ],
         "entity_snapshot": [
-          "entity_snapshot:0707caf19410b77f57b695ddc839101a"
+          "entity_snapshot:a35f922ce8de378a0121fc913a56185c"
         ],
         "shift": [],
         "signal": [],
@@ -164,10 +164,10 @@
     }
   },
   "limitations": [
-    "This artifact pins PREPARED consumer conformance only and grants no live or delivery authority.",
+    "This artifact pins PREPARED recorded-replay consumer conformance only and grants no live or delivery authority.",
     "Production SurrealDB durability is ACE Platform evidence; Market neither reimplements nor independently claims it.",
-    "P1C1 source mapping is PREPARED-only and performs no live authority or acquisition; P1C2 live adapter binding, use-time capability and grant resolution, capture, acquisition-receipt resolution, and LIVE admission remain open.",
-    "The legacy ace_ext_b2b_marketing.marketing.source_ingestion module is compatibility code, not the future live adapter; P1C2 requires a new narrow separately packaged adapter behind Platform live ingress.",
-    "Core Brief reasoning and template enforcement, Decision or no-action, Outcome, delivery, and learning remain open."
+    "The official OpenAI records are reviewed recorded inputs, not live capture or a current-pricing claim.",
+    "The public-product connector cannot capture these HTML publications without a future reviewed extraction contract.",
+    "Decision, Outcome, delivery, learning, and an executable Market Builder remain outside this foundation."
   ]
 }

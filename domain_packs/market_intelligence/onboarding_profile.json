@@ -65,53 +65,13 @@
   "source_groups": [
     {
       "source_group_id": "competitor_public_evidence",
-      "label": "Competitor public evidence",
-      "description": "Websites, product pages, pricing, documentation, launches, job postings, and public statements.",
+      "label": "Official competitor pricing evidence",
+      "description": "The two reviewed OpenAI publications that establish the GPT-5.6 Terra launch and July 30 input-price change.",
       "evidence_role": "first_party_claim",
-      "source_ids": ["competitor_web", "competitor_pricing", "competitor_docs", "competitor_jobs", "competitor_newsrooms"],
-      "source_labels": ["Web & product pages", "Pricing", "Documentation", "Job postings", "Newsrooms"],
+      "source_ids": ["openai_gpt_5_6_launch", "openai_gpt_5_6_price_performance"],
+      "source_labels": ["GPT-5.6 launch pricing", "July 30 price-performance update"],
       "access_label": "Public · no credentials",
       "default_selected": true
-    },
-    {
-      "source_group_id": "market_and_company_records",
-      "label": "Market and company records",
-      "description": "Filings, earnings materials, patents, government records, research, and category publications.",
-      "evidence_role": "authoritative_record",
-      "source_ids": ["company_filings", "earnings_materials", "patent_records", "government_records", "market_research"],
-      "source_labels": ["Company filings", "Earnings", "Patents", "Government records", "Market research"],
-      "access_label": "Public + licensed options",
-      "default_selected": true
-    },
-    {
-      "source_group_id": "news_social_and_narratives",
-      "label": "News, social, and narratives",
-      "description": "Independent reporting, executive commentary, events, communities, and category conversation.",
-      "evidence_role": "leading_indicator",
-      "source_ids": ["independent_news", "executive_commentary", "industry_events", "social_channels", "public_communities"],
-      "source_labels": ["Independent news", "Executive commentary", "Events", "Social channels", "Communities"],
-      "access_label": "Public · optional API access",
-      "default_selected": true
-    },
-    {
-      "source_group_id": "customer_voice",
-      "label": "Customer voice",
-      "description": "Reviews plus optional surveys, interviews, support conversations, community posts, and win/loss evidence.",
-      "evidence_role": "independent_measurement",
-      "source_ids": ["public_reviews", "customer_surveys", "customer_interviews", "support_conversations", "win_loss"],
-      "source_labels": ["Reviews", "Surveys", "Interviews", "Support", "Win/loss"],
-      "access_label": "Public + private with permission",
-      "default_selected": true
-    },
-    {
-      "source_group_id": "owned_marketing_and_revenue",
-      "label": "Owned marketing and revenue data",
-      "description": "CRM, web analytics, campaign performance, content engagement, pipeline, and revenue outcomes.",
-      "evidence_role": "private_organizational",
-      "source_ids": ["crm", "web_analytics", "campaign_analytics", "content_analytics", "pipeline_and_revenue"],
-      "source_labels": ["CRM", "Web analytics", "Campaigns", "Content", "Pipeline & revenue"],
-      "access_label": "Private · permission required",
-      "default_selected": false
     }
   ],
   "cadences": [

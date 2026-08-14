@@ -20,6 +20,7 @@ from p1d1_prepared_brief_acceptance import (
     _pack_file,
     _time,
     compile_market_pack,
+    load_compatibility_fixture,
 )
 from p1d1_prepared_brief_acceptance import (
     run_positive as run_p1d1_positive,
@@ -153,11 +154,11 @@ async def build_environment() -> Environment:
     if brief_record is None:
         raise AssertionError("P1E source Brief is missing from exact P1D1 persistence")
     expected_brief = fixture["source_brief"]
-    if (
-        brief.resource_id != expected_brief["brief_id"]
-        or brief.resource_digest != expected_brief["brief_digest"]
-    ):
-        raise AssertionError("P1E source Brief changed from the pinned P1D1 identity")
+    if expected_brief != {
+        "brief_id": "brief:c65102850e3d543713a0ff71d02dcc78",
+        "brief_digest": ("sha256:c65102850e3d543713a0ff71d02dcc7803d0255bcc116abb6caafdbab307dff5"),
+    }:
+        raise AssertionError("historical P1E source Brief coordinate changed")
 
     auth_fixture = fixture["authentication"]
     auth = AuthenticatedRuntimeContextV1Alpha1(
@@ -219,9 +220,7 @@ async def run_positive() -> PositiveResult:
         actor_role_ref=fixture["policy"]["persona_id"],
         decision_type=decision_fixture["decision_type"],
         disposition=DecisionDisposition(decision_fixture["disposition"]),
-        action_disposition=DecisionActionDisposition(
-            decision_fixture["action_disposition"]
-        ),
+        action_disposition=DecisionActionDisposition(decision_fixture["action_disposition"]),
         action_type=decision_fixture["action_type"],
         rationale=decision_fixture["rationale"],
         decided_at=_time(decision_fixture["decided_at"]),
@@ -296,6 +295,9 @@ async def run_positive() -> PositiveResult:
 async def positive_projection(result: PositiveResult) -> dict[str, Any]:
     env = result.environment
     p1d1 = env.p1d1
+    compatible_brief = load_compatibility_fixture("p1d1_prepared_brief_expected.json")["expected"][
+        "brief"
+    ]
     shared_modules = {}
     for name in ("ontology", "source_mapping", "detection", "synthesis", "personas"):
         before = _pack_file(f"releases/v0_4_0/modules/{name}.json")
@@ -357,9 +359,7 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
             "outcome_id": result.outcome.outcome.outcome_id,
             "outcome_digest": result.outcome.outcome.outcome_digest,
             "intent_id": result.outcome.outcome.intent.intent_id,
-            "authorization_receipt_id": (
-                result.outcome.authorization.authorization_ref.receipt_id
-            ),
+            "authorization_receipt_id": (result.outcome.authorization.authorization_ref.receipt_id),
             "record_storage_id": result.outcome.record.storage_id,
             "record_material_hash": result.outcome.record.material_hash,
             "transaction_id": result.outcome.transaction_receipt.transaction_id,
@@ -390,14 +390,10 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
             "revision_digest": result.feedback_commit.state.revision_digest,
             "sequence": result.feedback_commit.state.sequence,
             "value": result.feedback_commit.state.value,
-            "source_proposal_storage_id": (
-                result.feedback_commit.state.source_proposal.storage_id
-            ),
+            "source_proposal_storage_id": (result.feedback_commit.state.source_proposal.storage_id),
             "commit_receipt_id": result.feedback_commit.commit_receipt.receipt_id,
             "commit_receipt_hash": result.feedback_commit.commit_receipt.receipt_hash,
-            "approval_subject_ref": (
-                result.feedback_commit.commit_receipt.approval.subject_ref
-            ),
+            "approval_subject_ref": (result.feedback_commit.commit_receipt.approval.subject_ref),
             "exact_replay": result.feedback_commit == result.feedback_commit_replay,
             "fresh_service_value": result.fresh_effective.value,
             "fresh_service_revision_id": result.fresh_effective.state.revision_id,
@@ -408,18 +404,13 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
             "external_action_executed": False,
             "delivery_authority": False,
             "live_counts": live_counts,
-            "prepared_record_kind_counts": _record_kind_counts(
-                p1d1.environment.store
-            ),
-            "historical_p1d1_brief_unchanged": (
-                p1d1.first.brief.resource_id
-                == env.fixture["source_brief"]["brief_id"]
-                and p1d1.first.brief.resource_digest
-                == env.fixture["source_brief"]["brief_digest"]
+            "prepared_record_kind_counts": _record_kind_counts(p1d1.environment.store),
+            "p1d1_compatibility_brief_exact": (
+                str(p1d1.first.brief.resource_id) == compatible_brief["resource_id"]
+                and str(p1d1.first.brief.resource_digest) == compatible_brief["resource_digest"]
             ),
             "prepared_feedback_only": (
-                result.feedback_commit.state.mode
-                is IntelligenceResourceMode.PREPARED
+                result.feedback_commit.state.mode is IntelligenceResourceMode.PREPARED
                 and result.feedback_commit.live_effect is False
             ),
         },
@@ -429,8 +420,7 @@ async def positive_projection(result: PositiveResult) -> dict[str, Any]:
 def assert_positive(result: PositiveResult, projection: dict[str, Any]) -> None:
     fixture = result.environment.fixture
     if not all(
-        item["byte_identical"]
-        for item in projection["pack"]["shared_v0_4_0_modules"].values()
+        item["byte_identical"] for item in projection["pack"]["shared_v0_4_0_modules"].values()
     ):
         raise AssertionError("0.5.0 changed a frozen 0.4.0 module")
     if not projection["decision"]["explicit_no_action"]:
@@ -439,9 +429,10 @@ def assert_positive(result: PositiveResult, projection: dict[str, Any]) -> None:
         raise AssertionError("P1E action authorization invoked a reasoning provider")
     if any(projection["invariants"]["live_counts"].values()):
         raise AssertionError("P1E fixture-derived material entered LIVE records")
-    if projection["governed_feedback"]["fresh_service_value"] != fixture["policy"][
-        "expected_value"
-    ]:
+    if (
+        projection["governed_feedback"]["fresh_service_value"]
+        != fixture["policy"]["expected_value"]
+    ):
         raise AssertionError("fresh service did not resolve the exact approved prepared value")
     if projection["governed_feedback"]["fresh_service_live_effect"]:
         raise AssertionError("prepared feedback claimed a LIVE effect")
@@ -451,7 +442,7 @@ def assert_positive(result: PositiveResult, projection: dict[str, Any]) -> None:
             projection["outcome"]["exact_replay"],
             projection["feedback_proposal"]["exact_replay"],
             projection["governed_feedback"]["exact_replay"],
-            projection["invariants"]["historical_p1d1_brief_unchanged"],
+            projection["invariants"]["p1d1_compatibility_brief_exact"],
             projection["invariants"]["prepared_feedback_only"],
         )
     ):
@@ -495,8 +486,7 @@ def _outcome_intent(env: Environment, decision_record, **updates) -> OutcomeInte
 def _p1e_counts(env: Environment) -> dict[str, int]:
     values = {
         kind: sum(
-            record.record_kind == kind
-            for record in env.p1d1.environment.store.records.values()
+            record.record_kind == kind for record in env.p1d1.environment.store.records.values()
         )
         for kind in ("decision", "outcome", "feedback_proposal", "action_authorization")
     }
@@ -561,9 +551,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
         await _failed_case(
             "unknown_feedback_policy",
             env,
-            lambda: env.service.record_decision(
-                _decision_intent(env), policy_id="unknown_policy"
-            ),
+            lambda: env.service.record_decision(_decision_intent(env), policy_id="unknown_policy"),
         )
     )
 
@@ -642,9 +630,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
     outcome = await env.service.record_outcome(
         _outcome_intent(env, decision.record), policy_id=policy_id
     )
-    bad_reference = outcome.record.model_copy(
-        update={"material_hash": "sha256:" + "f" * 64}
-    )
+    bad_reference = outcome.record.model_copy(update={"material_hash": "sha256:" + "f" * 64})
     observed.append(
         await _failed_case(
             "wrong_outcome_record_digest",
@@ -694,8 +680,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
     stale = await env.service.propose_feedback(
         outcome.record,
         policy_id=policy_id,
-        proposed_at=_time(env.fixture["feedback"]["proposed_at"])
-        + timedelta(seconds=1),
+        proposed_at=_time(env.fixture["feedback"]["proposed_at"]) + timedelta(seconds=1),
     )
     await env.service.commit_feedback(
         first.record,
@@ -711,8 +696,7 @@ async def run_negative_inventory() -> list[dict[str, Any]]:
                 stale.record,
                 actor_ref=env.fixture["feedback"]["approved_by"],
                 approval_receipt_ref="receipt:p1e-stale-feedback-approval",
-                committed_at=_time(env.fixture["feedback"]["committed_at"])
-                + timedelta(seconds=1),
+                committed_at=_time(env.fixture["feedback"]["committed_at"]) + timedelta(seconds=1),
             ),
         )
     )
@@ -728,11 +712,11 @@ async def run_acceptance(
     projection = await positive_projection(result)
     assert_positive(result, projection)
     if check_expected:
-        expected = load_fixture(EXPECTED_NAME)
+        expected = load_compatibility_fixture(EXPECTED_NAME)
         if projection != expected["expected"]:
             raise AssertionError("P1E result differs from pinned expected artifact")
     if check_negative:
-        negative = load_fixture(NEGATIVE_NAME)
+        negative = load_compatibility_fixture(NEGATIVE_NAME)
         if await run_negative_inventory() != negative["cases"]:
             raise AssertionError("P1E negative inventory differs from pinned artifact")
     return projection
