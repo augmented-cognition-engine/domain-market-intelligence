@@ -3,6 +3,32 @@
 All notable changes to `ace-domain-market-intelligence` are recorded here. The project follows
 Semantic Versioning.
 
+## [0.8.0] — candidate
+
+### Added
+
+- Added the separately packaged, trusted Market Intelligence Builder planner and executor for the
+  exact reviewed GPT-5.6 Terra price progression.
+- The proposal-only planner exposes the exact Pack, source materials, activation requirements, and
+  requested effects without connecting sources or binding authority.
+- The executor reuses Core-owned recorded admission, PREPARED derivation, cited first-Brief, source
+  readiness, and resource-plane ports; it adds no second runtime or connector framework.
+- Added a content-addressed direction-package contract derived from an exact Brief and user Decision,
+  plus an effect-free binding to Core's existing AC5 destination-delivery gate.
+
+### Changed
+
+- Aligned the root distribution version with the existing 0.8.0 Pack and widened its inert data-only
+  Core compatibility window to `ace-core>=0.8.3,<1.1`.
+- Kept the historical public-product adapter independent. It is not used to fabricate a live network
+  capture for the recorded v1 proof.
+
+### Boundary
+
+The root wheel remains JSON-only and inert. The trusted Builder is a distinct distribution requiring
+Core 0.9 or later and receives execution authority only from the Core host after exact user review
+and approval.
+
 ## [0.7.0] — candidate
 
 ### Added

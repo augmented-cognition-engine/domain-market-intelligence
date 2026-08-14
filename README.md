@@ -15,10 +15,10 @@ engine, graph, state store, authority system, detector runtime, or feedback loop
 [Proof](#current-proof-surface) · [Roadmap](ROADMAP.md) · [Security](SECURITY.md) ·
 [Contributing](CONTRIBUTING.md)
 
-- **Distribution:** `ace-domain-market-intelligence` 0.7.0
-- **Requires:** Python 3.12 and `ace-core>=0.8.2,<0.9`
+- **Distribution candidate:** `ace-domain-market-intelligence` 0.8.0
+- **Requires:** Python 3.12 and `ace-core>=0.8.3,<1.1`
 - **Artifact boundary:** JSON-only, data-only, inert
-- **Release:** public
+- **Last public release:**
   [`v0.7.0`](https://github.com/augmented-cognition-engine/domain-market-intelligence/releases/tag/v0.7.0)
   and [`0.7.0 on PyPI`](https://pypi.org/project/ace-domain-market-intelligence/0.7.0/).
   GI2 and the historical external GC1 consumer journey remain frozen in their original evidence.
@@ -34,7 +34,7 @@ The product is split into three layers, and this repository owns only the third.
 
 | Layer | Distribution | What it is |
 |---|---|---|
-| **ACE Core** | `ace-core` (0.8.2 published) | The runtime: identity, graph, immutable records, temporal validation, lineage, reasoning, authority, decisions, outcomes, receipts, and replay. |
+| **ACE Core** | `ace-core` | The runtime: identity, graph, immutable records, temporal validation, lineage, reasoning, authority, decisions, outcomes, receipts, and replay. |
 | **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: pack compilation, activation, Observation, Entity Snapshot, detection, routing, Case, Brief synthesis, epistemic status, and feedback. |
 | **Market Intelligence Domain Pack** | `ace-domain-market-intelligence` (this repository) | JSON declarations only — ontology, source mappings, detection, personas, synthesis, feedback policy, and frozen conformance fixtures. |
 
@@ -45,19 +45,24 @@ the reasoning. Live sensing requires a separately reviewed connector; see
 
 ### Install
 
-Install the public 0.7.0 package with either command:
+Install the 0.8.0 candidate package with either command after publication:
 
 ```bash
-uv add "ace-domain-market-intelligence==0.7.0"
+uv add "ace-domain-market-intelligence==0.8.0"
 ```
 
 ```bash
-pip install "ace-domain-market-intelligence==0.7.0"
+pip install "ace-domain-market-intelligence==0.8.0"
 ```
 
 The 0.7.0 release gate used the real public `ace-core==0.8.2` and World Intelligence 0.12.0
 artifacts in a checkout-free environment. The published 0.6.0 artifact and its Core 0.4
 compatibility metadata remain unchanged.
+
+The 0.8.0 root wheel remains inert and separately proves compatibility with public Core 0.8.3.
+Its optional `ace-app-market-intelligence-builder` companion targets Core 0.9/1.0 and provides the
+trusted planner/executor path for the reviewed Market v1 experience. Installing the root pack does
+not install that adapter or grant it authority.
 
 Resolve the pack data from the installed distribution:
 
@@ -121,6 +126,11 @@ executable host software, not Domain Pack content. It is source-available here f
 is not a dependency of the Domain Pack and is not published by the root release. Installing
 `ace-domain-market-intelligence` never installs, discovers, registers, or authorizes it.
 
+The separately packaged Market Builder is also executable host software, but it is not a connector:
+it translates one exact approved onboarding build into existing Core host calls. It consumes only
+the two packaged recorded publications for the bounded v1 proof and does not claim a current network
+response.
+
 ## GI2: cross-domain falsification
 
 The public release proved a clean installation of ACE plus both independently packaged domains:
@@ -166,7 +176,9 @@ uv run --no-sync ruff format --check --no-cache tests scripts/gc1_external_consu
 
 The immutable historical artifact hashes, clean-install evidence, cross-domain GI2 proof, and
 limitations are recorded in the [0.6.0 release record](docs/releases/market-intelligence-v0.6.0.md).
-The 0.7 candidate packet is in
+The current candidate packet is in
+[docs/releases/market-intelligence-v0.8.0-candidate.md](docs/releases/market-intelligence-v0.8.0-candidate.md).
+The historical 0.7 packet remains preserved in
 [docs/releases/market-intelligence-v0.7.0-candidate.md](docs/releases/market-intelligence-v0.7.0-candidate.md).
 The GC1
 consumer evidence is a later additive proof over the unchanged inert 0.6.0 artifact.

@@ -1,4 +1,4 @@
-"""Publishable identity and data-only boundary for Market Intelligence 0.7.0."""
+"""Publishable identity and data-only boundary for Market Intelligence 0.8.0."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ ADAPTER_PROJECT = tomllib.loads(
 )
 
 ROOT_DISTRIBUTION = "ace-domain-market-intelligence"
-ROOT_VERSION = "0.7.0"
+ROOT_VERSION = "0.8.0"
 ADAPTER_DISTRIBUTION = "ace-market-public-product-source"
 
 
@@ -29,11 +29,11 @@ def test_root_distribution_identity_and_compatibility_are_exact() -> None:
     assert project["name"] == ROOT_DISTRIBUTION
     assert project["version"] == ROOT_VERSION
     assert project["requires-python"] == ">=3.12,<3.13"
-    assert project["dependencies"] == ["ace-core>=0.8.3,<0.9"]
+    assert project["dependencies"] == ["ace-core>=0.8.3,<1.1"]
 
     requirement = Requirement(project["dependencies"][0])
     assert canonicalize_name(requirement.name) == "ace-core"
-    assert requirement.specifier == SpecifierSet(">=0.8.3,<0.9")
+    assert requirement.specifier == SpecifierSet(">=0.8.3,<1.1")
     assert requirement.marker is None
     assert requirement.url is None
 
