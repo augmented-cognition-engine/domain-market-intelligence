@@ -27,6 +27,12 @@ NEGATIVE_CASES_PATH = PACK_ROOT / "conformance" / "p1_price_move_negative_cases.
 DURABLE_EXPECTED_PATH = (
     PACK_ROOT / "conformance" / "p1c_durable_price_move_expected.json"
 )
+ACTIVATION_FIXTURE_PATH = (
+    PACK_ROOT / "conformance" / "activation_golden_fixture.json"
+)
+RECORDED_SOURCES_PATH = (
+    PACK_ROOT / "conformance" / "openai_terra_price_recorded_sources.json"
+)
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -166,8 +172,16 @@ def _prepared_observations_and_snapshots(
             source_uri=source["source_uri"],
             captured_payload_json=payload_json,
             captured_payload_digest=source["captured_payload_digest"],
-            source_published_at=source["source_published_at"],
-            event_effective_at=source["event_effective_at"],
+            source_published_at=(
+                None
+                if source["source_published_at"] is None
+                else _parse_time(source["source_published_at"])
+            ),
+            event_effective_at=(
+                None
+                if source["event_effective_at"] is None
+                else _parse_time(source["event_effective_at"])
+            ),
             observed_at=_parse_time(source["observed_at"]),
             ingested_at=_parse_time(source["ingested_at"]),
             locator=source["locator"],
@@ -352,8 +366,8 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
     )
     assert all(_parse_time(snapshot["source"]["observed_at"]) for snapshot in snapshots)
     context = fixture["comparison_context"]
-    assert context["competitor"]["entity_key"] == "competitor:northstar_systems"
-    assert context["relation"]["target_entity_key"] == "product:northstar_edge_x1"
+    assert context["competitor"]["entity_key"] == "competitor:openai"
+    assert context["relation"]["target_entity_key"] == "product:gpt-5-6-terra-input-tokens"
     assert (
         len({snapshot["resolved_subject"]["entity_ref"] for snapshot in snapshots}) == 1
     )
@@ -361,9 +375,12 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
         len({snapshot["source"]["source_definition_ref"] for snapshot in snapshots})
         == 1
     )
-    assert len({snapshot["source"]["source_uri"] for snapshot in snapshots}) == 1
+    assert {snapshot["source"]["source_uri"] for snapshot in snapshots} == {
+        "https://openai.com/index/gpt-5-6/",
+        "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/",
+    }
     assert {snapshot["source"]["source_definition_ref"] for snapshot in snapshots} == {
-        "source_definition:public-northstar-edge-x1"
+        "source_definition:openai-gpt-5-6-terra-pricing"
     }
 
     for snapshot in snapshots:
@@ -382,7 +399,7 @@ def test_inert_pack_files_and_price_move_fixture_are_self_consistent() -> None:
         assert subject == {
             "subject_binding_id": source_mapping["mappings"][0]["subject_binding_id"],
             "entity_type_id": source_mapping["mappings"][0]["entity_type_id"],
-            "entity_ref": "product:northstar_edge_x1",
+            "entity_ref": "product:gpt-5-6-terra-input-tokens",
         }
         values = snapshot["expected_mapped_product_attributes"]
         declarations = entity_attributes[subject["entity_type_id"]]
@@ -437,7 +454,7 @@ def test_pack_compiles_through_the_shared_ace_intelligence_compiler() -> None:
 
     assert compiled.contract == "ace.intelligence.compiled-domain-pack/v1alpha1"
     assert compiled.metadata.pack_id == "market_intelligence"
-    assert compiled.metadata.version == "0.3.0"
+    assert compiled.metadata.version == "0.8.0"
     assert [
         item.model_dump(mode="json") for item in compiled.capability_requirements
     ] == [
@@ -474,6 +491,66 @@ def test_pack_compiles_through_the_shared_ace_intelligence_compiler() -> None:
     ) == SourceMappingModuleV1.model_validate(source_mapping)
 
 
+def test_pack_passes_fixed_activation_fixture_for_recorded_terra_price_move() -> None:
+    from ace.intelligence.conformance import run_domain_pack_conformance
+
+    manifest = _load_json(MANIFEST_PATH)
+    fixture = _load_json(ACTIVATION_FIXTURE_PATH)
+    (case,) = fixture["observations"]
+
+    assert json.loads(case["baseline_attributes_json"])["price"] == 2.5
+    assert json.loads(case["current_attributes_json"])["price"] == 2.0
+    assert _parse_time(case["baseline_as_of"]) < _parse_time(case["current_as_of"])
+
+    receipt = run_domain_pack_conformance(
+        manifest_document=MANIFEST_PATH.read_bytes(),
+        resources={
+            item["path"]: (PACK_ROOT / item["path"]).read_bytes()
+            for item in manifest["resources"]
+        },
+        fixture_document=ACTIVATION_FIXTURE_PATH.read_bytes(),
+    )
+
+    assert receipt.pack_id == "market_intelligence"
+    assert receipt.pack_version == "0.8.0"
+    assert receipt.fixture_id == "market_intelligence_activation"
+    assert receipt.expected_digest == receipt.actual_digest
+    assert receipt.passed is True
+    assert receipt.diagnostics == ()
+
+
+def test_recorded_terra_sources_pin_exact_payloads_and_disclaim_freshness() -> None:
+    from ace.core import canonical_json
+
+    inventory = _load_json(RECORDED_SOURCES_PATH)
+
+    assert inventory["source_group_id"] == "competitor_public_evidence"
+    assert inventory["source_definition_ref"] == (
+        "source_definition:openai-gpt-5-6-terra-pricing"
+    )
+    assert inventory["subject_binding"] == {
+        "subject_binding_id": "listed_product",
+        "entity_type_id": "product",
+        "entity_ref": "product:gpt-5-6-terra-input-tokens",
+    }
+    assert [item["source_uri"] for item in inventory["materials"]] == [
+        "https://openai.com/index/gpt-5-6/",
+        "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/",
+    ]
+    assert [item["source_published_at"] for item in inventory["materials"]] == [
+        "2026-07-09T00:00:00Z",
+        "2026-07-30T00:00:00Z",
+    ]
+    for material in inventory["materials"]:
+        payload = json.loads(material["captured_payload_json"])
+        assert canonical_json(payload) == material["captured_payload_json"]
+        assert material["captured_payload_digest"] == (
+            f"sha256:{hashlib.sha256(material['captured_payload_json'].encode()).hexdigest()}"
+        )
+    assert any("not proof" in item for item in inventory["limitations"])
+    assert any("does not capture or extract" in item for item in inventory["limitations"])
+
+
 def test_prepared_conformance_inventory_pins_every_market_fixture() -> None:
     pack_manifest = _load_json(MANIFEST_PATH)
     conformance_manifest = _load_json(CONFORMANCE_MANIFEST_PATH)
@@ -488,6 +565,8 @@ def test_prepared_conformance_inventory_pins_every_market_fixture() -> None:
         PRICE_MOVE_FIXTURE_PATH.name,
         NEGATIVE_CASES_PATH.name,
         DURABLE_EXPECTED_PATH.name,
+        "activation_golden_fixture.json",
+        "openai_terra_price_recorded_sources.json",
     }
     assert {
         path.name
@@ -593,7 +672,7 @@ def test_price_move_rule_runs_through_shared_intelligence_resources() -> None:
         detected_at=_parse_time(fixture["scenario"]["signal_detected_at"]),
     )
     assert signal.signal_type_ref == "competitive_price_move"
-    assert signal.subject_refs == ("product:northstar_edge_x1",)
+    assert signal.subject_refs == ("product:gpt-5-6-terra-input-tokens",)
     assert signal.lineage[0].resource_id == shift.resource_id
 
     routes = eligible_signal_routes(signal=signal, binding=binding)
@@ -624,7 +703,7 @@ def test_price_move_rule_runs_through_shared_intelligence_resources() -> None:
         product_id=fixture["scenario"]["product_id"],
         mode=IntelligenceResourceMode.PREPARED,
         activation_revision=binding.reference,
-        as_of=snapshots[1].as_of,
+        as_of=_parse_time(fixture["scenario"]["brief_as_of"]),
         lineage=(
             LineageReferenceV1Alpha1(
                 resource_kind=LineageResourceKind.SHIFT,
@@ -678,7 +757,8 @@ def test_price_move_rule_runs_through_shared_intelligence_resources() -> None:
         item.resource_id for item in observations
     ]
     assert [item.as_of for item in observations] == [
-        item.ingested_at for item in observations
+        _parse_time(item["source"]["source_published_at"])
+        for item in fixture["snapshots"]
     ]
     assert all(item.observed_at < item.ingested_at for item in observations)
     assert all(

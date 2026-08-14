@@ -1,7 +1,7 @@
 {
   "contract": "ace.market-intelligence.public-source-boundary/v1alpha1",
   "boundary_id": "public_product_price_snapshot",
-  "boundary_version": "0.8.0",
+  "boundary_version": "0.2.0",
   "artifact_scope": "prepared_conformance_declaration",
   "runtime_status": "compiled_prepared_only",
   "pack_requirements": {
@@ -37,15 +37,15 @@
     "entity_type_id": "product"
   },
   "source_semantics": {
-    "source_definition_ref": "source_definition:openai-gpt-5-6-terra-pricing",
+    "source_definition_ref": "source_definition:public-northstar-edge-x1",
     "source_definition_identity_policy": "The source definition is mode-neutral. PREPARED versus LIVE belongs to acquisition and admission mode so P1C2 can reuse this exact mapping.",
     "source_type_ref": "public_product_page",
     "source_uri_scheme": "https",
-    "price_meaning": "The standard OpenAI API input-token price in USD per 1 million tokens explicitly stated for GPT-5.6 Terra in one reviewed official publication. It is not cached-input, output-token, batch, enterprise-contract, cloud-reseller, subscription, tax-inclusive, or realized workload cost.",
+    "price_meaning": "A price explicitly listed for the identified product in one captured public page snapshot. It does not establish transaction price, availability, taxes, shipping, motive, or market impact.",
     "price_validation_boundary": "AttributeMappingV1 has no numeric min/max declaration. The public decimal_text_to_number interpreter instead requires bounded decimal text, faithful finite JSON-number representation, and compatibility with the ontology number target; no private numeric rule is added.",
     "currency_meaning": "The explicit three-letter currency code captured beside the listed price; it is comparison context, not a value to convert implicitly.",
-    "publication_time_policy": "The two reviewed publications disclose calendar dates but not exact publication instants. Their dates are normalized to 00:00:00Z solely as deterministic day-level semantic coordinates and do not claim a precise publication time.",
-    "as_of_policy": "Each attributable price Observation uses the official publication date coordinate as semantic as_of and its later recorded ingestion time as availability. Recorded replay never claims current network freshness.",
+    "publication_time_policy": "A source publication or event-effective time may be null when the page does not disclose one.",
+    "as_of_policy": "When publication or event-effective time is unavailable, the attributable price Observation preserves observed_at as the source-time fact and uses ingested_at as the replay-safe resource as-of cutoff.",
     "availability_policy": "No derived resource may be available before the source snapshot's ingested_at time."
   },
   "required_source_snapshot_fields": [
@@ -79,15 +79,14 @@
   },
   "comparison_policy": {
     "same_source_definition_required": true,
-    "same_source_uri_required": false,
-    "source_uri_policy": "The baseline launch record and later price-performance record are distinct official OpenAI publication URLs under the same reviewed Terra-pricing source definition.",
+    "same_source_uri_required": true,
     "same_entity_fields": [
       "product.entity_key"
     ],
     "context_fields": [
       "product.attributes.currency"
     ],
-    "baseline_order": "baseline.source_published_at < current.source_published_at and baseline.observed_at < current.observed_at",
+    "baseline_order": "baseline.observed_at < current.observed_at",
     "availability_cutoff": "max(baseline.ingested_at,current.ingested_at)"
   },
   "prohibited_adapter_outputs": [
@@ -99,10 +98,9 @@
   ],
   "limitations": [
     "The Market-owned source mapping is compiler-supported and interpreted only through Platform P1C1's public PREPARED interpreter.",
-    "The named snapshot fixture is structural capability-binding identity material only; the root Domain Pack ships no executable source adapter.",
+    "The named snapshot fixture is structural capability-binding identity material only; this package ships no executable source adapter.",
     "The acquisition receipt reference and digest are PREPARED provenance only and do not assert live capture or acquisition success.",
     "The prepared authority binding proves exact activation shape and grants no live source access.",
-    "The separately packaged public-product adapter can validate an already extracted three-field application/json response, but it cannot capture or extract the cited OpenAI HTML pages without a separately reviewed transport/extraction contract.",
-    "P1C2 remains responsible for live adapter binding, use-time capability and authority resolution, acquisition receipt resolution, capture, extraction, and LIVE admission."
+    "P1C2 remains responsible for live adapter binding, use-time capability and authority resolution, acquisition receipt resolution, capture, and LIVE admission."
   ]
 }

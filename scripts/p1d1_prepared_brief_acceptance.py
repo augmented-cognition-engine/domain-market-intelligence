@@ -127,7 +127,7 @@ def load_fixture(name: str) -> dict[str, Any]:
 
 
 def _load_historical_fixture(name: str) -> dict[str, Any]:
-    return json.loads(_pack_file(f"conformance/{name}"))
+    return json.loads(_pack_file(f"releases/v0_3_0/conformance/{name}"))
 
 
 def compile_market_pack(*, release: str | None = None):
@@ -310,8 +310,16 @@ def _prepared_context(*, binding, fixture: dict[str, Any], scenario: dict[str, A
             source_uri=source["source_uri"],
             captured_payload_json=canonical_json(source["captured_payload"]),
             captured_payload_digest=source["captured_payload_digest"],
-            source_published_at=source["source_published_at"],
-            event_effective_at=source["event_effective_at"],
+            source_published_at=(
+                None
+                if source["source_published_at"] is None
+                else _time(source["source_published_at"])
+            ),
+            event_effective_at=(
+                None
+                if source["event_effective_at"] is None
+                else _time(source["event_effective_at"])
+            ),
             observed_at=_time(source["observed_at"]),
             ingested_at=_time(source["ingested_at"]),
             locator=source["locator"],
@@ -741,7 +749,7 @@ async def build_environment(
     fixture = load_fixture(INPUT_NAME)
     old_fixture = _load_historical_fixture("p1_price_move_golden.json")
     boundary = _load_historical_fixture("public_product_price_boundary.json")
-    old_pack = compile_market_pack()
+    old_pack = compile_market_pack(release="v0_3_0")
     new_pack = compile_market_pack(release="v0_4_0")
     activation_store = MemoryGovernedStateStore()
     activation_service = DomainActivationAdmissionService(

@@ -1,10 +1,10 @@
 {
   "contract": "ace.market-intelligence.negative-conformance-cases/v1alpha1",
   "fixture_id": "p1_price_move_negative_cases",
-  "fixture_version": "0.8.0",
+  "fixture_version": "0.2.0",
   "fixture_scope": "prepared_conformance_input",
   "base_fixture_path": "p1_price_move_golden.json",
-  "base_fixture_digest": "sha256:d8df38acf6b018d132f589388dcb891a3f35ceff5ba80c4b32de5550c9520854",
+  "base_fixture_digest": "sha256:5d04afed27b785f35cbd29083d566bb84770a2fbdf4a44837ea196e432dd1cdf",
   "operation_contract": "rfc6902-replace-only",
   "cases": [
     {
@@ -25,7 +25,7 @@
         {
           "op": "replace",
           "path": "/snapshots/1/source/source_uri",
-          "value": "http://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/"
+          "value": "http://example.com/public/northstar/edge-x1"
         }
       ],
       "expected_rejection_stage": "source_admission",
@@ -61,7 +61,7 @@
         {
           "op": "replace",
           "path": "/snapshots/1/resolved_subject/entity_ref",
-          "value": "product:gpt-5-6-terra-output-tokens"
+          "value": "product:northstar_edge_x2"
         }
       ],
       "expected_rejection_stage": "comparison",
@@ -78,7 +78,7 @@
         {
           "op": "replace",
           "path": "/snapshots/1/source/captured_payload_digest",
-          "value": "sha256:988fe931f80c02d8f19ab2d3d46b6d045368060cffa6915593f92e822d7724f7"
+          "value": "sha256:069c8ec66dd90ad4fee9130dd10e040822c1c5b51a8e9643f1f20199cee75560"
         }
       ],
       "expected_rejection_stage": "comparison",
@@ -90,7 +90,7 @@
         {
           "op": "replace",
           "path": "/snapshots/1/source/ingested_at",
-          "value": "2026-08-13T18:06:00Z"
+          "value": "2026-02-15T12:05:00Z"
         }
       ],
       "expected_rejection_stage": "comparison",
@@ -110,7 +110,7 @@
     }
   ],
   "limitations": [
-    "These are Market-owned recorded-replay input vectors, not a generic conformance runner, network acquisition, or live admission service.",
+    "These are Market-owned prepared input vectors, not a generic conformance runner or live admission service.",
     "ACE Platform remains responsible for durable activation, authority and receipt resolution, replay, and restart acceptance."
   ]
 }

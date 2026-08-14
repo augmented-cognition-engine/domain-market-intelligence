@@ -89,16 +89,18 @@ def _pack_file(name: str) -> bytes:
 
 
 def load_fixture(name: str) -> dict[str, Any]:
-    return json.loads(_pack_file(f"conformance/{name}"))
+    return json.loads(_pack_file(f"releases/v0_3_0/conformance/{name}"))
 
 
 def compile_market_pack():
-    manifest_bytes = _pack_file("manifest.json")
+    manifest_bytes = _pack_file("releases/v0_3_0/manifest.json")
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
         {
-            resource["path"]: _pack_file(resource["path"])
+            resource["path"]: _pack_file(
+                f"releases/v0_3_0/{resource['path']}"
+            )
             for resource in manifest["resources"]
         },
     )

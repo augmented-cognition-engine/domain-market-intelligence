@@ -24,6 +24,7 @@ pytestmark = pytest.mark.unit
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PACK_ROOT = REPO_ROOT / "domain_packs" / "market_intelligence"
+HISTORICAL_ROOT = PACK_ROOT / "releases" / "v0_3_0"
 RELEASE_ROOT = PACK_ROOT / "releases" / "v0_4_0"
 CONFORMANCE_ROOT = RELEASE_ROOT / "conformance"
 ACCEPTANCE_PATH = REPO_ROOT / "scripts" / "p1d1_prepared_brief_acceptance.py"
@@ -46,9 +47,6 @@ FROZEN_0_3_0_SHA256 = {
     "conformance/p1c2_live_source_negative_cases.json": "bbd89f833094605821a164b56da0cf1a97663d9ea26e4b09a9c73d91bd5e820f",
     "conformance/p1c2_live_manifest.json": "b3ab83ab4d32df2c1211802a126d39e3165fc2545e0c4e7e7112adf95ce94722",
 }
-ADDITIVE_PRODUCT_METADATA = {"onboarding_profile.json"}
-
-
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -78,17 +76,17 @@ def _compile(root: Path):
 
 def test_historical_0_3_0_archive_is_byte_frozen() -> None:
     historical_inventory = {
-        path.relative_to(PACK_ROOT).as_posix()
-        for path in PACK_ROOT.rglob("*")
+        path.relative_to(HISTORICAL_ROOT).as_posix()
+        for path in HISTORICAL_ROOT.rglob("*")
         if path.is_file()
-        and "releases" not in path.relative_to(PACK_ROOT).parts
-        and "__pycache__" not in path.relative_to(PACK_ROOT).parts
+        and "__pycache__" not in path.relative_to(HISTORICAL_ROOT).parts
     }
-    assert historical_inventory == set(FROZEN_0_3_0_SHA256) | ADDITIVE_PRODUCT_METADATA
+    assert historical_inventory == set(FROZEN_0_3_0_SHA256)
     assert {
-        relative: _sha256(PACK_ROOT / relative) for relative in FROZEN_0_3_0_SHA256
+        relative: _sha256(HISTORICAL_ROOT / relative)
+        for relative in FROZEN_0_3_0_SHA256
     } == FROZEN_0_3_0_SHA256
-    compiled = _compile(PACK_ROOT)
+    compiled = _compile(HISTORICAL_ROOT)
     assert compiled.compiled_pack_id == "pack_ir:19de6d59b28095f7bd7600364c3b4de7"
     assert compiled.pack_digest == (
         "sha256:19de6d59b28095f7bd7600364c3b4de787cce0365764cf54ab9f282f3412c2dd"
@@ -107,10 +105,10 @@ def test_0_4_0_is_an_additive_ordered_synthesis_release() -> None:
         "personas.json",
     ):
         assert (RELEASE_ROOT / "modules" / name).read_bytes() == (
-            PACK_ROOT / "modules" / name
+            HISTORICAL_ROOT / "modules" / name
         ).read_bytes()
 
-    old_synthesis = _load(PACK_ROOT / "modules" / "synthesis.json")
+    old_synthesis = _load(HISTORICAL_ROOT / "modules" / "synthesis.json")
     expected_synthesis = dict(old_synthesis)
     expected_synthesis["contract"] = "ace.intelligence.synthesis/v1alpha2"
     assert _load(RELEASE_ROOT / "modules" / "synthesis.json") == expected_synthesis

@@ -2,9 +2,9 @@
   "contract": "ace.intelligence.domain-pack-manifest/v1alpha1",
   "metadata": {
     "pack_id": "market_intelligence",
-    "version": "0.8.0",
+    "version": "0.3.0",
     "display_name": "ACE Market Intelligence",
-    "description": "Inert Market Intelligence domain program for recorded replay of a cited official AI price move through shared ACE detection, routing, and Brief policy."
+    "description": "Inert Market Intelligence domain program for the prepared P1 public-price source and price-move conformance slice."
   },
   "compatibility": {
     "compiler_contract": "ace.intelligence.pack-compiler/v1alpha1",
@@ -21,7 +21,7 @@
       "resource_id": "market_source_mapping",
       "path": "modules/source_mapping.json",
       "media_type": "application/json",
-      "digest": "sha256:da3f720be7e351a3b3f2ad373c00f74a757bcf1bd83b51e0c6c2157d4575c163"
+      "digest": "sha256:acebb1a048ca284c9d7d902e4c1a3af9ea02567f13836685382a02047e7ee293"
     },
     {
       "resource_id": "market_detection",
